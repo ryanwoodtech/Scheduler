@@ -27,5 +27,14 @@ namespace C969
             Console.WriteLine(dataTable);
             */
         }
+
+        private void LoginButton_Click(object sender, EventArgs e)
+        {
+            // Validate user
+            /*
+             * 1. Capture text inputs
+             * 2. 
+            */
+        }
     }
 }
