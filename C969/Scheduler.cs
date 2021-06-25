@@ -17,7 +17,6 @@ namespace C969
         {
             InitializeComponent();
             SchedulerAppointmentsDGV.DataSource = Appointments.appointments;
-            
         }
     }
 }
