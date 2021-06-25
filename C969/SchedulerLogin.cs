@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,17 +18,37 @@ namespace C969
         public SchedulerLogin()
         {
             InitializeComponent();
-            /*
-            string connectionString = "server=wgudb.ucertify.com;userid=U08hnQ;database=U08hnQ;password=53689293162;";
-            MySqlConnection connection = new MySqlConnection(connectionString);
 
-            connection.Open();
-            MySqlCommand command = new MySqlCommand("SELECT * FROM user",connection);
-            MySqlDataAdapter adapter = new MySqlDataAdapter(command);
-            DataTable dataTable = new DataTable();
-            adapter.Fill(dataTable);
-            Console.WriteLine(dataTable);
-            */
+            if (RegionInfo.CurrentRegion.EnglishName == "United States")
+            {
+                // Show english text
+                ShowEnglishText();
+            }
+            else if (RegionInfo.CurrentRegion.EnglishName == "Argentina")
+            {
+                // Show spanish text
+                ShowSpanishText();
+            }
+            
+
+        }
+
+        private void ShowEnglishText()
+        {
+            LoginSchedulerLabel.Text = "Scheduler";
+            LoginUsernameLabel.Text = "Username";
+            LoginPasswordLabel.Text = "Password";
+            LoginButton.Text = "Login";
+            LoginIncorrectLabel.Text = "Incorrect username/password";
+        }
+
+        private void ShowSpanishText()
+        {
+            LoginSchedulerLabel.Text = "Programador";
+            LoginUsernameLabel.Text = "Nombre de usuario";
+            LoginPasswordLabel.Text = "Contraseña";
+            LoginButton.Text = "Acceso";
+            LoginIncorrectLabel.Text = "Nombre de usuario / contraseña incorrectos";
         }
 
         private ArrayList getColumn(string query)
@@ -59,9 +80,14 @@ namespace C969
             }
         }
 
-        private void LoginButton_Click(object sender, EventArgs e)
+        private void ShowSchedulerForm()
         {
-            // Validate user
+            Scheduler scheduler = new Scheduler();
+            scheduler.Show();
+        }
+
+        private void Validate_User(string username, string password)
+        {
             /*
              * 1. [X] Capture text inputs
              * 2. [X] Create query that iterates over every userName
@@ -69,11 +95,6 @@ namespace C969
              * 4. [X] if input-password == database-password, log user in
              * 5. [X] if false, let user know there was an incorrect username/password
             */
-
-            string username = LoginUsernameInput.Text;
-            string password = LoginPasswordInput.Text;
-
-            // Returns the matched user's row from user table
             ArrayList dbUserName = getColumn("select userName from user where userName=\"" + username + "\";");
             if (dbUserName.Count > 0)
             {
@@ -81,21 +102,29 @@ namespace C969
 
                 if ((string)dbPassword[0] == password)
                 {
-                    MessageBox.Show("Successfully logged in!");
+                    Close();
+                    ShowSchedulerForm();
                 }
                 else
                 {
-                    MessageBox.Show("Incorrect password.");
-                    
+                    LoginIncorrectLabel.Visible = true;                    
                 }
             }
             else
             {
-                MessageBox.Show("Incorrect username.");
+                LoginIncorrectLabel.Visible = true;
             }
-            
+        }
 
-            // Check user table to see if a user with this username and password exists
+        private void LoginButton_Click(object sender, EventArgs e)
+        {
+            LoginIncorrectLabel.Visible = false;
+
+            string username = LoginUsernameInput.Text;
+            string password = LoginPasswordInput.Text;
+
+            Validate_User(username, password);
+           
         }
     }
 }

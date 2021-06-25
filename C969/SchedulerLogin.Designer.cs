@@ -35,6 +35,7 @@ namespace C969
             this.LoginPasswordInput = new System.Windows.Forms.TextBox();
             this.LoginPasswordLabel = new System.Windows.Forms.Label();
             this.LoginButton = new System.Windows.Forms.Button();
+            this.LoginIncorrectLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // LoginSchedulerLabel
@@ -51,7 +52,7 @@ namespace C969
             // LoginUsernameLabel
             // 
             this.LoginUsernameLabel.AutoSize = true;
-            this.LoginUsernameLabel.Location = new System.Drawing.Point(6, 78);
+            this.LoginUsernameLabel.Location = new System.Drawing.Point(6, 85);
             this.LoginUsernameLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.LoginUsernameLabel.Name = "LoginUsernameLabel";
             this.LoginUsernameLabel.Size = new System.Drawing.Size(91, 28);
@@ -62,7 +63,7 @@ namespace C969
             // 
             this.LoginUsernameInput.Font = new System.Drawing.Font("Adobe Devanagari", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LoginUsernameInput.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.LoginUsernameInput.Location = new System.Drawing.Point(11, 108);
+            this.LoginUsernameInput.Location = new System.Drawing.Point(11, 115);
             this.LoginUsernameInput.Margin = new System.Windows.Forms.Padding(2);
             this.LoginUsernameInput.Name = "LoginUsernameInput";
             this.LoginUsernameInput.Size = new System.Drawing.Size(253, 29);
@@ -73,7 +74,7 @@ namespace C969
             // 
             this.LoginPasswordInput.Font = new System.Drawing.Font("Adobe Devanagari", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LoginPasswordInput.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.LoginPasswordInput.Location = new System.Drawing.Point(11, 189);
+            this.LoginPasswordInput.Location = new System.Drawing.Point(11, 176);
             this.LoginPasswordInput.Margin = new System.Windows.Forms.Padding(2);
             this.LoginPasswordInput.Name = "LoginPasswordInput";
             this.LoginPasswordInput.Size = new System.Drawing.Size(253, 29);
@@ -84,7 +85,7 @@ namespace C969
             // LoginPasswordLabel
             // 
             this.LoginPasswordLabel.AutoSize = true;
-            this.LoginPasswordLabel.Location = new System.Drawing.Point(6, 159);
+            this.LoginPasswordLabel.Location = new System.Drawing.Point(6, 146);
             this.LoginPasswordLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.LoginPasswordLabel.Name = "LoginPasswordLabel";
             this.LoginPasswordLabel.Size = new System.Drawing.Size(86, 28);
@@ -94,7 +95,7 @@ namespace C969
             // LoginButton
             // 
             this.LoginButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.LoginButton.Location = new System.Drawing.Point(189, 249);
+            this.LoginButton.Location = new System.Drawing.Point(189, 223);
             this.LoginButton.Name = "LoginButton";
             this.LoginButton.Size = new System.Drawing.Size(75, 34);
             this.LoginButton.TabIndex = 5;
@@ -102,11 +103,23 @@ namespace C969
             this.LoginButton.UseVisualStyleBackColor = true;
             this.LoginButton.Click += new System.EventHandler(this.LoginButton_Click);
             // 
+            // LoginIncorrectLabel
+            // 
+            this.LoginIncorrectLabel.AutoSize = true;
+            this.LoginIncorrectLabel.BackColor = System.Drawing.Color.Red;
+            this.LoginIncorrectLabel.Location = new System.Drawing.Point(19, 55);
+            this.LoginIncorrectLabel.Name = "LoginIncorrectLabel";
+            this.LoginIncorrectLabel.Size = new System.Drawing.Size(245, 28);
+            this.LoginIncorrectLabel.TabIndex = 6;
+            this.LoginIncorrectLabel.Text = "Invalid username or password";
+            this.LoginIncorrectLabel.Visible = false;
+            // 
             // SchedulerLogin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 28F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 311);
+            this.ClientSize = new System.Drawing.Size(284, 286);
+            this.Controls.Add(this.LoginIncorrectLabel);
             this.Controls.Add(this.LoginButton);
             this.Controls.Add(this.LoginPasswordInput);
             this.Controls.Add(this.LoginPasswordLabel);
@@ -131,6 +144,7 @@ namespace C969
         private System.Windows.Forms.TextBox LoginPasswordInput;
         private System.Windows.Forms.Label LoginPasswordLabel;
         private System.Windows.Forms.Button LoginButton;
+        private System.Windows.Forms.Label LoginIncorrectLabel;
     }
 }
 

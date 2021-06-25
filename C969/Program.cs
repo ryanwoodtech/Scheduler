@@ -16,7 +16,9 @@ namespace C969
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new SchedulerLogin());
+            new SchedulerLogin().Show();
+            // Parameterless Application.Run() allows SchedulerLogin to be closed when login is sucessful
+            Application.Run();
         }
     }
 }
