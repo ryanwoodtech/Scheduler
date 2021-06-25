@@ -14,11 +14,11 @@ namespace C969
         [STAThread]
         static void Main()
         {
+            Appointments.appointments = new List<Appointment>(DataAccess.GetAppointments());
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            new SchedulerLogin().Show();
-            // Parameterless Application.Run() allows SchedulerLogin to be closed when login is sucessful
-            Application.Run();
+            Application.Run(new SchedulerLogin());
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿using MySql.Data.MySqlClient;
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -10,6 +9,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MySql.Data.MySqlClient;
+
 
 namespace C969
 {
@@ -29,8 +30,6 @@ namespace C969
                 // Show spanish text
                 ShowSpanishText();
             }
-            
-
         }
 
         private void ShowEnglishText()
@@ -79,7 +78,6 @@ namespace C969
                 return userNames;
             }
         }
-
         private void ShowSchedulerForm()
         {
             Scheduler scheduler = new Scheduler();
@@ -102,7 +100,6 @@ namespace C969
 
                 if ((string)dbPassword[0] == password)
                 {
-                    Close();
                     ShowSchedulerForm();
                 }
                 else

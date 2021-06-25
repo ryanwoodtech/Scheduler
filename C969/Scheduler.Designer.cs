@@ -29,20 +29,34 @@ namespace C969
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            this.SchedulerAppointmentsDGV = new System.Windows.Forms.DataGridView();
             this.SuspendLayout();
+            // 
+            // SchedulerAppointmentsDGV
+            // 
+            this.SchedulerAppointmentsDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.SchedulerAppointmentsDGV.Location = new System.Drawing.Point(89, 81);
+            this.SchedulerAppointmentsDGV.Name = "SchedulerAppointmentsDGV";
+            this.SchedulerAppointmentsDGV.Size = new System.Drawing.Size(595, 277);
+            this.SchedulerAppointmentsDGV.TabIndex = 0;
             // 
             // Scheduler
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.SchedulerAppointmentsDGV);
             this.Name = "Scheduler";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Scheduler";
+            ((System.ComponentModel.ISupportInitialize)(this.SchedulerAppointmentsDGV)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
+
+        private System.Windows.Forms.DataGridView SchedulerAppointmentsDGV;
     }
 }
