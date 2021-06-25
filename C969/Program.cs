@@ -14,13 +14,12 @@ namespace C969
         [STAThread]
         static void Main()
         {
-            DataAccess dataAccess = new DataAccess();
-            Appointments.appointments = dataAccess.GetAppointments();
-            Customers.customers = dataAccess.GetCustomers();
+            Appointments.appointments = DataAccess.GetAppointments();
+            Customers.customers = DataAccess.GetCustomers();
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new SchedulerLogin());
+            Application.Run(new Scheduler());
         }
     }
 }

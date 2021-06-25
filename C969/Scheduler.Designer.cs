@@ -48,6 +48,8 @@ namespace C969
             // 
             // SchedulerAppointmentsDGV
             // 
+            this.SchedulerAppointmentsDGV.AllowUserToAddRows = false;
+            this.SchedulerAppointmentsDGV.AllowUserToDeleteRows = false;
             this.SchedulerAppointmentsDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.SchedulerAppointmentsDGV.Location = new System.Drawing.Point(280, 40);
             this.SchedulerAppointmentsDGV.Name = "SchedulerAppointmentsDGV";
@@ -109,6 +111,7 @@ namespace C969
             this.AppointmentsDeleteButton.TabIndex = 6;
             this.AppointmentsDeleteButton.Text = "Delete";
             this.AppointmentsDeleteButton.UseVisualStyleBackColor = false;
+            this.AppointmentsDeleteButton.Click += new System.EventHandler(this.AppointmentsDeleteButton_Click);
             // 
             // CustomersDeleteButton
             // 

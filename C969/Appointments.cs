@@ -12,5 +12,14 @@ namespace C969
         public Appointments() { }
 
         static public DataTable appointments = new DataTable();
+
+        static public bool DeleteAppointment(int appointmentId)
+        {
+            // Delete appointment
+            DataAccess.DeleteAppointment(appointmentId);
+
+            // Refresh DGV
+            return true;
+        }
     }
 }
