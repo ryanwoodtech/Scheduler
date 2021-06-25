@@ -29,8 +29,8 @@ namespace C969
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.SchedulerAppointmentsDGV = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.SchedulerAppointmentsDGV)).BeginInit();
             this.SuspendLayout();
             // 
             // SchedulerAppointmentsDGV

@@ -18,17 +18,6 @@ namespace C969
             InitializeComponent();
             SchedulerAppointmentsDGV.DataSource = Appointments.appointments;
             
-            //BindingList<Appointment> appointments = DataAccess.GetAppointments();
-            //SchedulerAppointmentsDGV.DataSource = appointments;
-
-            //PopulateAppointments();
-        }
-
-        public void PopulateAppointments()
-        {
-            List<Appointment> appointments = DataAccess.GetAppointments();
-            SchedulerAppointmentsDGV.DataSource = appointments;
-            Console.WriteLine(appointments);
         }
     }
 }
