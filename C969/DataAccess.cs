@@ -16,7 +16,7 @@ namespace C969
             string connectionString = "server=wgudb.ucertify.com;userid=U08hnQ;database=U08hnQ;password=53689293162;";
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
-                MySqlCommand command = new MySqlCommand("SELECT appointmentId, customerId, userId, title, description, location, contact, type, url, start, end FROM appointment;", connection);
+                MySqlCommand command = new MySqlCommand("SELECT * FROM appointment;", connection);
                 MySqlDataAdapter adapter = new MySqlDataAdapter(command);
                 DataTable appointmentsDataTable = new DataTable();
                 adapter.Fill(appointmentsDataTable);
