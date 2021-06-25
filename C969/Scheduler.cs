@@ -17,8 +17,7 @@ namespace C969
         {
             InitializeComponent();
             SchedulerAppointmentsDGV.DataSource = Appointments.appointments;
-            // TODO: Create Customers class
-            // SchedulerCustomersDGV.DataSource = Customers.customers;
+            SchedulerCustomersDGV.DataSource = Customers.customers;
         }
     }
 }

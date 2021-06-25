@@ -16,6 +16,7 @@ namespace C969
         {
             DataAccess dataAccess = new DataAccess();
             Appointments.appointments = dataAccess.GetAppointments();
+            Customers.customers = dataAccess.GetCustomers();
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

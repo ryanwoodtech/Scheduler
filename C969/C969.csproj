@@ -52,6 +52,8 @@
   <ItemGroup>
     <Compile Include="Appointment.cs" />
     <Compile Include="Appointments.cs" />
+    <Compile Include="Customer.cs" />
+    <Compile Include="Customers.cs" />
     <Compile Include="DataAccess.cs" />
     <Compile Include="Scheduler.cs">
       <SubType>Form</SubType>
