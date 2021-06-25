@@ -9,9 +9,9 @@ using System.Data;
 
 namespace C969
 {
-    static class DataAccess
+    class DataAccess
     {
-        static public DataTable GetAppointments()
+        public DataTable GetAppointments()
         {
             string connectionString = "server=wgudb.ucertify.com;userid=U08hnQ;database=U08hnQ;password=53689293162;";
             using (MySqlConnection connection = new MySqlConnection(connectionString))

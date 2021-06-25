@@ -14,7 +14,8 @@ namespace C969
         [STAThread]
         static void Main()
         {
-            Appointments.appointments = DataAccess.GetAppointments();
+            DataAccess dataAccess = new DataAccess();
+            Appointments.appointments = dataAccess.GetAppointments();
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
