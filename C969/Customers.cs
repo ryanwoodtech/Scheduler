@@ -12,5 +12,14 @@ namespace C969
         public Customers() { }
 
         static public DataTable customers = new DataTable();
+
+        static public bool DeleteCustomer(int customerId)
+        {
+            // Delete appointment
+            DataAccess.DeleteCustomer(customerId);
+
+            // Refresh DGV
+            return true;
+        }
     }
 }

@@ -76,6 +76,8 @@ namespace C969
             // 
             // SchedulerCustomersDGV
             // 
+            this.SchedulerCustomersDGV.AllowUserToAddRows = false;
+            this.SchedulerCustomersDGV.AllowUserToDeleteRows = false;
             this.SchedulerCustomersDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.SchedulerCustomersDGV.Location = new System.Drawing.Point(280, 373);
             this.SchedulerCustomersDGV.Name = "SchedulerCustomersDGV";
@@ -122,6 +124,7 @@ namespace C969
             this.CustomersDeleteButton.TabIndex = 9;
             this.CustomersDeleteButton.Text = "Delete";
             this.CustomersDeleteButton.UseVisualStyleBackColor = false;
+            this.CustomersDeleteButton.Click += new System.EventHandler(this.CustomersDeleteButton_Click);
             // 
             // CustomersAddButton
             // 

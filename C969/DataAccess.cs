@@ -51,7 +51,22 @@ namespace C969
                 MySqlCommand command = new MySqlCommand(query, connection);
                 connection.Open();
                 command.ExecuteNonQuery();
-                
+
+            }
+            return true;
+        }
+
+        static public bool DeleteCustomer(int customerId)
+        {
+            string query = "DELETE FROM customer WHERE customerId=" + customerId + ";";
+            string connectionString = "server=wgudb.ucertify.com;userid=U08hnQ;database=U08hnQ;password=53689293162;";
+
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                MySqlCommand command = new MySqlCommand(query, connection);
+                connection.Open();
+                command.ExecuteNonQuery();
+
             }
             return true;
         }

@@ -60,5 +60,48 @@ namespace C969
 
             MessageBox.Show("Appointment deleted!");
         }
+
+        private void CustomersDeleteButton_Click(object sender, EventArgs e)
+        {
+            DataGridViewSelectedCellCollection cellData = SchedulerCustomersDGV.SelectedCells;
+
+            if (cellData.Count == 0)
+            {
+                MessageBox.Show("You must select a customer to delete.");
+                return;
+            }
+
+            string message = "Are you sure you want to delete this customer?";
+            string caption = "Delete Customer";
+            MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+            DialogResult result;
+
+            result = MessageBox.Show(message, caption, buttons);
+            if (result == System.Windows.Forms.DialogResult.No)
+            {
+                return;
+            }
+
+            // TODO: Send appointment id to be deleted
+            // 1. Find which row in the DGV was selected
+            //      cellData[0].RowIndex
+            // 2. 
+            int customerId = (int)SchedulerCustomersDGV.Rows[cellData[0].RowIndex].Cells[0].Value;
+
+            // TODO: Implement DeleteCustomer 
+            Customers.DeleteCustomer(customerId);
+
+            // WARNING, HACKY CODE BELOW
+            // This code executes independently of the database query e.g. if the query doesn't execute correctly, the DB won't match the DGV
+
+            // Delete row from SchedulerAppointmentsDGV
+            SchedulerCustomersDGV.Rows.RemoveAt(cellData[0].RowIndex);
+
+            // Refresh DGV
+            SchedulerCustomersDGV.DataSource = null;
+            SchedulerCustomersDGV.DataSource = Customers.customers;
+
+            MessageBox.Show("Customer deleted!");
+        }
     }
 }
