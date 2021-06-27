@@ -17,8 +17,6 @@ namespace C969
         {
             // Delete appointment
             DataAccess.DeleteCustomer(customerId);
-
-            // Refresh DGV
             return true;
         }
     }

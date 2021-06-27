@@ -103,5 +103,18 @@ namespace C969
 
             MessageBox.Show("Customer deleted!");
         }
+
+        private void AppointmentsAddButton_Click(object sender, EventArgs e)
+        {
+            // Show add appointment form
+            // Has all of the fields required
+            // When clicking save, it will run an insert query to the DB
+            // When clicking cancel, it will discard all changes
+            
+            SchedulerAddAppointment schedulerAddAppointmentForm = new SchedulerAddAppointment(SchedulerCustomersDGV.Rows);
+            schedulerAddAppointmentForm.Show();
+
+            
+        }
     }
 }

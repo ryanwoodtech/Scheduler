@@ -93,6 +93,7 @@ namespace C969
             this.AppointmentsAddButton.TabIndex = 4;
             this.AppointmentsAddButton.Text = "Add";
             this.AppointmentsAddButton.UseVisualStyleBackColor = false;
+            this.AppointmentsAddButton.Click += new System.EventHandler(this.AppointmentsAddButton_Click);
             // 
             // AppointmentsUpdateButton
             // 

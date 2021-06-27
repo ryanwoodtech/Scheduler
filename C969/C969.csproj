@@ -61,6 +61,12 @@
     <Compile Include="Scheduler.Designer.cs">
       <DependentUpon>Scheduler.cs</DependentUpon>
     </Compile>
+    <Compile Include="SchedulerAddAppointment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SchedulerAddAppointment.Designer.cs">
+      <DependentUpon>SchedulerAddAppointment.cs</DependentUpon>
+    </Compile>
     <Compile Include="SchedulerLogin.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -77,6 +83,9 @@
     <EmbeddedResource Include="Scheduler.resx">
       <DependentUpon>Scheduler.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SchedulerAddAppointment.resx">
+      <DependentUpon>SchedulerAddAppointment.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SchedulerLogin.resx">
       <DependentUpon>SchedulerLogin.cs</DependentUpon>
