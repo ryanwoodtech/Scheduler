@@ -36,25 +36,29 @@ namespace C969
             this.AddAppointmentTitleInput = new System.Windows.Forms.TextBox();
             this.AddAppointmentDescriptionLabel = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.textBox6 = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.textBox7 = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
+            this.AddAppointmentLocationInput = new System.Windows.Forms.TextBox();
+            this.AddAppointmentLocationLabel = new System.Windows.Forms.Label();
+            this.AddAppointmentContactInput = new System.Windows.Forms.TextBox();
+            this.AddAppointmentContactLabel = new System.Windows.Forms.Label();
+            this.AddAppointmentTypeInput = new System.Windows.Forms.TextBox();
+            this.AddAppointmentTypeLabel = new System.Windows.Forms.Label();
+            this.AddAppointmentURLInput = new System.Windows.Forms.TextBox();
+            this.AddAppointmentURLLabel = new System.Windows.Forms.Label();
+            this.AddAppointmentStartTimeLabel = new System.Windows.Forms.Label();
+            this.AddAppointmentEndTimeLabel = new System.Windows.Forms.Label();
+            this.AddAppointmentSaveButton = new System.Windows.Forms.Button();
+            this.AddAppointmentCancelButton = new System.Windows.Forms.Button();
+            this.AddAppointmentStartDatePicker = new System.Windows.Forms.DateTimePicker();
+            this.AddAppointmentEndDatePicker = new System.Windows.Forms.DateTimePicker();
+            this.AddAppointmentStartTimePicker = new System.Windows.Forms.DateTimePicker();
+            this.AddAppointmentEndTimePicker = new System.Windows.Forms.DateTimePicker();
             this.SuspendLayout();
             // 
             // AddAppointmentLabel
             // 
             this.AddAppointmentLabel.AutoSize = true;
             this.AddAppointmentLabel.Font = new System.Drawing.Font("Adobe Devanagari", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.AddAppointmentLabel.Location = new System.Drawing.Point(106, 34);
+            this.AddAppointmentLabel.Location = new System.Drawing.Point(89, 34);
             this.AddAppointmentLabel.Name = "AddAppointmentLabel";
             this.AddAppointmentLabel.Size = new System.Drawing.Size(237, 43);
             this.AddAppointmentLabel.TabIndex = 0;
@@ -64,7 +68,7 @@ namespace C969
             // 
             this.AddAppointmentCustomerId.AutoSize = true;
             this.AddAppointmentCustomerId.Font = new System.Drawing.Font("Adobe Devanagari", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.AddAppointmentCustomerId.Location = new System.Drawing.Point(50, 100);
+            this.AddAppointmentCustomerId.Location = new System.Drawing.Point(53, 100);
             this.AddAppointmentCustomerId.Name = "AddAppointmentCustomerId";
             this.AddAppointmentCustomerId.Size = new System.Drawing.Size(104, 33);
             this.AddAppointmentCustomerId.TabIndex = 1;
@@ -73,7 +77,7 @@ namespace C969
             // AddAppointmentCustomerComboBox
             // 
             this.AddAppointmentCustomerComboBox.FormattingEnabled = true;
-            this.AddAppointmentCustomerComboBox.Location = new System.Drawing.Point(207, 107);
+            this.AddAppointmentCustomerComboBox.Location = new System.Drawing.Point(163, 107);
             this.AddAppointmentCustomerComboBox.Name = "AddAppointmentCustomerComboBox";
             this.AddAppointmentCustomerComboBox.Size = new System.Drawing.Size(167, 21);
             this.AddAppointmentCustomerComboBox.TabIndex = 2;
@@ -82,7 +86,7 @@ namespace C969
             // 
             this.AddAppointmentTitleLabel.AutoSize = true;
             this.AddAppointmentTitleLabel.Font = new System.Drawing.Font("Adobe Devanagari", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.AddAppointmentTitleLabel.Location = new System.Drawing.Point(96, 145);
+            this.AddAppointmentTitleLabel.Location = new System.Drawing.Point(99, 140);
             this.AddAppointmentTitleLabel.Name = "AddAppointmentTitleLabel";
             this.AddAppointmentTitleLabel.Size = new System.Drawing.Size(58, 33);
             this.AddAppointmentTitleLabel.TabIndex = 3;
@@ -90,7 +94,7 @@ namespace C969
             // 
             // AddAppointmentTitleInput
             // 
-            this.AddAppointmentTitleInput.Location = new System.Drawing.Point(207, 150);
+            this.AddAppointmentTitleInput.Location = new System.Drawing.Point(163, 150);
             this.AddAppointmentTitleInput.Name = "AddAppointmentTitleInput";
             this.AddAppointmentTitleInput.Size = new System.Drawing.Size(167, 20);
             this.AddAppointmentTitleInput.TabIndex = 4;
@@ -99,7 +103,7 @@ namespace C969
             // 
             this.AddAppointmentDescriptionLabel.AutoSize = true;
             this.AddAppointmentDescriptionLabel.Font = new System.Drawing.Font("Adobe Devanagari", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.AddAppointmentDescriptionLabel.Location = new System.Drawing.Point(33, 205);
+            this.AddAppointmentDescriptionLabel.Location = new System.Drawing.Point(36, 180);
             this.AddAppointmentDescriptionLabel.Name = "AddAppointmentDescriptionLabel";
             this.AddAppointmentDescriptionLabel.Size = new System.Drawing.Size(121, 33);
             this.AddAppointmentDescriptionLabel.TabIndex = 5;
@@ -107,131 +111,175 @@ namespace C969
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(207, 205);
+            this.textBox1.Location = new System.Drawing.Point(163, 187);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(215, 100);
             this.textBox1.TabIndex = 6;
             // 
-            // textBox2
+            // AddAppointmentLocationInput
             // 
-            this.textBox2.Location = new System.Drawing.Point(207, 329);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(167, 20);
-            this.textBox2.TabIndex = 8;
+            this.AddAppointmentLocationInput.Location = new System.Drawing.Point(163, 306);
+            this.AddAppointmentLocationInput.Name = "AddAppointmentLocationInput";
+            this.AddAppointmentLocationInput.Size = new System.Drawing.Size(167, 20);
+            this.AddAppointmentLocationInput.TabIndex = 8;
             // 
-            // label1
+            // AddAppointmentLocationLabel
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Adobe Devanagari", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(96, 322);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(58, 33);
-            this.label1.TabIndex = 7;
-            this.label1.Text = "Title";
+            this.AddAppointmentLocationLabel.AutoSize = true;
+            this.AddAppointmentLocationLabel.Font = new System.Drawing.Font("Adobe Devanagari", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.AddAppointmentLocationLabel.Location = new System.Drawing.Point(63, 299);
+            this.AddAppointmentLocationLabel.Name = "AddAppointmentLocationLabel";
+            this.AddAppointmentLocationLabel.Size = new System.Drawing.Size(94, 33);
+            this.AddAppointmentLocationLabel.TabIndex = 7;
+            this.AddAppointmentLocationLabel.Text = "Location";
             // 
-            // textBox3
+            // AddAppointmentContactInput
             // 
-            this.textBox3.Location = new System.Drawing.Point(207, 367);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(167, 20);
-            this.textBox3.TabIndex = 10;
+            this.AddAppointmentContactInput.Location = new System.Drawing.Point(163, 346);
+            this.AddAppointmentContactInput.Name = "AddAppointmentContactInput";
+            this.AddAppointmentContactInput.Size = new System.Drawing.Size(167, 20);
+            this.AddAppointmentContactInput.TabIndex = 10;
             // 
-            // label2
+            // AddAppointmentContactLabel
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Adobe Devanagari", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(96, 360);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(58, 33);
-            this.label2.TabIndex = 9;
-            this.label2.Text = "Title";
+            this.AddAppointmentContactLabel.AutoSize = true;
+            this.AddAppointmentContactLabel.Font = new System.Drawing.Font("Adobe Devanagari", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.AddAppointmentContactLabel.Location = new System.Drawing.Point(70, 339);
+            this.AddAppointmentContactLabel.Name = "AddAppointmentContactLabel";
+            this.AddAppointmentContactLabel.Size = new System.Drawing.Size(87, 33);
+            this.AddAppointmentContactLabel.TabIndex = 9;
+            this.AddAppointmentContactLabel.Text = "Contact";
             // 
-            // textBox4
+            // AddAppointmentTypeInput
             // 
-            this.textBox4.Location = new System.Drawing.Point(207, 400);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(167, 20);
-            this.textBox4.TabIndex = 12;
+            this.AddAppointmentTypeInput.Location = new System.Drawing.Point(163, 386);
+            this.AddAppointmentTypeInput.Name = "AddAppointmentTypeInput";
+            this.AddAppointmentTypeInput.Size = new System.Drawing.Size(167, 20);
+            this.AddAppointmentTypeInput.TabIndex = 12;
             // 
-            // label3
+            // AddAppointmentTypeLabel
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Adobe Devanagari", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(96, 393);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(58, 33);
-            this.label3.TabIndex = 11;
-            this.label3.Text = "Title";
+            this.AddAppointmentTypeLabel.AutoSize = true;
+            this.AddAppointmentTypeLabel.Font = new System.Drawing.Font("Adobe Devanagari", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.AddAppointmentTypeLabel.Location = new System.Drawing.Point(98, 379);
+            this.AddAppointmentTypeLabel.Name = "AddAppointmentTypeLabel";
+            this.AddAppointmentTypeLabel.Size = new System.Drawing.Size(59, 33);
+            this.AddAppointmentTypeLabel.TabIndex = 11;
+            this.AddAppointmentTypeLabel.Text = "Type";
             // 
-            // textBox5
+            // AddAppointmentURLInput
             // 
-            this.textBox5.Location = new System.Drawing.Point(207, 433);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(167, 20);
-            this.textBox5.TabIndex = 14;
+            this.AddAppointmentURLInput.Location = new System.Drawing.Point(163, 426);
+            this.AddAppointmentURLInput.Name = "AddAppointmentURLInput";
+            this.AddAppointmentURLInput.Size = new System.Drawing.Size(167, 20);
+            this.AddAppointmentURLInput.TabIndex = 14;
             // 
-            // label4
+            // AddAppointmentURLLabel
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Adobe Devanagari", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(96, 426);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(58, 33);
-            this.label4.TabIndex = 13;
-            this.label4.Text = "Title";
+            this.AddAppointmentURLLabel.AutoSize = true;
+            this.AddAppointmentURLLabel.Font = new System.Drawing.Font("Adobe Devanagari", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.AddAppointmentURLLabel.Location = new System.Drawing.Point(100, 419);
+            this.AddAppointmentURLLabel.Name = "AddAppointmentURLLabel";
+            this.AddAppointmentURLLabel.Size = new System.Drawing.Size(57, 33);
+            this.AddAppointmentURLLabel.TabIndex = 13;
+            this.AddAppointmentURLLabel.Text = "URL";
             // 
-            // textBox6
+            // AddAppointmentStartTimeLabel
             // 
-            this.textBox6.Location = new System.Drawing.Point(207, 466);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(167, 20);
-            this.textBox6.TabIndex = 16;
+            this.AddAppointmentStartTimeLabel.AutoSize = true;
+            this.AddAppointmentStartTimeLabel.Font = new System.Drawing.Font("Adobe Devanagari", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.AddAppointmentStartTimeLabel.Location = new System.Drawing.Point(46, 459);
+            this.AddAppointmentStartTimeLabel.Name = "AddAppointmentStartTimeLabel";
+            this.AddAppointmentStartTimeLabel.Size = new System.Drawing.Size(111, 33);
+            this.AddAppointmentStartTimeLabel.TabIndex = 15;
+            this.AddAppointmentStartTimeLabel.Text = "Start Time";
             // 
-            // label5
+            // AddAppointmentEndTimeLabel
             // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Adobe Devanagari", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(96, 459);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(58, 33);
-            this.label5.TabIndex = 15;
-            this.label5.Text = "Title";
+            this.AddAppointmentEndTimeLabel.AutoSize = true;
+            this.AddAppointmentEndTimeLabel.Font = new System.Drawing.Font("Adobe Devanagari", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.AddAppointmentEndTimeLabel.Location = new System.Drawing.Point(52, 499);
+            this.AddAppointmentEndTimeLabel.Name = "AddAppointmentEndTimeLabel";
+            this.AddAppointmentEndTimeLabel.Size = new System.Drawing.Size(105, 33);
+            this.AddAppointmentEndTimeLabel.TabIndex = 17;
+            this.AddAppointmentEndTimeLabel.Text = "End Time";
             // 
-            // textBox7
+            // AddAppointmentSaveButton
             // 
-            this.textBox7.Location = new System.Drawing.Point(207, 499);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(167, 20);
-            this.textBox7.TabIndex = 18;
+            this.AddAppointmentSaveButton.Location = new System.Drawing.Point(303, 544);
+            this.AddAppointmentSaveButton.Name = "AddAppointmentSaveButton";
+            this.AddAppointmentSaveButton.Size = new System.Drawing.Size(75, 44);
+            this.AddAppointmentSaveButton.TabIndex = 19;
+            this.AddAppointmentSaveButton.Text = "Save";
+            this.AddAppointmentSaveButton.UseVisualStyleBackColor = true;
+            this.AddAppointmentSaveButton.Click += new System.EventHandler(this.AddAppointmentSaveButton_Click);
             // 
-            // label6
+            // AddAppointmentCancelButton
             // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Adobe Devanagari", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(96, 492);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(58, 33);
-            this.label6.TabIndex = 17;
-            this.label6.Text = "Title";
+            this.AddAppointmentCancelButton.Location = new System.Drawing.Point(207, 544);
+            this.AddAppointmentCancelButton.Name = "AddAppointmentCancelButton";
+            this.AddAppointmentCancelButton.Size = new System.Drawing.Size(75, 44);
+            this.AddAppointmentCancelButton.TabIndex = 20;
+            this.AddAppointmentCancelButton.Text = "Cancel";
+            this.AddAppointmentCancelButton.UseVisualStyleBackColor = true;
+            this.AddAppointmentCancelButton.Click += new System.EventHandler(this.AddAppointmentCancelButton_Click);
+            // 
+            // AddAppointmentStartDatePicker
+            // 
+            this.AddAppointmentStartDatePicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.AddAppointmentStartDatePicker.Location = new System.Drawing.Point(163, 466);
+            this.AddAppointmentStartDatePicker.Name = "AddAppointmentStartDatePicker";
+            this.AddAppointmentStartDatePicker.Size = new System.Drawing.Size(98, 20);
+            this.AddAppointmentStartDatePicker.TabIndex = 21;
+            // 
+            // AddAppointmentEndDatePicker
+            // 
+            this.AddAppointmentEndDatePicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.AddAppointmentEndDatePicker.Location = new System.Drawing.Point(163, 503);
+            this.AddAppointmentEndDatePicker.Name = "AddAppointmentEndDatePicker";
+            this.AddAppointmentEndDatePicker.Size = new System.Drawing.Size(98, 20);
+            this.AddAppointmentEndDatePicker.TabIndex = 22;
+            // 
+            // AddAppointmentStartTimePicker
+            // 
+            this.AddAppointmentStartTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.AddAppointmentStartTimePicker.Location = new System.Drawing.Point(267, 466);
+            this.AddAppointmentStartTimePicker.Name = "AddAppointmentStartTimePicker";
+            this.AddAppointmentStartTimePicker.ShowUpDown = true;
+            this.AddAppointmentStartTimePicker.Size = new System.Drawing.Size(84, 20);
+            this.AddAppointmentStartTimePicker.TabIndex = 23;
+            // 
+            // AddAppointmentEndTimePicker
+            // 
+            this.AddAppointmentEndTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.AddAppointmentEndTimePicker.Location = new System.Drawing.Point(267, 503);
+            this.AddAppointmentEndTimePicker.Name = "AddAppointmentEndTimePicker";
+            this.AddAppointmentEndTimePicker.ShowUpDown = true;
+            this.AddAppointmentEndTimePicker.Size = new System.Drawing.Size(84, 20);
+            this.AddAppointmentEndTimePicker.TabIndex = 24;
             // 
             // SchedulerAddAppointment
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(434, 611);
-            this.Controls.Add(this.textBox7);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.textBox6);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.textBox5);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.textBox4);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.label1);
+            this.ClientSize = new System.Drawing.Size(415, 611);
+            this.Controls.Add(this.AddAppointmentEndTimePicker);
+            this.Controls.Add(this.AddAppointmentStartTimePicker);
+            this.Controls.Add(this.AddAppointmentEndDatePicker);
+            this.Controls.Add(this.AddAppointmentStartDatePicker);
+            this.Controls.Add(this.AddAppointmentCancelButton);
+            this.Controls.Add(this.AddAppointmentSaveButton);
+            this.Controls.Add(this.AddAppointmentEndTimeLabel);
+            this.Controls.Add(this.AddAppointmentStartTimeLabel);
+            this.Controls.Add(this.AddAppointmentURLInput);
+            this.Controls.Add(this.AddAppointmentURLLabel);
+            this.Controls.Add(this.AddAppointmentTypeInput);
+            this.Controls.Add(this.AddAppointmentTypeLabel);
+            this.Controls.Add(this.AddAppointmentContactInput);
+            this.Controls.Add(this.AddAppointmentContactLabel);
+            this.Controls.Add(this.AddAppointmentLocationInput);
+            this.Controls.Add(this.AddAppointmentLocationLabel);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.AddAppointmentDescriptionLabel);
             this.Controls.Add(this.AddAppointmentTitleInput);
@@ -256,17 +304,21 @@ namespace C969
         private System.Windows.Forms.TextBox AddAppointmentTitleInput;
         private System.Windows.Forms.Label AddAppointmentDescriptionLabel;
         private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox textBox6;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox textBox7;
-        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox AddAppointmentLocationInput;
+        private System.Windows.Forms.Label AddAppointmentLocationLabel;
+        private System.Windows.Forms.TextBox AddAppointmentContactInput;
+        private System.Windows.Forms.Label AddAppointmentContactLabel;
+        private System.Windows.Forms.TextBox AddAppointmentTypeInput;
+        private System.Windows.Forms.Label AddAppointmentTypeLabel;
+        private System.Windows.Forms.TextBox AddAppointmentURLInput;
+        private System.Windows.Forms.Label AddAppointmentURLLabel;
+        private System.Windows.Forms.Label AddAppointmentStartTimeLabel;
+        private System.Windows.Forms.Label AddAppointmentEndTimeLabel;
+        private System.Windows.Forms.Button AddAppointmentSaveButton;
+        private System.Windows.Forms.Button AddAppointmentCancelButton;
+        private System.Windows.Forms.DateTimePicker AddAppointmentStartDatePicker;
+        private System.Windows.Forms.DateTimePicker AddAppointmentEndDatePicker;
+        private System.Windows.Forms.DateTimePicker AddAppointmentStartTimePicker;
+        private System.Windows.Forms.DateTimePicker AddAppointmentEndTimePicker;
     }
 }

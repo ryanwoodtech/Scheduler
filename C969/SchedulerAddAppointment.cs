@@ -24,6 +24,17 @@ namespace C969
             AddAppointmentCustomerComboBox.Items.AddRange(ExtractCustomerNames(customerNameCollection)); 
         }
 
+
+        private void AddAppointmentCancelButton_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void AddAppointmentSaveButton_Click(object sender, EventArgs e)
+        {
+            SaveNewAppointment();
+        }
+
         private object[] ExtractCustomerNames(DataGridViewRowCollection customerNameCollection)
         {
             IList list = customerNameCollection;
@@ -37,6 +48,16 @@ namespace C969
             }
 
             return customerNames;
+        }
+
+
+        private void SaveNewAppointment()
+        {
+            // Create appointment object
+
+            // Save appointment to the database
+
+            // Refresh DGV
         }
     }
 }
