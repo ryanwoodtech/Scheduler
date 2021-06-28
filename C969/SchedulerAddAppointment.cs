@@ -91,6 +91,7 @@ namespace C969
 
             Appointment newAppointment = new Appointment(appointmentId, customerId, userId, title, description, location, contact, type, url, start, end, createDate, createdBy, lastUpdate, lastUpdatedBy);
 
+            DataAccess.SaveNewAppointment(newAppointment);
             // Save appointment to the database
 
             // Refresh DGV
@@ -114,11 +115,6 @@ namespace C969
             }
 
             throw new Exception();
-        }
-
-        private int getAppointmentId()
-        {
-            throw new NotImplementedException();
         }
 
         private int getUserId()
