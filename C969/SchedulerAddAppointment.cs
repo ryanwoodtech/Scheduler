@@ -92,9 +92,13 @@ namespace C969
             Appointment newAppointment = new Appointment(appointmentId, customerId, userId, title, description, location, contact, type, url, start, end, createDate, createdBy, lastUpdate, lastUpdatedBy);
 
             DataAccess.SaveNewAppointment(newAppointment);
-            // Save appointment to the database
-
+            Appointments.appointments = DataAccess.GetAppointments();
             // Refresh DGV
+            Scheduler.SchedulerAppointmentsDGV.DataSource = null;
+            Scheduler.SchedulerAppointmentsDGV.DataSource = Appointments.appointments;
+
+            MessageBox.Show("Appointment Added!");
+            Close();
         }
 
         private DateTime getAppointmentDateTime(string startOrEnd)

@@ -29,10 +29,10 @@ namespace C969
         /// </summary>
         private void InitializeComponent()
         {
-            this.SchedulerAppointmentsDGV = new System.Windows.Forms.DataGridView();
+            SchedulerAppointmentsDGV = new System.Windows.Forms.DataGridView();
             this.AppointmentsLabel = new System.Windows.Forms.Label();
             this.CustomersLabel = new System.Windows.Forms.Label();
-            this.SchedulerCustomersDGV = new System.Windows.Forms.DataGridView();
+            SchedulerCustomersDGV = new System.Windows.Forms.DataGridView();
             this.AppointmentsAddButton = new System.Windows.Forms.Button();
             this.AppointmentsUpdateButton = new System.Windows.Forms.Button();
             this.AppointmentsDeleteButton = new System.Windows.Forms.Button();
@@ -42,19 +42,19 @@ namespace C969
             this.AppointmentsMonthRadioButton = new System.Windows.Forms.RadioButton();
             this.AppointmentsWeekRadioButton = new System.Windows.Forms.RadioButton();
             this.CustomersUpdateButton = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.SchedulerAppointmentsDGV)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.SchedulerCustomersDGV)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(SchedulerAppointmentsDGV)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(SchedulerCustomersDGV)).BeginInit();
             this.SuspendLayout();
             // 
             // SchedulerAppointmentsDGV
             // 
-            this.SchedulerAppointmentsDGV.AllowUserToAddRows = false;
-            this.SchedulerAppointmentsDGV.AllowUserToDeleteRows = false;
-            this.SchedulerAppointmentsDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.SchedulerAppointmentsDGV.Location = new System.Drawing.Point(280, 40);
-            this.SchedulerAppointmentsDGV.Name = "SchedulerAppointmentsDGV";
-            this.SchedulerAppointmentsDGV.Size = new System.Drawing.Size(601, 257);
-            this.SchedulerAppointmentsDGV.TabIndex = 0;
+            SchedulerAppointmentsDGV.AllowUserToAddRows = false;
+            SchedulerAppointmentsDGV.AllowUserToDeleteRows = false;
+            SchedulerAppointmentsDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            SchedulerAppointmentsDGV.Location = new System.Drawing.Point(280, 40);
+            SchedulerAppointmentsDGV.Name = "SchedulerAppointmentsDGV";
+            SchedulerAppointmentsDGV.Size = new System.Drawing.Size(601, 257);
+            SchedulerAppointmentsDGV.TabIndex = 0;
             // 
             // AppointmentsLabel
             // 
@@ -76,13 +76,13 @@ namespace C969
             // 
             // SchedulerCustomersDGV
             // 
-            this.SchedulerCustomersDGV.AllowUserToAddRows = false;
-            this.SchedulerCustomersDGV.AllowUserToDeleteRows = false;
-            this.SchedulerCustomersDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.SchedulerCustomersDGV.Location = new System.Drawing.Point(280, 373);
-            this.SchedulerCustomersDGV.Name = "SchedulerCustomersDGV";
-            this.SchedulerCustomersDGV.Size = new System.Drawing.Size(601, 257);
-            this.SchedulerCustomersDGV.TabIndex = 2;
+            SchedulerCustomersDGV.AllowUserToAddRows = false;
+            SchedulerCustomersDGV.AllowUserToDeleteRows = false;
+            SchedulerCustomersDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            SchedulerCustomersDGV.Location = new System.Drawing.Point(280, 373);
+            SchedulerCustomersDGV.Name = "SchedulerCustomersDGV";
+            SchedulerCustomersDGV.Size = new System.Drawing.Size(601, 257);
+            SchedulerCustomersDGV.TabIndex = 2;
             // 
             // AppointmentsAddButton
             // 
@@ -195,14 +195,14 @@ namespace C969
             this.Controls.Add(this.AppointmentsUpdateButton);
             this.Controls.Add(this.AppointmentsAddButton);
             this.Controls.Add(this.CustomersLabel);
-            this.Controls.Add(this.SchedulerCustomersDGV);
+            this.Controls.Add(SchedulerCustomersDGV);
             this.Controls.Add(this.AppointmentsLabel);
-            this.Controls.Add(this.SchedulerAppointmentsDGV);
+            this.Controls.Add(SchedulerAppointmentsDGV);
             this.Name = "Scheduler";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Scheduler";
-            ((System.ComponentModel.ISupportInitialize)(this.SchedulerAppointmentsDGV)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.SchedulerCustomersDGV)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(SchedulerAppointmentsDGV)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(SchedulerCustomersDGV)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -210,10 +210,10 @@ namespace C969
 
         #endregion
 
-        private System.Windows.Forms.DataGridView SchedulerAppointmentsDGV;
+        static public System.Windows.Forms.DataGridView SchedulerAppointmentsDGV;
         private System.Windows.Forms.Label AppointmentsLabel;
         private System.Windows.Forms.Label CustomersLabel;
-        private System.Windows.Forms.DataGridView SchedulerCustomersDGV;
+        static public System.Windows.Forms.DataGridView SchedulerCustomersDGV;
         private System.Windows.Forms.Button AppointmentsAddButton;
         private System.Windows.Forms.Button AppointmentsUpdateButton;
         private System.Windows.Forms.Button AppointmentsDeleteButton;
