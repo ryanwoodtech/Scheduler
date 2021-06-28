@@ -47,6 +47,7 @@ namespace C969
             SaveNewAppointment();
         }
 
+        // Use this to popuate the drop down menu for customers
         private object[] ExtractCustomerInfo(int index)
         {
             object[] customerInfo = new object[customerRowIList.Count];
@@ -73,7 +74,6 @@ namespace C969
             // if null: default none value
             // 
 
-            int appointmentId = int.Parse(AddAppointmentAppointmentIdInput.Text);
             int customerId = getCustomerId();
             int userId = getUserId();
             string title = AddAppointmentTitleInput.Text;
@@ -89,13 +89,10 @@ namespace C969
             DateTime lastUpdate = DateTime.Now;
             string lastUpdatedBy = Scheduler.userName;
 
-            Appointment newAppointment = new Appointment(appointmentId, customerId, userId, title, description, location, contact, type, url, start, end, createDate, createdBy, lastUpdate, lastUpdatedBy);
+            Appointment newAppointment = new Appointment( customerId, userId, title, description, location, contact, type, url, start, end, createDate, createdBy, lastUpdate, lastUpdatedBy);
 
             DataAccess.SaveNewAppointment(newAppointment);
             Appointments.appointments = DataAccess.GetAppointments();
-            // Refresh DGV
-            Scheduler.SchedulerAppointmentsDGV.DataSource = null;
-            Scheduler.SchedulerAppointmentsDGV.DataSource = Appointments.appointments;
 
             MessageBox.Show("Appointment Added!");
             Close();
@@ -140,6 +137,5 @@ namespace C969
             }
             return -1;
         }
-
     }
 }

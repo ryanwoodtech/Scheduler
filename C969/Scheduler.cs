@@ -121,5 +121,18 @@ namespace C969
 
             
         }
+
+        private void CustomersAddButton_Click(object sender, EventArgs e)
+        {
+            SchedulerAddCustomer schedulerAddCustomerForm = new SchedulerAddCustomer();
+            schedulerAddCustomerForm.Show();
+        }
+
+        private void Scheduler_Activated(object sender, EventArgs e)
+        {
+            // Refresh DGV
+            SchedulerAppointmentsDGV.DataSource = null;
+            SchedulerAppointmentsDGV.DataSource = Appointments.appointments;
+        }
     }
 }

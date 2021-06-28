@@ -52,8 +52,6 @@ namespace C969
             this.AddAppointmentEndDatePicker = new System.Windows.Forms.DateTimePicker();
             this.AddAppointmentStartTimePicker = new System.Windows.Forms.DateTimePicker();
             this.AddAppointmentEndTimePicker = new System.Windows.Forms.DateTimePicker();
-            this.AddAppointmentAppointmentIdInput = new System.Windows.Forms.TextBox();
-            this.AddAppointmentAppointmentIdLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // AddAppointmentLabel
@@ -261,30 +259,11 @@ namespace C969
             this.AddAppointmentEndTimePicker.Size = new System.Drawing.Size(84, 20);
             this.AddAppointmentEndTimePicker.TabIndex = 24;
             // 
-            // AddAppointmentAppointmentIdInput
-            // 
-            this.AddAppointmentAppointmentIdInput.Location = new System.Drawing.Point(163, 96);
-            this.AddAppointmentAppointmentIdInput.Name = "AddAppointmentAppointmentIdInput";
-            this.AddAppointmentAppointmentIdInput.Size = new System.Drawing.Size(167, 20);
-            this.AddAppointmentAppointmentIdInput.TabIndex = 26;
-            // 
-            // AddAppointmentAppointmentIdLabel
-            // 
-            this.AddAppointmentAppointmentIdLabel.AutoSize = true;
-            this.AddAppointmentAppointmentIdLabel.Font = new System.Drawing.Font("Adobe Devanagari", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.AddAppointmentAppointmentIdLabel.Location = new System.Drawing.Point(-3, 89);
-            this.AddAppointmentAppointmentIdLabel.Name = "AddAppointmentAppointmentIdLabel";
-            this.AddAppointmentAppointmentIdLabel.Size = new System.Drawing.Size(165, 33);
-            this.AddAppointmentAppointmentIdLabel.TabIndex = 25;
-            this.AddAppointmentAppointmentIdLabel.Text = "Appointment ID";
-            // 
             // SchedulerAddAppointment
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(415, 648);
-            this.Controls.Add(this.AddAppointmentAppointmentIdInput);
-            this.Controls.Add(this.AddAppointmentAppointmentIdLabel);
             this.Controls.Add(this.AddAppointmentEndTimePicker);
             this.Controls.Add(this.AddAppointmentStartTimePicker);
             this.Controls.Add(this.AddAppointmentEndDatePicker);
@@ -341,7 +320,5 @@ namespace C969
         private System.Windows.Forms.DateTimePicker AddAppointmentEndDatePicker;
         private System.Windows.Forms.DateTimePicker AddAppointmentStartTimePicker;
         private System.Windows.Forms.DateTimePicker AddAppointmentEndTimePicker;
-        private System.Windows.Forms.TextBox AddAppointmentAppointmentIdInput;
-        private System.Windows.Forms.Label AddAppointmentAppointmentIdLabel;
     }
 }
