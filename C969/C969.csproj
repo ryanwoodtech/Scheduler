@@ -50,6 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Address.cs" />
     <Compile Include="Appointment.cs" />
     <Compile Include="Appointments.cs" />
     <Compile Include="Customer.cs" />
@@ -66,6 +67,12 @@
     </Compile>
     <Compile Include="SchedulerAddAppointment.Designer.cs">
       <DependentUpon>SchedulerAddAppointment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SchedulerAddCustomer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SchedulerAddCustomer.Designer.cs">
+      <DependentUpon>SchedulerAddCustomer.cs</DependentUpon>
     </Compile>
     <Compile Include="SchedulerLogin.cs">
       <SubType>Form</SubType>
@@ -86,6 +93,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SchedulerAddAppointment.resx">
       <DependentUpon>SchedulerAddAppointment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SchedulerAddCustomer.resx">
+      <DependentUpon>SchedulerAddCustomer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SchedulerLogin.resx">
       <DependentUpon>SchedulerLogin.cs</DependentUpon>
