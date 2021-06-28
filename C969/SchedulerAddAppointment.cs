@@ -82,14 +82,11 @@ namespace C969
             string contact = AddAppointmentContactInput.Text;
             string type = AddAppointmentTypeInput.Text;
             string url = AddAppointmentURLInput.Text;
-
-            DateTime start = new DateTime();
-            DateTime end = new DateTime();
-            
-            DateTime createDate = new DateTime();
+            DateTime start = getAppointmentDateTime("start");
+            DateTime end = getAppointmentDateTime("end");
+            DateTime createDate = DateTime.Now;
             string createdBy = Scheduler.userName;
-
-            DateTime lastUpdate = new DateTime();
+            DateTime lastUpdate = DateTime.Now;
             string lastUpdatedBy = Scheduler.userName;
 
             Appointment newAppointment = new Appointment(appointmentId, customerId, userId, title, description, location, contact, type, url, start, end, createDate, createdBy, lastUpdate, lastUpdatedBy);
@@ -97,6 +94,26 @@ namespace C969
             // Save appointment to the database
 
             // Refresh DGV
+        }
+
+        private DateTime getAppointmentDateTime(string startOrEnd)
+        {
+            if (startOrEnd == "start")
+            {
+                string startDate = AddAppointmentStartDatePicker.Value.ToString("yyyy/MM/dd");
+                string startTime = AddAppointmentStartTimePicker.Value.ToString("HH:mm:ss");
+                string appointmentDateTime = startDate + " " + startTime;
+
+                return DateTime.Parse(appointmentDateTime);
+            }
+            else if (startOrEnd == "end")
+            {
+                string endDate = AddAppointmentEndDatePicker.Value.ToString("yyyy/MM/dd");
+                string endTime = AddAppointmentEndTimePicker.Value.ToString("HH:mm:ss");
+                return DateTime.Parse(endDate + " " + endTime);
+            }
+
+            throw new Exception();
         }
 
         private int getAppointmentId()
@@ -123,5 +140,6 @@ namespace C969
             }
             return -1;
         }
+
     }
 }
