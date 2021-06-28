@@ -50,7 +50,7 @@ namespace C969
             LoginIncorrectLabel.Text = "Nombre de usuario / contraseña incorrectos";
         }
 
-        private ArrayList getColumn(string query)
+        private ArrayList GetColumn(string query)
         {
             string connectionString = "server=wgudb.ucertify.com;userid=U08hnQ;database=U08hnQ;password=53689293162;";
             using(MySqlConnection connection = new MySqlConnection(connectionString))
@@ -63,6 +63,7 @@ namespace C969
 
                 if (reader.HasRows)
                 {
+                    // Reads one row at a time
                     while (reader.Read())
                     {
                         userNames.Add(reader[0]);
@@ -78,9 +79,9 @@ namespace C969
                 return userNames;
             }
         }
-        private void ShowSchedulerForm()
+        private void ShowSchedulerForm(int userId, string userName)
         {
-            Scheduler scheduler = new Scheduler();
+            Scheduler scheduler = new Scheduler(userId, userName);
             scheduler.Show();
         }
 
@@ -93,14 +94,16 @@ namespace C969
              * 4. [X] if input-password == database-password, log user in
              * 5. [X] if false, let user know there was an incorrect username/password
             */
-            ArrayList dbUserName = getColumn("select userName from user where userName=\"" + username + "\";");
+            ArrayList dbUserName = GetColumn("select userName from user where userName=\"" + username + "\";");
             if (dbUserName.Count > 0)
             {
-                ArrayList dbPassword = getColumn("select password from user where userName=\"" + username + "\";");
+                ArrayList dbPassword = GetColumn("select password from user where userName=\"" + username + "\";");
 
                 if ((string)dbPassword[0] == password)
                 {
-                    ShowSchedulerForm();
+                    // Log user in
+                    ArrayList dbUserId = GetColumn("select userId from user where userName=\"" + username + "\";");
+                    ShowSchedulerForm((int)dbUserId[0], (string)dbUserName[0]);
                 }
                 else
                 {

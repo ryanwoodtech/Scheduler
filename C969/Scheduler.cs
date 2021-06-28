@@ -13,11 +13,16 @@ namespace C969
 {
     public partial class Scheduler : Form
     {
-        public Scheduler()
+        static public int userId;
+        static public string userName;
+
+        public Scheduler(int userId, string userName)
         {
             InitializeComponent();
             SchedulerAppointmentsDGV.DataSource = Appointments.appointments;
             SchedulerCustomersDGV.DataSource = Customers.customers;
+            Scheduler.userId = userId;
+            Scheduler.userName = userName;
         }
 
         private void AppointmentsDeleteButton_Click(object sender, EventArgs e)
