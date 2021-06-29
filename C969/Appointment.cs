@@ -18,13 +18,9 @@ namespace C969
         public string url { get; set; }
         public DateTime start { get; set; }
         public DateTime end { get; set; }
-        public DateTime createDate { get; set; }
-        public string createdBy { get; set; }
-        public DateTime lastUpdate { get; set; }
-        public string lastUpdatedBy { get; set; }
 
         // SELECT appointmentId, customerId, userId, title, description, location, contact, type, url, start, end FROM appointment;
-        public Appointment(int customerId, int userId, string title, string description, string location, string contact, string type, string url, DateTime start, DateTime end, DateTime createDate, string createdBy, DateTime lastUpdate, string lastUpdatedBy)
+        public Appointment(int customerId, int userId, string title, string description, string location, string contact, string type, string url, DateTime start, DateTime end)
         {
             this.customerId = customerId;
             this.userId = userId;
@@ -36,10 +32,6 @@ namespace C969
             this.url = url;
             this.start = start;
             this.end = end;
-            this.createDate = createDate;
-            this.createdBy = createdBy;
-            this.lastUpdate = lastUpdate;
-            this.lastUpdatedBy = lastUpdatedBy;
         }
     }
 }

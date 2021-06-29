@@ -96,6 +96,7 @@ namespace C969
             this.UpdateAppointmentCancelButton.TabIndex = 43;
             this.UpdateAppointmentCancelButton.Text = "Cancel";
             this.UpdateAppointmentCancelButton.UseVisualStyleBackColor = true;
+            this.UpdateAppointmentCancelButton.Click += new System.EventHandler(this.UpdateAppointmentCancelButton_Click);
             // 
             // UpdateAppointmentSaveButton
             // 
@@ -105,6 +106,7 @@ namespace C969
             this.UpdateAppointmentSaveButton.TabIndex = 42;
             this.UpdateAppointmentSaveButton.Text = "Save";
             this.UpdateAppointmentSaveButton.UseVisualStyleBackColor = true;
+            this.UpdateAppointmentSaveButton.Click += new System.EventHandler(this.UpdateAppointmentSaveButton_Click);
             // 
             // UpdateAppointmentEndTimeLabel
             // 

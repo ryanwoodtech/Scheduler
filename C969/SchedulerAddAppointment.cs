@@ -61,7 +61,7 @@ namespace C969
         }
 
 
-        private void SaveNewAppointment()
+        public void SaveNewAppointment()
         {
             // Create appointment object
 
@@ -82,12 +82,8 @@ namespace C969
             string url = AddAppointmentURLInput.Text;
             DateTime start = getAppointmentDateTime("start");
             DateTime end = getAppointmentDateTime("end");
-            DateTime createDate = DateTime.Now;
-            string createdBy = Scheduler.userName;
-            DateTime lastUpdate = DateTime.Now;
-            string lastUpdatedBy = Scheduler.userName;
 
-            Appointment newAppointment = new Appointment( customerId, userId, title, description, location, contact, type, url, start, end, createDate, createdBy, lastUpdate, lastUpdatedBy);
+            Appointment newAppointment = new Appointment( customerId, userId, title, description, location, contact, type, url, start, end);
 
             DataAccess.SaveNewAppointment(newAppointment);
             Appointments.appointments = DataAccess.GetAppointments();
