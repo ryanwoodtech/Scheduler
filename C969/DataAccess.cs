@@ -43,6 +43,94 @@ namespace C969
             }
         }
 
+        static public IEnumerable<string> GetCustomerAddress(int addressId)
+        {
+            string[] customerAddressData = new string[7];
+
+            string[] addressData  = getAddress(addressId);
+            string[] cityData = getCity(addressData[2]);
+            string[] countryData = getCountry(cityData[1]);
+
+            customerAddressData[0] = addressData[0];
+            customerAddressData[1] = addressData[1];
+            customerAddressData[2] = addressData[3];
+            customerAddressData[3] = addressData[4];
+            customerAddressData[4] = cityData[0];
+            customerAddressData[5] = countryData[0];
+
+
+            return customerAddressData;
+        }
+
+        private static string[] getCountry(object countryId)
+        {
+            string query = "SELECT * FROM country WHERE countryId=" + countryId + ";";
+            string connectionString = "server=wgudb.ucertify.com;userid=U08hnQ;database=U08hnQ;password=53689293162;";
+
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                MySqlCommand command = new MySqlCommand(query, connection);
+                connection.Open();
+                MySqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    string[] country = new string[1];
+                    country[0] = reader.GetString(1);
+
+                    return country;
+                }
+            }
+            throw new Exception();
+        }
+
+       
+
+        private static string[] getCity(object cityId)
+        {
+            string query = "SELECT * FROM city WHERE cityId=" + cityId + ";";
+            string connectionString = "server=wgudb.ucertify.com;userid=U08hnQ;database=U08hnQ;password=53689293162;";
+
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                MySqlCommand command = new MySqlCommand(query, connection);
+                connection.Open();
+                MySqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    string[] city = new string[2];
+                    city[0] = reader.GetString(1);
+                    city[1] = reader.GetInt32(2).ToString();
+
+                    return city;
+                }
+            }
+            throw new Exception();
+        }
+
+        private static string[] getAddress(int addressId)
+        {
+            string query = "SELECT * FROM address WHERE addressId=" + addressId + ";";
+            string connectionString = "server=wgudb.ucertify.com;userid=U08hnQ;database=U08hnQ;password=53689293162;";
+
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                MySqlCommand command = new MySqlCommand(query, connection);
+                connection.Open();
+                MySqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    string[] address = new string[5];
+                    address[0] = reader.GetString(1);
+                    address[1] = reader.GetString(2);
+                    address[2] = reader.GetInt32(3).ToString();
+                    address[3] = reader.GetString(4);
+                    address[4] = reader.GetString(5);
+
+                    return address;
+                }
+            }
+            throw new Exception();
+        }
 
         static public bool DeleteAppointment(int appointmentId)
         {
@@ -98,6 +186,30 @@ namespace C969
                 command.ExecuteNonQuery();
             }
 
+        }
+
+        static public void SaveUpdatedCustomer(int customerId, int addressId, int cityId, int countryId, string customerName, string address, string address2, string city, string country, string postalCode, string phone, int active)
+        {
+            string queryCountry = "UPDATE country SET country='" + country + "' WHERE countryId=" + countryId + ";";
+            string queryCity = "UPDATE city SET city='" + city + "' WHERE cityId=" + cityId + ";"; 
+            string queryAddress = "UPDATE address SET address='" + address + "', address2='" + address2 + "', postalCode='" + postalCode + "', phone='" + phone + "' WHERE addressId=" + addressId + ";";
+            string queryCustomer = "UPDATE customer SET customerName='" + customerName + "', active=" + active + " WHERE customerId=" + customerId + ";";
+            string connectionString = "server=wgudb.ucertify.com;userid=U08hnQ;database=U08hnQ;password=53689293162;";
+
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                MySqlCommand commandCountry = new MySqlCommand(queryCountry, connection);
+                MySqlCommand commandCity = new MySqlCommand(queryCity, connection);
+                MySqlCommand commandAddress = new MySqlCommand(queryAddress, connection);
+                MySqlCommand commandCustomer = new MySqlCommand(queryCustomer, connection);
+
+                connection.Open();
+                
+                commandCountry.ExecuteNonQuery();
+                commandCity.ExecuteNonQuery();
+                commandAddress.ExecuteNonQuery();
+                commandCustomer.ExecuteNonQuery();
+            }
         }
 
         static private string SqlFormat(Appointment newAppointment)

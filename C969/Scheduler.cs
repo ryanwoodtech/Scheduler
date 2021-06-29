@@ -112,7 +112,7 @@ namespace C969
 
             if (rowToUpdate.Cells.Count == 0)
             {
-                MessageBox.Show("You must select an appointment to delete.");
+                MessageBox.Show("You must select an appointment to update.");
                 return;
             }
 
@@ -122,7 +122,15 @@ namespace C969
 
         private void CustomersUpdateButton_Click(object sender, EventArgs e)
         {
-            SchedulerUpdateCustomer schedulerUpdateCustomerForm = new SchedulerUpdateCustomer();
+            // Grab selected DataGridViewRow and send it to update
+            DataGridViewRow rowToUpdate = SchedulerCustomersDGV.SelectedRows[0];
+
+            if (rowToUpdate.Cells.Count == 0)
+            {
+                MessageBox.Show("You must select a customer to update.");
+                return;
+            }
+            SchedulerUpdateCustomer schedulerUpdateCustomerForm = new SchedulerUpdateCustomer(rowToUpdate);
             schedulerUpdateCustomerForm.Show();
         }
     }
