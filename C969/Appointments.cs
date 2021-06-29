@@ -18,7 +18,6 @@ namespace C969
             // Delete appointment
             DataAccess.DeleteAppointment(appointmentId);
 
-            // Refresh DGV
             return true;
         }
     }

@@ -45,18 +45,23 @@ namespace C969
 
         static public IEnumerable<string> GetCustomerAddress(int addressId)
         {
-            string[] customerAddressData = new string[7];
+            string[] customerAddressData = new string[9];
 
             string[] addressData  = getAddress(addressId);
-            string[] cityData = getCity(addressData[2]);
-            string[] countryData = getCountry(cityData[1]);
+            string[] cityData = getCity(addressData[3]);
+            string[] countryData = getCountry(cityData[2]);
 
-            customerAddressData[0] = addressData[0];
-            customerAddressData[1] = addressData[1];
-            customerAddressData[2] = addressData[3];
-            customerAddressData[3] = addressData[4];
-            customerAddressData[4] = cityData[0];
-            customerAddressData[5] = countryData[0];
+            customerAddressData[0] = addressData[0]; // addressId
+            customerAddressData[1] = cityData[0]; // cityId
+            customerAddressData[2] = countryData[0]; // countryId
+
+            customerAddressData[3] = addressData[1]; // address
+            customerAddressData[4] = addressData[2]; // address2
+            customerAddressData[5] = addressData[4]; // postalCode
+            customerAddressData[6] = addressData[5]; // phone
+
+            customerAddressData[7] = cityData[1]; // city
+            customerAddressData[8] = countryData[1]; // country
 
 
             return customerAddressData;
@@ -74,8 +79,9 @@ namespace C969
                 MySqlDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {
-                    string[] country = new string[1];
-                    country[0] = reader.GetString(1);
+                    string[] country = new string[2];
+                    country[0] = reader.GetInt32(0).ToString(); // countryId
+                    country[1] = reader.GetString(1); // country
 
                     return country;
                 }
@@ -87,7 +93,7 @@ namespace C969
 
         private static string[] getCity(object cityId)
         {
-            string query = "SELECT * FROM city WHERE cityId=" + cityId + ";";
+            string query = "SELECT * FROM city WHERE cityId=" + int.Parse(cityId.ToString()) + ";";
             string connectionString = "server=wgudb.ucertify.com;userid=U08hnQ;database=U08hnQ;password=53689293162;";
 
             using (MySqlConnection connection = new MySqlConnection(connectionString))
@@ -97,9 +103,10 @@ namespace C969
                 MySqlDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {
-                    string[] city = new string[2];
-                    city[0] = reader.GetString(1);
-                    city[1] = reader.GetInt32(2).ToString();
+                    string[] city = new string[3];
+                    city[0] = reader.GetInt32(2).ToString(); // cityId
+                    city[1] = reader.GetString(1); // city
+                    city[2] = reader.GetInt32(2).ToString(); // countryId
 
                     return city;
                 }
@@ -107,7 +114,7 @@ namespace C969
             throw new Exception();
         }
 
-        private static string[] getAddress(int addressId)
+        private static string[] getAddress(object addressId)
         {
             string query = "SELECT * FROM address WHERE addressId=" + addressId + ";";
             string connectionString = "server=wgudb.ucertify.com;userid=U08hnQ;database=U08hnQ;password=53689293162;";
@@ -119,12 +126,14 @@ namespace C969
                 MySqlDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {
-                    string[] address = new string[5];
-                    address[0] = reader.GetString(1);
-                    address[1] = reader.GetString(2);
-                    address[2] = reader.GetInt32(3).ToString();
-                    address[3] = reader.GetString(4);
-                    address[4] = reader.GetString(5);
+                    string[] address = new string[6];
+
+                    address[0] = reader.GetInt32(0).ToString(); // addressId
+                    address[1] = reader.GetString(1); // address
+                    address[2] = reader.GetString(2); // address2
+                    address[3] = reader.GetInt32(3).ToString(); //cityId
+                    address[4] = reader.GetString(4); // postalCode
+                    address[5] = reader.GetString(5); // phone
 
                     return address;
                 }
@@ -188,7 +197,7 @@ namespace C969
 
         }
 
-        static public void SaveUpdatedCustomer(int customerId, int addressId, int cityId, int countryId, string customerName, string address, string address2, string city, string country, string postalCode, string phone, int active)
+        static public void SaveUpdatedCustomer(int customerId, int addressId, int cityId, int countryId, string customerName, string address, string address2, string city, string country, string postalCode, string phone, bool active)
         {
             string queryCountry = "UPDATE country SET country='" + country + "' WHERE countryId=" + countryId + ";";
             string queryCity = "UPDATE city SET city='" + city + "' WHERE cityId=" + cityId + ";"; 

@@ -13,33 +13,32 @@ namespace C969
     public partial class SchedulerUpdateCustomer : Form
     {
         DataGridViewRow rowToUpdate;
+        string[] customerData;
         public SchedulerUpdateCustomer(DataGridViewRow rowToUpdate)
         {
             InitializeComponent();
             this.rowToUpdate = rowToUpdate;
-
-            List<string> customerData = getCustomerAddressData(rowToUpdate);
-
+            // customerData[0] = addressId
+            // customerData[1] = cityId
+            // customerData[2] = countryId
+            customerData = getCustomerAddressData(rowToUpdate);
             
             UpdateCustomerNameInput.Text = rowToUpdate.Cells[1].Value.ToString();
-            UpdateCustomerAddressInput.Text = customerData[0];
-            UpdateCustomerAddress2Input.Text = customerData[1];
-            UpdateCustomerCityInput.Text = customerData[2];
-            UpdateCustomerCountryInput.Text = customerData[3];
-            UpdateCustomerPostalCodeInput.Text = customerData[4];
-            UpdateCustomerPhoneInput.Text = customerData[5];
+            UpdateCustomerAddressInput.Text = customerData[3];
+            UpdateCustomerAddress2Input.Text = customerData[4];
+            UpdateCustomerCityInput.Text = customerData[7];
+            UpdateCustomerCountryInput.Text = customerData[8];
+            UpdateCustomerPostalCodeInput.Text = customerData[5];
+            UpdateCustomerPhoneInput.Text = customerData[6];
             UpdateCustomerActiveCheckBox.Checked = (bool)rowToUpdate.Cells[3].Value;
             
         }
 
-        private List<string> getCustomerAddressData(DataGridViewRow rowToUpdate)
+        private string[] getCustomerAddressData(DataGridViewRow rowToUpdate)
         {
-            List<string> customerAddressData = new List<string>();
             int addressId = (int)rowToUpdate.Cells[2].Value;
 
-            // use DataAccess to get address info
-            customerAddressData.AddRange(DataAccess.GetCustomerAddress(addressId));
-
+            string[] customerAddressData = (string[])DataAccess.GetCustomerAddress(addressId);
 
             return customerAddressData;
         }
@@ -65,8 +64,13 @@ namespace C969
             string phone = UpdateCustomerPhoneInput.Text;
             bool active = UpdateCustomerActiveCheckBox.Checked;
 
-            // int customerId, int addressId, int cityId, int countryId, string customerName, string address, string address2, string city, string country, string postalCode, string phone, int active
-            DataAccess.SaveUpdatedCustomer(customerId, address, address2, city, country, postalCode, phone, active);
+            // int customerId, int addressId, int cityId, int countryId, string customerName, string address, string address2, string city, string country, string postalCode, string phone, bool active
+            DataAccess.SaveUpdatedCustomer(customerId, int.Parse(customerData[0]), int.Parse(customerData[1]), int.Parse(customerData[2]), customerName, address, address2, city, country, postalCode, phone, active);
+
+            Customers.customers = DataAccess.GetCustomers();
+
+            MessageBox.Show("Customer Updated!");
+            Close();
         }
     }
 }
