@@ -35,6 +35,10 @@ namespace C969
 
             SaveNewCustomer(customerName, address, address2, city, country, postalCode, phone, active);
 
+            Customers.customers = DataAccess.GetCustomers();
+
+            MessageBox.Show("Customer Added!");
+            Close();
         }
 
         private void SaveNewCustomer(string customerName, string address, string address2, string city, string country, string postalCode, string phone, bool active)
@@ -43,8 +47,7 @@ namespace C969
             int cityId = DataAccess.SaveCity(city, countryId);
             int addressId = DataAccess.SaveAddress(address, address2, cityId, postalCode, phone);
 
-            // Customer newCustomer = new Customer(customerName, addressId, active);
-            // DataAccess.SaveNewCustomer(newCustomer);
+            DataAccess.SaveNewCustomer(customerName, addressId, active);
         }
 
     }

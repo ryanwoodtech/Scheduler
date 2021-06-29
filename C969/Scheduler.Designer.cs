@@ -52,7 +52,9 @@ namespace C969
             this.SchedulerAppointmentsDGV.AllowUserToDeleteRows = false;
             this.SchedulerAppointmentsDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.SchedulerAppointmentsDGV.Location = new System.Drawing.Point(280, 40);
+            this.SchedulerAppointmentsDGV.MultiSelect = false;
             this.SchedulerAppointmentsDGV.Name = "SchedulerAppointmentsDGV";
+            this.SchedulerAppointmentsDGV.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.SchedulerAppointmentsDGV.Size = new System.Drawing.Size(601, 257);
             this.SchedulerAppointmentsDGV.TabIndex = 0;
             // 
@@ -80,7 +82,9 @@ namespace C969
             this.SchedulerCustomersDGV.AllowUserToDeleteRows = false;
             this.SchedulerCustomersDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.SchedulerCustomersDGV.Location = new System.Drawing.Point(280, 373);
+            this.SchedulerCustomersDGV.MultiSelect = false;
             this.SchedulerCustomersDGV.Name = "SchedulerCustomersDGV";
+            this.SchedulerCustomersDGV.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.SchedulerCustomersDGV.Size = new System.Drawing.Size(601, 257);
             this.SchedulerCustomersDGV.TabIndex = 2;
             // 
@@ -104,6 +108,7 @@ namespace C969
             this.AppointmentsUpdateButton.TabIndex = 5;
             this.AppointmentsUpdateButton.Text = "Update Database";
             this.AppointmentsUpdateButton.UseVisualStyleBackColor = false;
+            this.AppointmentsUpdateButton.Click += new System.EventHandler(this.AppointmentsUpdateButton_Click);
             // 
             // AppointmentsDeleteButton
             // 
