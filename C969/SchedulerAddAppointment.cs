@@ -13,7 +13,6 @@ namespace C969
 {
     public partial class SchedulerAddAppointment : Form
     {
-        private DataGridViewRowCollection customerRowCollection;
         IList customerRowIList;
         object[] customerNames;
         object[] customerIds;
@@ -26,7 +25,6 @@ namespace C969
         public SchedulerAddAppointment(DataGridViewRowCollection customerRowCollection )
         {
             InitializeComponent();
-            this.customerRowCollection = customerRowCollection;
             this.customerRowIList = customerRowCollection;
 
             this.customerIds = new object[customerRowIList.Count];

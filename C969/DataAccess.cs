@@ -69,7 +69,6 @@ namespace C969
                 MySqlCommand command = new MySqlCommand(query, connection);
                 connection.Open();
                 command.ExecuteNonQuery();
-
             }
         }
 

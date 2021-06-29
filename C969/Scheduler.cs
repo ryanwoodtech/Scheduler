@@ -107,8 +107,23 @@ namespace C969
 
         private void AppointmentsUpdateButton_Click(object sender, EventArgs e)
         {
-            //SchedulerUpdateAppointment schedulerUpdateAppointmentForm= new SchedulerUpdateAppointment();
+            // Grab selected DataGridViewRow and send it to update
+            DataGridViewRow rowData = SchedulerAppointmentsDGV.SelectedRows[0];
+
+            if (rowData.Cells.Count == 0)
+            {
+                MessageBox.Show("You must select an appointment to delete.");
+                return;
+            }
+
+            SchedulerUpdateAppointment schedulerUpdateAppointmentForm= new SchedulerUpdateAppointment(rowData, SchedulerCustomersDGV.Rows);
             schedulerUpdateAppointmentForm.Show();
+        }
+
+        private void CustomersUpdateButton_Click(object sender, EventArgs e)
+        {
+            SchedulerUpdateCustomer schedulerUpdateCustomerForm = new SchedulerUpdateCustomer();
+            schedulerUpdateCustomerForm.Show();
         }
     }
 }

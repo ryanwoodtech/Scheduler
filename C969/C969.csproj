@@ -82,6 +82,18 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SchedulerUpdateAppointment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SchedulerUpdateAppointment.Designer.cs">
+      <DependentUpon>SchedulerUpdateAppointment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SchedulerUpdateCustomer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SchedulerUpdateCustomer.Designer.cs">
+      <DependentUpon>SchedulerUpdateCustomer.cs</DependentUpon>
+    </Compile>
     <Compile Include="U08hnQDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -109,6 +121,12 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="SchedulerUpdateAppointment.resx">
+      <DependentUpon>SchedulerUpdateAppointment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SchedulerUpdateCustomer.resx">
+      <DependentUpon>SchedulerUpdateCustomer.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\DataSources\Appointment.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
