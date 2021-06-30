@@ -95,8 +95,8 @@ namespace C969
             string contact = UpdateAppointmentContactInput.Text;
             string type = UpdateAppointmentTypeInput.Text;
             string url = UpdateAppointmentURLInput.Text;
-            DateTime start = getAppointmentDateTime("start");
-            DateTime end = getAppointmentDateTime("end");
+            DateTime start = getAppointmentDateTime("start").ToUniversalTime();
+            DateTime end = getAppointmentDateTime("end").ToUniversalTime(); ;
             // DateTime createDate = DateTime.Now;
             // string createdBy = Scheduler.userName;
             // DateTime lastUpdate = DateTime.Now;

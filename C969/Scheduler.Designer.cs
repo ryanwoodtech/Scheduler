@@ -148,6 +148,7 @@ namespace C969
             // AppointmentsAllRadioButton
             // 
             this.AppointmentsAllRadioButton.AutoSize = true;
+            this.AppointmentsAllRadioButton.Checked = true;
             this.AppointmentsAllRadioButton.Location = new System.Drawing.Point(191, 123);
             this.AppointmentsAllRadioButton.Name = "AppointmentsAllRadioButton";
             this.AppointmentsAllRadioButton.Size = new System.Drawing.Size(36, 17);
@@ -155,6 +156,7 @@ namespace C969
             this.AppointmentsAllRadioButton.TabStop = true;
             this.AppointmentsAllRadioButton.Text = "All";
             this.AppointmentsAllRadioButton.UseVisualStyleBackColor = true;
+            this.AppointmentsAllRadioButton.CheckedChanged += new System.EventHandler(this.AppointmentsAllRadioButton_CheckedChanged);
             // 
             // AppointmentsMonthRadioButton
             // 
@@ -163,9 +165,9 @@ namespace C969
             this.AppointmentsMonthRadioButton.Name = "AppointmentsMonthRadioButton";
             this.AppointmentsMonthRadioButton.Size = new System.Drawing.Size(55, 17);
             this.AppointmentsMonthRadioButton.TabIndex = 11;
-            this.AppointmentsMonthRadioButton.TabStop = true;
             this.AppointmentsMonthRadioButton.Text = "Month";
             this.AppointmentsMonthRadioButton.UseVisualStyleBackColor = true;
+            this.AppointmentsMonthRadioButton.Click += new System.EventHandler(this.AppointmentsMonthRadioButton_Click);
             // 
             // AppointmentsWeekRadioButton
             // 
@@ -174,9 +176,9 @@ namespace C969
             this.AppointmentsWeekRadioButton.Name = "AppointmentsWeekRadioButton";
             this.AppointmentsWeekRadioButton.Size = new System.Drawing.Size(54, 17);
             this.AppointmentsWeekRadioButton.TabIndex = 12;
-            this.AppointmentsWeekRadioButton.TabStop = true;
             this.AppointmentsWeekRadioButton.Text = "Week";
             this.AppointmentsWeekRadioButton.UseVisualStyleBackColor = true;
+            this.AppointmentsWeekRadioButton.Click += new System.EventHandler(this.AppointmentsWeekRadioButton_Click);
             // 
             // CustomersUpdateButton
             // 

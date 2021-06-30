@@ -20,9 +20,68 @@ namespace C969
         {
             InitializeComponent();
             SchedulerAppointmentsDGV.DataSource = Appointments.appointments;
+            FilterAppointments();
             SchedulerCustomersDGV.DataSource = Customers.customers;
             Scheduler.userId = userId;
             Scheduler.userName = userName;
+        }
+
+        private void FilterAppointments()
+        {
+            if (AppointmentsAllRadioButton.Checked)
+            {
+                System.Collections.IList rows = SchedulerAppointmentsDGV.Rows;
+
+                for (int i = 0; i < rows.Count; i++)
+                {
+                    SchedulerAppointmentsDGV.Rows[i].Visible = true;
+                }
+
+            }
+            else if (AppointmentsMonthRadioButton.Checked)
+            {
+                System.Collections.IList rows = SchedulerAppointmentsDGV.Rows;
+                for (int i = 0; i < rows.Count; i++)
+                {
+                    DataGridViewRow row = (DataGridViewRow)rows[i];
+                    DateTime appointmentDate = (DateTime)row.Cells["start"].Value;
+
+                    if (appointmentDate.Month == DateTime.Now.Month)
+                    {
+                        // Show appointment
+                        SchedulerAppointmentsDGV.Rows[i].Visible = true;
+                        continue;
+                    }
+
+                    SchedulerAppointmentsDGV.Rows[i].Visible = false;
+                }
+
+            }
+            else if (AppointmentsWeekRadioButton.Checked)
+            {
+                System.Collections.IList rows = SchedulerAppointmentsDGV.Rows;
+                for (int i = 0; i < rows.Count; i++)
+                {
+                    DataGridViewRow row = (DataGridViewRow)rows[i];
+                    DateTime appointmentDate = (DateTime)row.Cells["start"].Value;
+
+                    // DayOfWeek.Sunday = 0, DayOfWeek.Saturday = 6
+                    DateTime todaysDay = DateTime.Now;
+                    int daysUntilPreviousSunday = -1 * (int)todaysDay.DayOfWeek;
+                    int daysUnitlSaturday = 6 - (int)todaysDay.DayOfWeek;
+
+                    DateTime previousSundaysDate = todaysDay.AddDays(daysUntilPreviousSunday);
+                    DateTime thisSaturdaysDate = todaysDay.AddDays(daysUnitlSaturday);
+
+                    if (appointmentDate > previousSundaysDate && appointmentDate < thisSaturdaysDate)
+                    {
+                        SchedulerAppointmentsDGV.Rows[i].Visible = true;
+                        continue;
+                    }
+
+                    SchedulerAppointmentsDGV.Rows[i].Visible = false;
+                }
+            }
         }
 
         private void AppointmentsDeleteButton_Click(object sender, EventArgs e)
@@ -132,6 +191,21 @@ namespace C969
             }
             SchedulerUpdateCustomer schedulerUpdateCustomerForm = new SchedulerUpdateCustomer(rowToUpdate);
             schedulerUpdateCustomerForm.Show();
+        }
+
+        private void AppointmentsMonthRadioButton_Click(object sender, EventArgs e)
+        {
+            FilterAppointments();
+        }
+
+        private void AppointmentsWeekRadioButton_Click(object sender, EventArgs e)
+        {
+            FilterAppointments();
+        }
+
+        private void AppointmentsAllRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            FilterAppointments();
         }
     }
 }

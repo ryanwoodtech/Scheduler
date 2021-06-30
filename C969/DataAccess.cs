@@ -11,12 +11,10 @@ namespace C969
 {
     class DataAccess
     {
+        static string connectionString = "server=wgudb.ucertify.com;userid=U08hnQ;database=U08hnQ;password=53689293162;";
         static public DataTable GetAppointments()
         {
             string query = "SELECT * FROM appointment;";
-            string connectionString = "server=wgudb.ucertify.com;userid=U08hnQ;database=U08hnQ;password=53689293162;";
-            object[] commonTableData = GetCommonTableData();
-
 
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
@@ -24,6 +22,20 @@ namespace C969
                 MySqlDataAdapter adapter = new MySqlDataAdapter(command);
                 DataTable appointmentsDataTable = new DataTable();
                 adapter.Fill(appointmentsDataTable);
+                
+                // Convert UTC to local
+                foreach (DataRow row in appointmentsDataTable.Rows)
+                {
+                    DateTime start = (DateTime)row["start"];
+                    row["start"] = start.ToLocalTime();
+                    DateTime end = (DateTime)row["end"];
+                    row["end"] = end.ToLocalTime();
+                    DateTime createDate = (DateTime)row["createDate"];
+                    row["createDate"] = createDate.ToLocalTime();
+                    DateTime lastUpdate = (DateTime)row["lastUpdate"];
+                    row["lastUpdate"] = lastUpdate.ToLocalTime();
+                }
+
                 return appointmentsDataTable;
             }
         }
@@ -31,7 +43,6 @@ namespace C969
         static public DataTable GetCustomers()
         {
             string query = "SELECT * FROM customer;";
-            string connectionString = "server=wgudb.ucertify.com;userid=U08hnQ;database=U08hnQ;password=53689293162;";
 
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
@@ -39,6 +50,16 @@ namespace C969
                 MySqlDataAdapter adapter = new MySqlDataAdapter(command);
                 DataTable customersDataTable = new DataTable();
                 adapter.Fill(customersDataTable);
+
+                // Convert UTC to local
+                foreach (DataRow row in customersDataTable.Rows)
+                {
+                    DateTime createDate = (DateTime)row["createDate"];
+                    row["createDate"] = createDate.ToLocalTime();
+                    DateTime lastUpdate = (DateTime)row["lastUpdate"];
+                    row["lastUpdate"] = lastUpdate.ToLocalTime();
+                }
+
                 return customersDataTable;
             }
         }
@@ -52,7 +73,7 @@ namespace C969
             string[] countryData = getCountry(cityData[2]);
 
             customerAddressData[0] = addressData[0]; // addressId
-            customerAddressData[1] = cityData[0]; // cityId
+            customerAddressData[1] = cityData[0]; // cityId INCORRECT
             customerAddressData[2] = countryData[0]; // countryId
 
             customerAddressData[3] = addressData[1]; // address
@@ -70,7 +91,6 @@ namespace C969
         private static string[] getCountry(object countryId)
         {
             string query = "SELECT * FROM country WHERE countryId=" + countryId + ";";
-            string connectionString = "server=wgudb.ucertify.com;userid=U08hnQ;database=U08hnQ;password=53689293162;";
 
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
@@ -94,7 +114,6 @@ namespace C969
         private static string[] getCity(object cityId)
         {
             string query = "SELECT * FROM city WHERE cityId=" + int.Parse(cityId.ToString()) + ";";
-            string connectionString = "server=wgudb.ucertify.com;userid=U08hnQ;database=U08hnQ;password=53689293162;";
 
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
@@ -117,7 +136,6 @@ namespace C969
         private static string[] getAddress(object addressId)
         {
             string query = "SELECT * FROM address WHERE addressId=" + addressId + ";";
-            string connectionString = "server=wgudb.ucertify.com;userid=U08hnQ;database=U08hnQ;password=53689293162;";
 
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
@@ -144,7 +162,6 @@ namespace C969
         static public bool DeleteAppointment(int appointmentId)
         {
             string query = "DELETE FROM appointment WHERE appointmentId=" + appointmentId + ";";
-            string connectionString = "server=wgudb.ucertify.com;userid=U08hnQ;database=U08hnQ;password=53689293162;";
 
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
@@ -159,7 +176,6 @@ namespace C969
         static public void DeleteCustomer(int customerId)
         {
             string query = "DELETE FROM customer WHERE customerId=" + customerId + ";";
-            string connectionString = "server=wgudb.ucertify.com;userid=U08hnQ;database=U08hnQ;password=53689293162;";
 
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
@@ -172,7 +188,6 @@ namespace C969
         static public void SaveNewAppointment(Appointment newAppointment)
         {
             string query = SqlFormat(newAppointment);
-            string connectionString = "server=wgudb.ucertify.com;userid=U08hnQ;database=U08hnQ;password=53689293162;";
 
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
@@ -185,8 +200,7 @@ namespace C969
         static public void SaveUpdatedAppointment(Appointment updatedAppointment, int updatedAppointmentId)
         {
             // find appointment id and replace with new appointment
-            string query = "UPDATE appointment SET customerId=" + updatedAppointment.customerId + ", userId=" + updatedAppointment.userId + ", title=' " + updatedAppointment.title + "', description='" + updatedAppointment.description + "', location='" + updatedAppointment.location + "', contact='" + updatedAppointment.contact + "', type='" + updatedAppointment.type + "', url='" + updatedAppointment.url + "', start='" + updatedAppointment.start.ToString("yyyy-MM-dd HH:mm:ss") + "', end='" + updatedAppointment.end.ToString("yyyy-MM-dd HH:mm:ss") + "', lastUpdate='" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "', lastUpdateBy='" + Scheduler.userName + "' WHERE appointmentId=" + updatedAppointmentId + ";";
-            string connectionString = "server=wgudb.ucertify.com;userid=U08hnQ;database=U08hnQ;password=53689293162;";
+            string query = "UPDATE appointment SET customerId=" + updatedAppointment.customerId + ", userId=" + updatedAppointment.userId + ", title=' " + updatedAppointment.title + "', description='" + updatedAppointment.description + "', location='" + updatedAppointment.location + "', contact='" + updatedAppointment.contact + "', type='" + updatedAppointment.type + "', url='" + updatedAppointment.url + "', start='" + updatedAppointment.start.ToString("yyyy-MM-dd HH:mm:ss") + "', end='" + updatedAppointment.end.ToString("yyyy-MM-dd HH:mm:ss") + "', lastUpdate='" + DateTime.Now.ToUniversalTime().ToString("yyyy-MM-dd HH:mm:ss") + "', lastUpdateBy='" + Scheduler.userName + "' WHERE appointmentId=" + updatedAppointmentId + ";";
 
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
@@ -199,11 +213,14 @@ namespace C969
 
         static public void SaveUpdatedCustomer(int customerId, int addressId, int cityId, int countryId, string customerName, string address, string address2, string city, string country, string postalCode, string phone, bool active)
         {
-            string queryCountry = "UPDATE country SET country='" + country + "' WHERE countryId=" + countryId + ";";
-            string queryCity = "UPDATE city SET city='" + city + "' WHERE cityId=" + cityId + ";"; 
-            string queryAddress = "UPDATE address SET address='" + address + "', address2='" + address2 + "', postalCode='" + postalCode + "', phone='" + phone + "' WHERE addressId=" + addressId + ";";
-            string queryCustomer = "UPDATE customer SET customerName='" + customerName + "', active=" + active + " WHERE customerId=" + customerId + ";";
-            string connectionString = "server=wgudb.ucertify.com;userid=U08hnQ;database=U08hnQ;password=53689293162;";
+            // Confirm correct cityId was passed in
+            object[] commonTableData = GetCommonTableData();
+
+            string queryCountry = "UPDATE country SET country='" + country + "', lastUpdate='" + commonTableData[2] + "' WHERE countryId=" + countryId + ";";
+            string queryCity = "UPDATE city SET city='" + city + "', lastUpdate='" + commonTableData[2] + "' WHERE cityId=" + cityId + ";"; 
+            // Confirm update queryCity works
+            string queryAddress = "UPDATE address SET address='" + address + "', address2='" + address2 + "', postalCode='" + postalCode + "', phone='" + phone + "', lastUpdate='" + commonTableData[2] + "' WHERE addressId=" + addressId + ";";
+            string queryCustomer = "UPDATE customer SET customerName='" + customerName + "', active=" + active + ", lastUpdate='" + commonTableData[2] + "' WHERE customerId=" + customerId + ";";
 
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
@@ -235,8 +252,9 @@ namespace C969
             object[] commonTableData = GetCommonTableData();
 
             string query = "INSERT INTO country (country, createDate, createdBy, lastUpdate, lastUpdateBy) VALUES (\'" + country + "\', \'" + commonTableData[0] + "\', \'" + commonTableData[1] + "\', \'" + commonTableData[2] + "\', \'" + commonTableData[3] + "\');";
-            string selectQuery = "SELECT countryId FROM country WHERE country = \'" + country + "\';";
-            string connectionString = "server=wgudb.ucertify.com;userid=U08hnQ;database=U08hnQ;password=53689293162;";
+
+            string selectQuery = "SELECT LAST_INSERT_ID()";
+            //string selectQuery = "SELECT countryId FROM country WHERE country = \'" + country + "\';";
 
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
@@ -247,7 +265,8 @@ namespace C969
                 MySqlDataReader reader = select.ExecuteReader();
                 while (reader.Read())
                 {
-                    return reader.GetInt32(0);
+                    int result = reader.GetInt32(0);
+                    return result;
                 }
             }
             return -1;
@@ -258,8 +277,7 @@ namespace C969
             object[] commonTableData = GetCommonTableData();
 
             string query = "INSERT INTO city (city, countryId, createDate, createdBy, lastUpdate, lastUpdateBy) VALUES (\'" + city + "\', " + countryId + ", \'" + commonTableData[0] + "\', \'" + commonTableData[1] + "\', \'" + commonTableData[2] + "\', \'" + commonTableData[3] + "\');";
-            string selectQuery = "SELECT cityId FROM city WHERE city = \'" + city + "\';";
-            string connectionString = "server=wgudb.ucertify.com;userid=U08hnQ;database=U08hnQ;password=53689293162;";
+            string selectQuery = "SELECT LAST_INSERT_ID()";
 
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
@@ -282,8 +300,7 @@ namespace C969
             object[] commonTableData = GetCommonTableData();
 
             string query = "INSERT INTO address (address, address2, cityId, postalCode, phone, createDate, createdBy, lastUpdate, lastUpdateBy) VALUES (\'" + address + "\', \'" + address2 + "\', \'" + cityId + "\', \'" + postalCode + "\', \'" + phone + "\', \'" + commonTableData[0] + "\', \'" + commonTableData[1] + "\', \'" + commonTableData[2] + "\', \'" + commonTableData[3] + "\');";
-            string selectQuery = "SELECT addressId FROM address WHERE address = \'" + address + "\';";
-            string connectionString = "server=wgudb.ucertify.com;userid=U08hnQ;database=U08hnQ;password=53689293162;";
+            string selectQuery = "SELECT LAST_INSERT_ID()";
 
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
@@ -305,7 +322,6 @@ namespace C969
             object[] commonTableData = GetCommonTableData();
 
             string query = "INSERT INTO customer (customerName, addressId, active, createDate, createdBy, lastUpdate, lastUpdateBy) VALUES (\'" + customerName + "\', " + addressId + ", \'" + Convert.ToInt32(active) + "\', \'" + commonTableData[0] + "\', \'" + commonTableData[1] + "\', \'" + commonTableData[2] + "\', \'" + commonTableData[3] + "\');";
-            string connectionString = "server=wgudb.ucertify.com;userid=U08hnQ;database=U08hnQ;password=53689293162;";
 
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
@@ -317,8 +333,10 @@ namespace C969
         }
         static private object[] GetCommonTableData()
         {
-            object[] commonTableData = new object[4] { DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), Scheduler.userName, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), Scheduler.userName };
+            // createDate, createdBy, lastUpdate, lastUpdatedBy
+            object[] commonTableData = new object[4] { DateTime.Now.ToUniversalTime().ToString("yyyy-MM-dd HH:mm:ss"), Scheduler.userName, DateTime.Now.ToUniversalTime().ToString("yyyy-MM-dd HH:mm:ss"), Scheduler.userName };
             return commonTableData;
         }
+
     }
 }

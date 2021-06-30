@@ -80,8 +80,8 @@ namespace C969
             string contact = AddAppointmentContactInput.Text;
             string type = AddAppointmentTypeInput.Text;
             string url = AddAppointmentURLInput.Text;
-            DateTime start = getAppointmentDateTime("start");
-            DateTime end = getAppointmentDateTime("end");
+            DateTime start = getAppointmentDateTime("start").ToUniversalTime();
+            DateTime end = getAppointmentDateTime("end").ToUniversalTime();
 
             Appointment newAppointment = new Appointment( customerId, userId, title, description, location, contact, type, url, start, end);
 
