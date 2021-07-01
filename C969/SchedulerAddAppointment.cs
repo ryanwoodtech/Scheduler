@@ -14,8 +14,8 @@ namespace C969
     public partial class SchedulerAddAppointment : Form
     {
         IList customerRowIList;
-        object[] customerNames;
-        object[] customerIds;
+        int[] customerIds;
+        string[] customerNames;
 
         public SchedulerAddAppointment()
         {
@@ -27,12 +27,21 @@ namespace C969
             InitializeComponent();
             this.customerRowIList = customerRowCollection;
 
-            this.customerIds = new object[customerRowIList.Count];
-            customerIds = ExtractCustomerInfo(0);
+            // Returns 
+            List<string[]> customerComboboxInfo = ExtractCustomerComboboxInfo();
 
-            this.customerNames = new object[customerRowIList.Count];
-            customerNames = ExtractCustomerInfo(1);
-            AddAppointmentCustomerComboBox.Items.AddRange(customerNames); 
+            string[][] customersData = customerComboboxInfo.ToArray();
+            customerIds = new int[customersData.Length];
+            customerNames = new string[customersData.Length];
+
+            for (int i = 0; i < customersData.Length; i++)
+            {
+                string[] customer = customersData[i];
+                customerIds[i] = int.Parse(customer[0]);
+                customerNames[i] = customer[1];
+            }
+
+            AddAppointmentCustomerComboBox.Items.AddRange(customerNames);
         }
 
         private void AddAppointmentCancelButton_Click(object sender, EventArgs e)
@@ -46,18 +55,10 @@ namespace C969
         }
 
         // Use this to popuate the drop down menu for customers
-        private object[] ExtractCustomerInfo(int index)
+        private List<string[]> ExtractCustomerComboboxInfo()
         {
-            object[] customerInfo = new object[customerRowIList.Count];
+            return DataAccess.GetCustomersInfo();
 
-            for (int i = 0; i < customerRowIList.Count; i++)
-            {
-                DataGridViewRow row = (DataGridViewRow)customerRowIList[i];
-                // Extract customer name
-                customerInfo[i] = row.Cells[index].Value;
-            }
-
-            return customerInfo;
         }
 
 
@@ -123,9 +124,9 @@ namespace C969
 
             for (int i = 0; i < customerNames.Length; i++)
             {
-                if (customerNames[i] == test)
+                if (customerNames[i] == (string)test)
                 {
-                    int customerId = (int)customerIds[i];
+                    int customerId = customerIds[i];
                     return customerId;
                 }
             }

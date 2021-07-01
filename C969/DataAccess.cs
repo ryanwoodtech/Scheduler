@@ -64,6 +64,28 @@ namespace C969
             }
         }
 
+        static public List<string[]> GetCustomersInfo()
+        {
+            string query = "SELECT * FROM customer;";
+            List<string[]> customerData = new List<string[]>();
+
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                MySqlCommand command = new MySqlCommand(query, connection);
+                connection.Open();
+                MySqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    string[] customer = new string[2];
+                    customer[0] = reader.GetInt32(0).ToString(); // countryId
+                    customer[1] = reader.GetString(1); // country
+                    customerData.Add(customer);
+                }
+                return customerData;
+            }
+            throw new Exception();
+        }
+
         static public IEnumerable<string> GetCustomerAddress(int addressId)
         {
             string[] customerAddressData = new string[9];
@@ -73,7 +95,7 @@ namespace C969
             string[] countryData = getCountry(cityData[2]);
 
             customerAddressData[0] = addressData[0]; // addressId
-            customerAddressData[1] = cityData[0]; // cityId INCORRECT
+            customerAddressData[1] = cityData[0]; // cityId 
             customerAddressData[2] = countryData[0]; // countryId
 
             customerAddressData[3] = addressData[1]; // address

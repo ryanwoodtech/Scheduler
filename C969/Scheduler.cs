@@ -46,12 +46,17 @@ namespace C969
                     DataGridViewRow row = (DataGridViewRow)rows[i];
                     DateTime appointmentDate = (DateTime)row.Cells["start"].Value;
 
-                    if (appointmentDate.Month == DateTime.Now.Month)
+                    if (appointmentDate.Month == DateTime.Now.Month && appointmentDate.Year == DateTime.Now.Year)
                     {
                         // Show appointment
                         SchedulerAppointmentsDGV.Rows[i].Visible = true;
                         continue;
                     }
+
+                    CurrencyManager currencyManager = (CurrencyManager)BindingContext[SchedulerAppointmentsDGV.DataSource];
+                    currencyManager.SuspendBinding();
+                    SchedulerAppointmentsDGV.Rows[i].Visible = false;
+                    currencyManager.ResumeBinding();
 
                     SchedulerAppointmentsDGV.Rows[i].Visible = false;
                 }
@@ -78,6 +83,13 @@ namespace C969
                         SchedulerAppointmentsDGV.Rows[i].Visible = true;
                         continue;
                     }
+
+                    // Without suspending the CurrencyManager, chedulerAppointmentsDGV.Rows[i].Visible = false; will error
+ 
+                    CurrencyManager currencyManager = (CurrencyManager)BindingContext[SchedulerAppointmentsDGV.DataSource];
+                    currencyManager.SuspendBinding();
+                    SchedulerAppointmentsDGV.Rows[i].Visible = false;
+                    currencyManager.ResumeBinding();
 
                     SchedulerAppointmentsDGV.Rows[i].Visible = false;
                 }
