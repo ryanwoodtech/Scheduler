@@ -154,7 +154,7 @@ namespace C969
             // When clicking save, it will run an insert query to the DB
             // When clicking cancel, it will discard all changes
             
-            SchedulerAddAppointment schedulerAddAppointmentForm = new SchedulerAddAppointment(SchedulerCustomersDGV.Rows);
+            SchedulerAddAppointment schedulerAddAppointmentForm = new SchedulerAddAppointment(SchedulerCustomersDGV.Rows, SchedulerAppointmentsDGV.Rows);
             schedulerAddAppointmentForm.Show();
 
             

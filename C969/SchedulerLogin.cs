@@ -53,13 +53,13 @@ namespace C969
         private ArrayList GetColumn(string query)
         {
             string connectionString = "server=wgudb.ucertify.com;userid=U08hnQ;database=U08hnQ;password=53689293162;";
-            using(MySqlConnection connection = new MySqlConnection(connectionString))
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
                 MySqlCommand command = new MySqlCommand(query, connection);
                 connection.Open();
                 MySqlDataReader reader = command.ExecuteReader();
 
-                ArrayList userNames = new ArrayList();  
+                ArrayList userNames = new ArrayList();
 
                 if (reader.HasRows)
                 {
@@ -85,37 +85,24 @@ namespace C969
             scheduler.Show();
         }
 
-        private void Validate_User(string username, string password)
+        private void Validate_User(string userName, string pass)
         {
-            /*
-             * 1. [X] Capture text inputs
-             * 2. [X] Create query that iterates over every userName
-             * 3. [X] if input-username == database-userName, check if input-password == database-password
-             * 4. [X] if input-password == database-password, log user in
-             * 5. [X] if false, let user know there was an incorrect username/password
-            */
-            ArrayList dbUserName = GetColumn("select userName from user where userName=\"" + username + "\";");
-            if (dbUserName.Count > 0)
+            ArrayList dbUserName = GetColumn("select userName from user where userName=\"" + userName + "\";");
+            ArrayList dbPassword = GetColumn("select password from user where userName=\"" + userName + "\";");
+            try
             {
-                ArrayList dbPassword = GetColumn("select password from user where userName=\"" + username + "\";");
-
-                if ((string)dbPassword[0] == password)
+                if ((string)dbPassword[0] == pass)
                 {
                     // Log user in
-                    ArrayList dbUserId = GetColumn("select userId from user where userName=\"" + username + "\";");
+                    ArrayList dbUserId = GetColumn("select userId from user where userName=\"" + userName + "\";");
                     ShowSchedulerForm((int)dbUserId[0], (string)dbUserName[0]);
                 }
-                else
-                {
-                    LoginIncorrectLabel.Visible = true;                    
-                }
             }
-            else
+            catch (Exception ex)
             {
                 LoginIncorrectLabel.Visible = true;
             }
         }
-
         private void LoginButton_Click(object sender, EventArgs e)
         {
             LoginIncorrectLabel.Visible = false;
@@ -124,7 +111,7 @@ namespace C969
             string password = LoginPasswordInput.Text;
 
             Validate_User(username, password);
-           
+
         }
-    }
-}
+        }
+    } 

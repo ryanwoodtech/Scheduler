@@ -14,6 +14,7 @@ namespace C969
     public partial class SchedulerAddAppointment : Form
     {
         IList customerRowIList;
+        IList appointmentRowCollection;
         int[] customerIds;
         string[] customerNames;
 
@@ -22,10 +23,11 @@ namespace C969
             InitializeComponent();
         }
 
-        public SchedulerAddAppointment(DataGridViewRowCollection customerRowCollection )
+        public SchedulerAddAppointment(DataGridViewRowCollection customerRowCollection, DataGridViewRowCollection appointmentRowCollection)
         {
             InitializeComponent();
             this.customerRowIList = customerRowCollection;
+            this.appointmentRowCollection = appointmentRowCollection;
 
             // Returns 
             List<string[]> customerComboboxInfo = ExtractCustomerComboboxInfo();
@@ -51,7 +53,113 @@ namespace C969
 
         private void AddAppointmentSaveButton_Click(object sender, EventArgs e)
         {
-            SaveNewAppointment();
+            bool isValid = CheckAppointmentConstraints();
+
+            if (isValid)
+            {
+                SaveNewAppointment();
+            }
+        }
+
+        private bool CheckAppointmentConstraints()
+        {
+            bool isAppointmentDuringBusinessHours = CheckAppointmentDuringBusinessHours();
+            bool isAppointmentConflictingWithAnotherAppointment = CheckAppointmentConflictingWithAnotherAppointment();
+            bool isCustomer = CheckCustomerExists();
+
+            if(!isAppointmentDuringBusinessHours && !isAppointmentConflictingWithAnotherAppointment && isCustomer)
+            {
+                return true;
+            }
+
+            if (isAppointmentDuringBusinessHours)
+            {
+                MessageBox.Show("Appointment cannot be during business hours (8AM - 5PM).");
+            }
+            if (isAppointmentConflictingWithAnotherAppointment)
+            {
+                MessageBox.Show("Appointment cannot be during another appointment.");
+            }
+            if (!isCustomer)
+            {
+                MessageBox.Show("Appointment needs to be with a customer.");
+            }
+            
+            return false;
+        }
+
+        private bool CheckCustomerExists()
+        {
+            int customerId = getCustomerId();
+
+            if (customerId == -1)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        private bool CheckAppointmentConflictingWithAnotherAppointment()
+        {
+            DateTime[] existingAppointmentStartDates = new DateTime[appointmentRowCollection.Count];
+            DateTime[] existingAppointmentEndDates = new DateTime[appointmentRowCollection.Count];
+
+            DateTime newAppointmentStartDate = getAppointmentDateTime("start");
+            DateTime newAppointmentEndDate = getAppointmentDateTime("end");
+
+            // Get appointments for the signed in user
+            for (int i = 0; i < appointmentRowCollection.Count; i++)
+            {
+                DataGridViewRow currentRow = (DataGridViewRow)appointmentRowCollection[i];
+
+                if ((string)currentRow.Cells["createdBy"].Value == Scheduler.userName) 
+                {
+                    existingAppointmentStartDates[i] = (DateTime)currentRow.Cells["start"].Value;
+                    existingAppointmentEndDates[i] = (DateTime)currentRow.Cells["end"].Value;
+                }
+            }
+            // If the start of the appointment we are trying to create is GREATER THAN the current appointment we are comparing against && LESS THAN the end of the appointment we are comparing against = BADDDDD!
+
+            // Check if the new appointment overlaps an existing appointment
+            // Loop through existing appointments
+            for(int i = 0; i < existingAppointmentStartDates.Length; i++)
+            {
+                // Check if the new appointment starts in the middle of another appointment
+                if (newAppointmentStartDate > existingAppointmentStartDates[i] && newAppointmentStartDate < existingAppointmentEndDates[i])
+                {
+                    return true;
+                }
+
+                // Will get here if appointment does NOT start in the middle of another appointment
+                if (newAppointmentStartDate < existingAppointmentStartDates[i] && newAppointmentEndDate > existingAppointmentStartDates[i])
+                {
+                    return true;
+                }
+
+            }
+
+            // Code will reach here if appointments do not overlap
+            return false; ;
+        }
+
+        private bool CheckAppointmentDuringBusinessHours()
+        {
+            TimeSpan businessStart = new TimeSpan(8, 0, 0);
+            TimeSpan businessEnd = new TimeSpan(17, 0, 0);
+
+            TimeSpan appointmentStart = getAppointmentDateTime("start").TimeOfDay;
+            TimeSpan appointmentEnd = getAppointmentDateTime("end").TimeOfDay;
+
+            if (appointmentStart < businessStart || appointmentStart > businessEnd)
+            {
+                return true;
+            }
+            else if (appointmentEnd < businessStart || appointmentEnd > businessEnd)
+            {
+                return true;
+            }
+
+            return false;
         }
 
         // Use this to popuate the drop down menu for customers
@@ -64,14 +172,7 @@ namespace C969
 
         public void SaveNewAppointment()
         {
-            // Create appointment object
-
-            // Capture selected item
-            // Search customerRowCollection for SelectedItem == customerRowCollection[1][i];
-            // if true: capture customerRowCollection[0][i]  "customerId"
-            // if finish iterating: default none value
-            // if null: default none value
-            // 
+            // Create appointment objec
 
             int customerId = getCustomerId();
             int userId = getUserId();
@@ -120,11 +221,11 @@ namespace C969
 
         private int getCustomerId()
         {
-            object test = (string)AddAppointmentCustomerComboBox.SelectedItem;
+            string customerName = (string)AddAppointmentCustomerComboBox.SelectedItem;
 
             for (int i = 0; i < customerNames.Length; i++)
             {
-                if (customerNames[i] == (string)test)
+                if (customerNames[i] == customerName)
                 {
                     int customerId = customerIds[i];
                     return customerId;
