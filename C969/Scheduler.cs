@@ -271,9 +271,37 @@ namespace C969
             }
             else if (reportType == "Appointments by consultant")
             {
-                GenerateReportAppointmentsByConsultant();
+                GenerateReportAppointmentsByConsultant(AppointmentsByConsultant());
             }
         }
+
+        private DataTable[] AppointmentsByConsultant()
+        {
+            List<string> consultants = new List<string>();
+            List<string[]> allConsultantData = new List<string[]>();
+
+            for (int i = 0; i < SchedulerAppointmentsDGV.RowCount; i++)
+            {
+                string consultant = SchedulerAppointmentsDGV.Rows[i].Cells["createdBy"].Value.ToString().ToLower();
+                consultants.Add(consultant);
+            }
+
+            var uniqueConsultants = consultants.GroupBy(i => i);
+
+            DataTable[] resultFromDB = new DataTable[uniqueConsultants.Count()];
+
+            int index = 0;
+            foreach (var consultant in uniqueConsultants)
+            {
+                DataTable idk = DataAccess.GetAppointmentsByConsultant(consultant.Key);
+                resultFromDB[index] = idk;
+                index++;
+            }
+            index = 0;
+
+            return resultFromDB;
+        }
+
         private List<string[]> AppointmentsByType()
         {
             List<string> appointmentTypes = new List<string>();
@@ -324,9 +352,13 @@ namespace C969
             Process.Start(path);
         }
 
-        private void GenerateReportAppointmentsByConsultant()
+        private void GenerateReportAppointmentsByConsultant(DataTable[] allConsultantData)
         {
-            throw new NotImplementedException();
+            // Populate DGV with allConsultantData
+            // Provide dropdown to go between consultants
+
+            AppointmentByConsutantReport appointmentByConsutantReportForm = new AppointmentByConsutantReport();
+            appointmentByConsutantReportForm.Show();
         }
 
     }

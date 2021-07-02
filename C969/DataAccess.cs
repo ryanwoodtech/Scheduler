@@ -277,6 +277,34 @@ namespace C969
             }
         }
 
+        static public DataTable GetAppointmentsByConsultant(string consultant)
+        {
+            string query = "SELECT * FROM appointment WHERE createdBy='" + consultant + "';";
+
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                MySqlCommand command = new MySqlCommand(query, connection);
+                MySqlDataAdapter adapter = new MySqlDataAdapter(command);
+                DataTable appointmentsDataTable = new DataTable();
+                adapter.Fill(appointmentsDataTable);
+
+                // Convert UTC to local
+                foreach (DataRow row in appointmentsDataTable.Rows)
+                {
+                    DateTime start = (DateTime)row["start"];
+                    row["start"] = start.ToLocalTime();
+                    DateTime end = (DateTime)row["end"];
+                    row["end"] = end.ToLocalTime();
+                    DateTime createDate = (DateTime)row["createDate"];
+                    row["createDate"] = createDate.ToLocalTime();
+                    DateTime lastUpdate = (DateTime)row["lastUpdate"];
+                    row["lastUpdate"] = lastUpdate.ToLocalTime();
+                }
+
+                return appointmentsDataTable;
+            }
+        }
+
         static private string SqlFormat(Appointment newAppointment)
         {
             object[] commonTableData = GetCommonTableData();
