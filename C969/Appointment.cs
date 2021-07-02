@@ -19,7 +19,7 @@ namespace C969
         public DateTime start { get; set; }
         public DateTime end { get; set; }
 
-        // SELECT appointmentId, customerId, userId, title, description, location, contact, type, url, start, end FROM appointment;
+        public Appointment() { }
         public Appointment(int customerId, int userId, string title, string description, string location, string contact, string type, string url, DateTime start, DateTime end)
         {
             this.customerId = customerId;

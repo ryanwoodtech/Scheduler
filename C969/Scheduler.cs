@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,8 +25,46 @@ namespace C969
             SchedulerCustomersDGV.DataSource = Customers.customers;
             Scheduler.userId = userId;
             Scheduler.userName = userName;
+            NotifyUserOfCloseAppointments();
         }
 
+        private void NotifyUserOfCloseAppointments()
+        {
+            for(int i = 0; i < Appointments.appointments.Rows.Count; i++)
+            {
+                DateTime appointmentDate = Appointments.appointments.Rows[i].Field<DateTime>("start");
+
+                if (DateTime.Now < appointmentDate && DateTime.Now > appointmentDate.AddMinutes(-15))
+                {
+                    // Customers.customers.Rows[i] is not the correct row. 
+                    // Look at how I do this in SchedulerAddAppointment
+                    string name = DataAccess.GetCustomerName(Appointments.appointments.Rows[i].Field<int>("customerId"));
+                    MessageBox.Show("You have a meeting with " + name + " at " + Appointments.appointments.Rows[i].Field<DateTime>("start").TimeOfDay + " today.");
+                }
+            }
+        }
+
+        /*
+        private DateTime getAppointmentDateTime(string startOrEnd, int row)
+        {
+            if (startOrEnd == "start")
+            {
+                string startDate = (string)SchedulerCustomersDGV.Rows[row].Cells["start"].Value;// .ToString("yyyy/MM/dd");
+                string startTime = (string)SchedulerCustomersDGV.Rows[row].Cells["end"].Value; //.ToString("HH:mm:ss");
+                string appointmentDateTime = startDate + " " + startTime;
+
+                return DateTime.Parse(appointmentDateTime);
+            }
+            else if (startOrEnd == "end")
+            {
+                string endDate = AddAppointmentEndDatePicker.Value.ToString("yyyy/MM/dd");
+                string endTime = AddAppointmentEndTimePicker.Value.ToString("HH:mm:ss");
+                return DateTime.Parse(endDate + " " + endTime);
+            }
+           
+            throw new Exception();
+        }
+        */
         private void FilterAppointments()
         {
             if (AppointmentsAllRadioButton.Checked)
@@ -219,5 +258,71 @@ namespace C969
         {
             FilterAppointments();
         }
+
+        private void SchedulerGenerateReportButton_Click(object sender, EventArgs e)
+        {
+            string reportType = (string)SchedulerGenerateReportComboBox.SelectedItem;
+
+            if (reportType == "Appointments by type")
+            {
+                GenerateReportAppointmentsByType(AppointmentsByType());
+            }
+            else if (reportType == "Appointments by consultant")
+            {
+                GenerateReportAppointmentsByConsultant();
+            }
+        }
+        private List<string[]> AppointmentsByType()
+        {
+            List<string> appointmentTypes = new List<string>();
+            List<string[]> allAppointmentData = new List<string[]>();
+
+            for (int i = 0; i < SchedulerAppointmentsDGV.RowCount; i++)
+            {
+                string type = SchedulerAppointmentsDGV.Rows[i].Cells["type"].Value.ToString().ToLower();
+                appointmentTypes.Add(type);
+            }
+
+            var uniqueTypes = appointmentTypes.GroupBy(i => i);
+
+            foreach(var type in uniqueTypes)
+            {
+                string[] appointmentData = new string[2];
+
+                int numberOfAppointmentsByType = appointmentTypes.FindAll(i => i == type.Key).Count;
+                
+                appointmentData[0] = type.Key;
+                appointmentData[1] = numberOfAppointmentsByType.ToString();
+
+                allAppointmentData.Add(appointmentData);
+                // appointmentData.Add(type.Key, numberOfAppointmentsByType);
+            }
+
+            return allAppointmentData;
+        }
+
+        private void GenerateReportAppointmentsByType(List<string[]> allAppointmentData)
+        {
+            string path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\appointment-by-type-report.txt";
+
+            using (StreamWriter sw = new StreamWriter(path, false))
+            {
+                if (!File.Exists(path))
+                {
+                    File.Create(path);
+                }
+
+                foreach (string[] appointment in allAppointmentData)
+                {
+                    sw.WriteLine("There are " + appointment[1] + " appointment(s) of type " + appointment[0] + ".");
+                }
+            }
+        }
+
+        private void GenerateReportAppointmentsByConsultant()
+        {
+            throw new NotImplementedException();
+        }
+
     }
 }

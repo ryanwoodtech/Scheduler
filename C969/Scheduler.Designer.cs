@@ -42,6 +42,9 @@ namespace C969
             this.AppointmentsMonthRadioButton = new System.Windows.Forms.RadioButton();
             this.AppointmentsWeekRadioButton = new System.Windows.Forms.RadioButton();
             this.CustomersUpdateButton = new System.Windows.Forms.Button();
+            this.SchedulerGenerateReportLabel = new System.Windows.Forms.Label();
+            this.SchedulerGenerateReportComboBox = new System.Windows.Forms.ComboBox();
+            this.SchedulerGenerateReportButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.SchedulerAppointmentsDGV)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.SchedulerCustomersDGV)).BeginInit();
             this.SuspendLayout();
@@ -193,11 +196,45 @@ namespace C969
             this.CustomersUpdateButton.UseVisualStyleBackColor = false;
             this.CustomersUpdateButton.Click += new System.EventHandler(this.CustomersUpdateButton_Click);
             // 
+            // SchedulerGenerateReportLabel
+            // 
+            this.SchedulerGenerateReportLabel.AutoSize = true;
+            this.SchedulerGenerateReportLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SchedulerGenerateReportLabel.Location = new System.Drawing.Point(47, 272);
+            this.SchedulerGenerateReportLabel.Name = "SchedulerGenerateReportLabel";
+            this.SchedulerGenerateReportLabel.Size = new System.Drawing.Size(171, 25);
+            this.SchedulerGenerateReportLabel.TabIndex = 14;
+            this.SchedulerGenerateReportLabel.Text = "Generate Report";
+            // 
+            // SchedulerGenerateReportComboBox
+            // 
+            this.SchedulerGenerateReportComboBox.FormattingEnabled = true;
+            this.SchedulerGenerateReportComboBox.Items.AddRange(new object[] {
+            "Appointments by type",
+            "Appointments by consultant"});
+            this.SchedulerGenerateReportComboBox.Location = new System.Drawing.Point(52, 310);
+            this.SchedulerGenerateReportComboBox.Name = "SchedulerGenerateReportComboBox";
+            this.SchedulerGenerateReportComboBox.Size = new System.Drawing.Size(166, 21);
+            this.SchedulerGenerateReportComboBox.TabIndex = 15;
+            // 
+            // SchedulerGenerateReportButton
+            // 
+            this.SchedulerGenerateReportButton.Location = new System.Drawing.Point(143, 345);
+            this.SchedulerGenerateReportButton.Name = "SchedulerGenerateReportButton";
+            this.SchedulerGenerateReportButton.Size = new System.Drawing.Size(75, 30);
+            this.SchedulerGenerateReportButton.TabIndex = 16;
+            this.SchedulerGenerateReportButton.Text = "Generate";
+            this.SchedulerGenerateReportButton.UseVisualStyleBackColor = true;
+            this.SchedulerGenerateReportButton.Click += new System.EventHandler(this.SchedulerGenerateReportButton_Click);
+            // 
             // Scheduler
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(954, 689);
+            this.Controls.Add(this.SchedulerGenerateReportButton);
+            this.Controls.Add(this.SchedulerGenerateReportComboBox);
+            this.Controls.Add(this.SchedulerGenerateReportLabel);
             this.Controls.Add(this.CustomersUpdateButton);
             this.Controls.Add(this.AppointmentsWeekRadioButton);
             this.Controls.Add(this.AppointmentsMonthRadioButton);
@@ -236,5 +273,8 @@ namespace C969
         private System.Windows.Forms.Button CustomersUpdateButton;
         public System.Windows.Forms.DataGridView SchedulerAppointmentsDGV;
         public System.Windows.Forms.DataGridView SchedulerCustomersDGV;
+        private System.Windows.Forms.Label SchedulerGenerateReportLabel;
+        private System.Windows.Forms.ComboBox SchedulerGenerateReportComboBox;
+        private System.Windows.Forms.Button SchedulerGenerateReportButton;
     }
 }

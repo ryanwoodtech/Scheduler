@@ -19,7 +19,7 @@ namespace C969
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Scheduler(1, "test"));
+            Application.Run(new SchedulerLogin());
         }
     }
 }

@@ -40,6 +40,23 @@ namespace C969
             }
         }
 
+        static public string GetCustomerName(int customerId)
+        {
+            string query = "SELECT customerName FROM customer WHERE customerId=" + customerId + ";";
+
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                MySqlCommand command = new MySqlCommand(query, connection);
+                connection.Open();
+                MySqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    return reader.GetString(0); // country
+                }
+            }
+            throw new Exception();
+        }
+
         static public DataTable GetCustomers()
         {
             string query = "SELECT * FROM customer;";

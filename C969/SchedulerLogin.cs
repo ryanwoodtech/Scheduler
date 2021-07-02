@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,6 +17,7 @@ namespace C969
 {
     public partial class SchedulerLogin : Form
     {
+        List<string> logins = new List<string>();
         public SchedulerLogin()
         {
             InitializeComponent();
@@ -85,7 +87,7 @@ namespace C969
             scheduler.Show();
         }
 
-        private void Validate_User(string userName, string pass)
+        private void ValidateUser(string userName, string pass)
         {
             ArrayList dbUserName = GetColumn("select userName from user where userName=\"" + userName + "\";");
             ArrayList dbPassword = GetColumn("select password from user where userName=\"" + userName + "\";");
@@ -93,16 +95,35 @@ namespace C969
             {
                 if ((string)dbPassword[0] == pass)
                 {
+                    // Record log in
+                    RecordLogin(userName);
+
                     // Log user in
                     ArrayList dbUserId = GetColumn("select userId from user where userName=\"" + userName + "\";");
                     ShowSchedulerForm((int)dbUserId[0], (string)dbUserName[0]);
                 }
             }
-            catch (Exception ex)
+            catch (ArgumentOutOfRangeException)
             {
                 LoginIncorrectLabel.Visible = true;
             }
         }
+
+        private void RecordLogin(string user)
+        { 
+            string path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\logins.txt";
+            logins.Add(user + " logged in at " + DateTime.UtcNow + " UTC.");
+
+            using (StreamWriter sw = File.AppendText(path))
+            {
+                if (!File.Exists(path))
+                {
+                    File.Create(path);
+                }
+                sw.WriteLine(logins[logins.Count - 1]);
+            }
+        }
+
         private void LoginButton_Click(object sender, EventArgs e)
         {
             LoginIncorrectLabel.Visible = false;
@@ -110,7 +131,7 @@ namespace C969
             string username = LoginUsernameInput.Text;
             string password = LoginPasswordInput.Text;
 
-            Validate_User(username, password);
+            ValidateUser(username, password);
 
         }
         }
