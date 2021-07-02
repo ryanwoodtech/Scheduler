@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -316,7 +318,10 @@ namespace C969
                 {
                     sw.WriteLine("There are " + appointment[1] + " appointment(s) of type " + appointment[0] + ".");
                 }
+                sw.Close();
             }
+
+            Process.Start(path);
         }
 
         private void GenerateReportAppointmentsByConsultant()
