@@ -211,7 +211,8 @@ namespace C969
             this.SchedulerGenerateReportComboBox.FormattingEnabled = true;
             this.SchedulerGenerateReportComboBox.Items.AddRange(new object[] {
             "Appointments by type",
-            "Appointments by consultant"});
+            "Appointments by consultant",
+            "Appointments by customer"});
             this.SchedulerGenerateReportComboBox.Location = new System.Drawing.Point(52, 310);
             this.SchedulerGenerateReportComboBox.Name = "SchedulerGenerateReportComboBox";
             this.SchedulerGenerateReportComboBox.Size = new System.Drawing.Size(166, 21);

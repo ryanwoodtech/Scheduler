@@ -277,7 +277,27 @@ namespace C969
             }
         }
 
+        internal static List<string> GetUniqueConsultants()
+        {
+            List<string> uniqueConsultants = new List<string>();
+            string query = "SELECT DISTINCT userName FROM user;";
+
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                MySqlCommand command = new MySqlCommand(query, connection);
+                connection.Open();
+                MySqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    uniqueConsultants.Add(reader.GetString(0)); // user.userName
+                }
+            }
+
+            return uniqueConsultants;
+        }
+
         static public DataTable GetAppointmentsByConsultant(string consultant)
+
         {
             string query = "SELECT * FROM appointment WHERE createdBy='" + consultant + "';";
 

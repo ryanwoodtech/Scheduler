@@ -273,31 +273,30 @@ namespace C969
             {
                 GenerateReportAppointmentsByConsultant(AppointmentsByConsultant());
             }
+            else if (reportType == "Appointments by customer")
+            {
+                // GenerateReportAppointmentsByConsultant(AppointmentsByCustomer());
+            }
+            else
+            {
+                MessageBox.Show("Please choose a report type.");
+            }
         }
 
         private DataTable[] AppointmentsByConsultant()
         {
-            List<string> consultants = new List<string>();
+            List<string> uniqueConsultants = new List<string>();
             List<string[]> allConsultantData = new List<string[]>();
 
-            for (int i = 0; i < SchedulerAppointmentsDGV.RowCount; i++)
-            {
-                string consultant = SchedulerAppointmentsDGV.Rows[i].Cells["createdBy"].Value.ToString().ToLower();
-                consultants.Add(consultant);
-            }
-
-            var uniqueConsultants = consultants.GroupBy(i => i);
+            uniqueConsultants = DataAccess.GetUniqueConsultants();
 
             DataTable[] resultFromDB = new DataTable[uniqueConsultants.Count()];
 
-            int index = 0;
-            foreach (var consultant in uniqueConsultants)
+            for (int i = 0; i < uniqueConsultants.Count; i++)
             {
-                DataTable idk = DataAccess.GetAppointmentsByConsultant(consultant.Key);
-                resultFromDB[index] = idk;
-                index++;
+                DataTable consultantAppointmentsDataTable = DataAccess.GetAppointmentsByConsultant(uniqueConsultants[i]);
+                resultFromDB[i] = consultantAppointmentsDataTable;
             }
-            index = 0;
 
             return resultFromDB;
         }
@@ -357,7 +356,8 @@ namespace C969
             // Populate DGV with allConsultantData
             // Provide dropdown to go between consultants
 
-            AppointmentByConsutantReport appointmentByConsutantReportForm = new AppointmentByConsutantReport();
+
+            AppointmentByConsutantReport appointmentByConsutantReportForm = new AppointmentByConsutantReport(allConsultantData);
             appointmentByConsutantReportForm.Show();
         }
 
