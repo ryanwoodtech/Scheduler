@@ -325,6 +325,56 @@ namespace C969
             }
         }
 
+        static public List<List<string[]>> GetAppointmentsByCustomer()
+        {
+            List<List<string[]>> allAppointments = new List<List<string[]>>();
+            List<int> customerIds = new List<int>();
+
+            // Get all customersId
+            string customerIdQuery = "SELECT customerId FROM customer;";
+
+
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                MySqlCommand command = new MySqlCommand(customerIdQuery, connection);
+                connection.Open();
+                MySqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    customerIds.Add(reader.GetInt32(0)); // user.userName
+                }
+                connection.Close();
+            }
+
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                connection.Open();
+                
+                for(int i = 0; i < customerIds.Count; i++)
+                {
+                    string appointmentQuery = "SELECT * FROM appointment WHERE customerId=" + customerIds[i];
+                    List<string[]> appointmentsPerCustomer = new List<string[]>();
+
+                    MySqlCommand command = new MySqlCommand(appointmentQuery, connection);
+                    MySqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read()) // Reads one row at a time
+                    {
+                        string[] appointmentData = new string[4];
+                        appointmentData[0] = reader.GetInt32(1).ToString(); // customerId
+                        appointmentData[1] = reader.GetString(3); // title
+                        appointmentData[2] = reader.GetDateTime(9).ToLocalTime().ToString(); // start
+                        appointmentData[3] = reader.GetDateTime(10).ToLocalTime().ToString(); // end
+                        appointmentsPerCustomer.Add(appointmentData);
+                    }
+                    allAppointments.Add(appointmentsPerCustomer);
+                    reader.Close();
+                }
+                connection.Close();
+            }
+
+            return allAppointments;
+        }
+
         static private string SqlFormat(Appointment newAppointment)
         {
             object[] commonTableData = GetCommonTableData();

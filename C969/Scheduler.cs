@@ -275,12 +275,41 @@ namespace C969
             }
             else if (reportType == "Appointments by customer")
             {
-                // GenerateReportAppointmentsByConsultant(AppointmentsByCustomer());
+                GenerateReportAppointmentsByCustomer(AppointmentsByCustomer());
             }
             else
             {
                 MessageBox.Show("Please choose a report type.");
             }
+        }
+
+        private List<string[]> AppointmentsByType()
+        {
+            List<string> appointmentTypes = new List<string>();
+            List<string[]> allAppointmentData = new List<string[]>();
+
+            for (int i = 0; i < SchedulerAppointmentsDGV.RowCount; i++)
+            {
+                string type = SchedulerAppointmentsDGV.Rows[i].Cells["type"].Value.ToString().ToLower();
+                appointmentTypes.Add(type);
+            }
+
+            var uniqueTypes = appointmentTypes.GroupBy(i => i);
+
+            foreach (var type in uniqueTypes)
+            {
+                string[] appointmentData = new string[2];
+
+                int numberOfAppointmentsByType = appointmentTypes.FindAll(i => i == type.Key).Count;
+
+                appointmentData[0] = type.Key;
+                appointmentData[1] = numberOfAppointmentsByType.ToString();
+
+                allAppointmentData.Add(appointmentData);
+                // appointmentData.Add(type.Key, numberOfAppointmentsByType);
+            }
+
+            return allAppointmentData;
         }
 
         private DataTable[] AppointmentsByConsultant()
@@ -301,34 +330,16 @@ namespace C969
             return resultFromDB;
         }
 
-        private List<string[]> AppointmentsByType()
+        private List<List<string[]>> AppointmentsByCustomer()
         {
-            List<string> appointmentTypes = new List<string>();
-            List<string[]> allAppointmentData = new List<string[]>();
-
-            for (int i = 0; i < SchedulerAppointmentsDGV.RowCount; i++)
-            {
-                string type = SchedulerAppointmentsDGV.Rows[i].Cells["type"].Value.ToString().ToLower();
-                appointmentTypes.Add(type);
-            }
-
-            var uniqueTypes = appointmentTypes.GroupBy(i => i);
-
-            foreach(var type in uniqueTypes)
-            {
-                string[] appointmentData = new string[2];
-
-                int numberOfAppointmentsByType = appointmentTypes.FindAll(i => i == type.Key).Count;
-                
-                appointmentData[0] = type.Key;
-                appointmentData[1] = numberOfAppointmentsByType.ToString();
-
-                allAppointmentData.Add(appointmentData);
-                // appointmentData.Add(type.Key, numberOfAppointmentsByType);
-            }
-
-            return allAppointmentData;
+            // allAppointments[0] = first customers appointments
+            // allAppointments[1] = second customers appointments ...
+            List<List<string[]>> allAppoinments = DataAccess.GetAppointmentsByCustomer();
+            
+            return allAppoinments;
         }
+
+
 
         private void GenerateReportAppointmentsByType(List<string[]> allAppointmentData)
         {
@@ -359,6 +370,14 @@ namespace C969
 
             AppointmentByConsutantReport appointmentByConsutantReportForm = new AppointmentByConsutantReport(allConsultantData);
             appointmentByConsutantReportForm.Show();
+        }
+
+        private void GenerateReportAppointmentsByCustomer(List<List<string[]>> allCustomerAppointmentData)
+        {
+            // Each item in allCustomerAppointmentData is a customer that contains a list of all of the appointments they have
+            AppointmentByCustomerReport appointmentByCustomerReportForm = new AppointmentByCustomerReport(allCustomerAppointmentData);
+            appointmentByCustomerReportForm.Show();
+
         }
 
     }

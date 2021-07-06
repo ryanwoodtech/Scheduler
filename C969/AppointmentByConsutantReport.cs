@@ -12,12 +12,9 @@ namespace C969
 {
     public partial class AppointmentByConsutantReport : Form
     {
-        DataTable[] allConsultantData;
         public AppointmentByConsutantReport(DataTable[] allConsultantData)
         {
-            InitializeComponent();
-            this.allConsultantData = allConsultantData;
-            
+            InitializeComponent();            
             //List<string> uniqueConsultants = DataAccess.GetUniqueConsultants();
 
             // The size of allConsultantData should match uniqueConsultants
