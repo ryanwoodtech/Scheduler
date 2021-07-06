@@ -27,16 +27,17 @@ namespace C969
             SchedulerCustomersDGV.DataSource = Customers.customers;
             Scheduler.userId = userId;
             Scheduler.userName = userName;
-            NotifyUserOfCloseAppointments();
+            NotifyUserOfCloseAppointments(userId);
         }
 
-        private void NotifyUserOfCloseAppointments()
+        private void NotifyUserOfCloseAppointments(int userId)
         {
             for(int i = 0; i < Appointments.appointments.Rows.Count; i++)
             {
                 DateTime appointmentDate = Appointments.appointments.Rows[i].Field<DateTime>("start");
+                int appointmentUserId = Appointments.appointments.Rows[i].Field<int>("userId");
 
-                if (DateTime.Now < appointmentDate && DateTime.Now > appointmentDate.AddMinutes(-15))
+                if ( userId == appointmentUserId && DateTime.Now < appointmentDate && DateTime.Now > appointmentDate.AddMinutes(-15))
                 {
                     // Customers.customers.Rows[i] is not the correct row. 
                     // Look at how I do this in SchedulerAddAppointment
@@ -139,7 +140,9 @@ namespace C969
 
         private void AppointmentsDeleteButton_Click(object sender, EventArgs e)
         {
-            DataGridViewRow rowData = SchedulerAppointmentsDGV.SelectedRows[0];
+            try
+            {
+                DataGridViewRow rowData = SchedulerAppointmentsDGV.SelectedRows[0];
 
             if (rowData.Cells.Count == 0)
             {
@@ -161,31 +164,46 @@ namespace C969
             SchedulerAppointmentsDGV.DataSource = Appointments.appointments;
 
             MessageBox.Show("Appointment deleted!");
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                return;
+            }
         }
 
         private void CustomersDeleteButton_Click(object sender, EventArgs e)
         {
-            DataGridViewRow rowData = SchedulerCustomersDGV.SelectedRows[0];
+            try { 
+                DataGridViewRow rowData = SchedulerCustomersDGV.SelectedRows[0];
 
-            if (rowData.Cells.Count == 0)
+                if (rowData.Cells.Count == 0)
+                {
+                    MessageBox.Show("You must select a customer to delete.");
+                    return;
+                }
+
+                int customerId = (int)rowData.Cells[0].Value;
+                if (!Customers.DeleteCustomer(customerId))
+                {
+                    MessageBox.Show("Query failed");
+                    return;
+                }
+
+                // WARNING, HACKY CODE BELOW
+                // This code executes independently of the database query e.g. if the query doesn't execute correctly, the DB won't match the DGV
+
+                SchedulerCustomersDGV.Rows.RemoveAt(rowData.Index);
+
+                // Refresh DGV
+                SchedulerCustomersDGV.DataSource = null;
+                SchedulerCustomersDGV.DataSource = Customers.customers;
+
+                MessageBox.Show("Customer deleted!");
+            }
+            catch (ArgumentOutOfRangeException)
             {
-                MessageBox.Show("You must select a customer to delete.");
                 return;
             }
-
-            int customerId = (int)rowData.Cells[0].Value;
-            Customers.DeleteCustomer(customerId);
-
-            // WARNING, HACKY CODE BELOW
-            // This code executes independently of the database query e.g. if the query doesn't execute correctly, the DB won't match the DGV
-
-            SchedulerCustomersDGV.Rows.RemoveAt(rowData.Index);
-
-            // Refresh DGV
-            SchedulerCustomersDGV.DataSource = null;
-            SchedulerCustomersDGV.DataSource = Customers.customers;
-
-            MessageBox.Show("Customer deleted!");
         }
 
         private void AppointmentsAddButton_Click(object sender, EventArgs e)
@@ -220,30 +238,43 @@ namespace C969
         private void AppointmentsUpdateButton_Click(object sender, EventArgs e)
         {
             // Grab selected DataGridViewRow and send it to update
-            DataGridViewRow rowToUpdate = SchedulerAppointmentsDGV.SelectedRows[0];
+            try 
+            { 
+                DataGridViewRow rowToUpdate = SchedulerAppointmentsDGV.SelectedRows[0];
 
-            if (rowToUpdate.Cells.Count == 0)
+                if (rowToUpdate.Cells.Count == 0)
+                {
+                    MessageBox.Show("You must select an appointment to update.");
+                    return;
+                }
+
+                SchedulerUpdateAppointment schedulerUpdateAppointmentForm= new SchedulerUpdateAppointment(rowToUpdate, SchedulerCustomersDGV.Rows);
+                schedulerUpdateAppointmentForm.Show();
+                }
+            catch (ArgumentOutOfRangeException)
             {
-                MessageBox.Show("You must select an appointment to update.");
                 return;
             }
-
-            SchedulerUpdateAppointment schedulerUpdateAppointmentForm= new SchedulerUpdateAppointment(rowToUpdate, SchedulerCustomersDGV.Rows);
-            schedulerUpdateAppointmentForm.Show();
         }
 
         private void CustomersUpdateButton_Click(object sender, EventArgs e)
         {
             // Grab selected DataGridViewRow and send it to update
-            DataGridViewRow rowToUpdate = SchedulerCustomersDGV.SelectedRows[0];
+            try { 
+                DataGridViewRow rowToUpdate = SchedulerCustomersDGV.SelectedRows[0];
 
-            if (rowToUpdate.Cells.Count == 0)
+                if (rowToUpdate.Cells.Count == 0)
+                {
+                    MessageBox.Show("You must select a customer to update.");
+                    return;
+                }
+                SchedulerUpdateCustomer schedulerUpdateCustomerForm = new SchedulerUpdateCustomer(rowToUpdate);
+                schedulerUpdateCustomerForm.Show();
+            }
+            catch (ArgumentOutOfRangeException)
             {
-                MessageBox.Show("You must select a customer to update.");
                 return;
             }
-            SchedulerUpdateCustomer schedulerUpdateCustomerForm = new SchedulerUpdateCustomer(rowToUpdate);
-            schedulerUpdateCustomerForm.Show();
         }
 
         private void AppointmentsMonthRadioButton_Click(object sender, EventArgs e)
@@ -294,13 +325,13 @@ namespace C969
                 appointmentTypes.Add(type);
             }
 
-            var uniqueTypes = appointmentTypes.GroupBy(i => i);
+            var uniqueTypes = appointmentTypes.GroupBy(i => i); // A lambda expression is used here to grab each unique appointment type
 
             foreach (var type in uniqueTypes)
             {
                 string[] appointmentData = new string[2];
 
-                int numberOfAppointmentsByType = appointmentTypes.FindAll(i => i == type.Key).Count;
+                int numberOfAppointmentsByType = appointmentTypes.FindAll(i => i == type.Key).Count; // A lambda expression is used here to simplify using type.Key as the value for counting
 
                 appointmentData[0] = type.Key;
                 appointmentData[1] = numberOfAppointmentsByType.ToString();
@@ -343,7 +374,8 @@ namespace C969
 
         private void GenerateReportAppointmentsByType(List<string[]> allAppointmentData)
         {
-            string path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\appointment-by-type-report.txt";
+            string path = Directory.GetCurrentDirectory() + @"\appointment-by-type-report.txt";
+            //string path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\appointment-by-type-report.txt";
 
             using (StreamWriter sw = new StreamWriter(path, false))
             {

@@ -88,6 +88,11 @@ namespace C969
             return false;
         }
 
+        private bool CheckAppointmentWithCurrentUser()
+        {
+            throw new NotImplementedException();
+        }
+
         private bool CheckCustomerExists()
         {
             int customerId = getCustomerId();

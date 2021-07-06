@@ -16,8 +16,8 @@ namespace C969
         static public bool DeleteCustomer(int customerId)
         {
             // Delete appointment
-            DataAccess.DeleteCustomer(customerId);
-            return true;
+            return DataAccess.DeleteCustomer(customerId);
+            
         }
     }
 }

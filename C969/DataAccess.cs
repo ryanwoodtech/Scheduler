@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 using System.Data;
+using System.Collections;
 
 namespace C969
 {
@@ -81,6 +82,35 @@ namespace C969
             }
         }
 
+        internal static ArrayList GetColumn(string query)
+        {
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                MySqlCommand command = new MySqlCommand(query, connection);
+                connection.Open();
+                MySqlDataReader reader = command.ExecuteReader();
+
+                ArrayList userNames = new ArrayList();
+
+                if (reader.HasRows)
+                {
+                    // Reads one row at a time
+                    while (reader.Read())
+                    {
+                        userNames.Add(reader[0]);
+                    }
+
+                }
+                else
+                {
+                    Console.WriteLine("No rows found.");
+                }
+
+                reader.Close();
+                return userNames;
+            }
+        }
+
         static public List<string[]> GetCustomersInfo()
         {
             string query = "SELECT * FROM customer;";
@@ -98,6 +128,7 @@ namespace C969
                     customer[1] = reader.GetString(1); // country
                     customerData.Add(customer);
                 }
+
                 return customerData;
             }
             throw new Exception();
@@ -212,15 +243,23 @@ namespace C969
             return true;
         }
 
-        static public void DeleteCustomer(int customerId)
+        static public bool DeleteCustomer(int customerId)
         {
             string query = "DELETE FROM customer WHERE customerId=" + customerId + ";";
 
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            try
             {
-                MySqlCommand command = new MySqlCommand(query, connection);
-                connection.Open();
-                command.ExecuteNonQuery();
+                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                {
+                    MySqlCommand command = new MySqlCommand(query, connection);
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                }
+                return true;
+            }
+            catch (MySqlException)
+            {
+                return false;
             }
         }
 

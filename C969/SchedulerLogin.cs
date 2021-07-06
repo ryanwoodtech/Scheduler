@@ -52,35 +52,6 @@ namespace C969
             LoginIncorrectLabel.Text = "Nombre de usuario / contraseña incorrectos";
         }
 
-        private ArrayList GetColumn(string query)
-        {
-            string connectionString = "server=wgudb.ucertify.com;userid=U08hnQ;database=U08hnQ;password=53689293162;";
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
-            {
-                MySqlCommand command = new MySqlCommand(query, connection);
-                connection.Open();
-                MySqlDataReader reader = command.ExecuteReader();
-
-                ArrayList userNames = new ArrayList();
-
-                if (reader.HasRows)
-                {
-                    // Reads one row at a time
-                    while (reader.Read())
-                    {
-                        userNames.Add(reader[0]);
-                    }
-
-                }
-                else
-                {
-                    Console.WriteLine("No rows found.");
-                }
-
-                reader.Close();
-                return userNames;
-            }
-        }
         private void ShowSchedulerForm(int userId, string userName)
         {
             Scheduler scheduler = new Scheduler(userId, userName);
@@ -89,8 +60,8 @@ namespace C969
 
         private void ValidateUser(string userName, string pass)
         {
-            ArrayList dbUserName = GetColumn("select userName from user where userName=\"" + userName + "\";");
-            ArrayList dbPassword = GetColumn("select password from user where userName=\"" + userName + "\";");
+            ArrayList dbUserName = DataAccess.GetColumn("select userName from user where userName=\"" + userName + "\";");
+            ArrayList dbPassword = DataAccess.GetColumn("select password from user where userName=\"" + userName + "\";");
             try
             {
                 if ((string)dbPassword[0] == pass)
@@ -99,7 +70,7 @@ namespace C969
                     RecordLogin(userName);
 
                     // Log user in
-                    ArrayList dbUserId = GetColumn("select userId from user where userName=\"" + userName + "\";");
+                    ArrayList dbUserId = DataAccess.GetColumn("select userId from user where userName=\"" + userName + "\";");
                     ShowSchedulerForm((int)dbUserId[0], (string)dbUserName[0]);
                 }
             }
@@ -111,7 +82,7 @@ namespace C969
 
         private void RecordLogin(string user)
         { 
-            string path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\logins.txt";
+            string path = Directory.GetCurrentDirectory() + @"\logins.txt";
             logins.Add(user + " logged in at " + DateTime.UtcNow + " UTC.");
 
             using (StreamWriter sw = File.AppendText(path))
