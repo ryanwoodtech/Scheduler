@@ -40,7 +40,6 @@ namespace C969
 
             string[] customerAddressData = (string[])DataAccess.GetCustomerAddress(addressId);
 
-            // returning incorrect customerAddressData[2]
             return customerAddressData;
         }
 
@@ -65,8 +64,12 @@ namespace C969
             string phone = UpdateCustomerPhoneInput.Text;
             bool active = UpdateCustomerActiveCheckBox.Checked;
 
-            // int customerId, int addressId, int cityId, int countryId, string customerName, string address, string address2, string city, string country, string postalCode, string phone, bool active
-            // Confirm all inputs are correct
+            if (string.IsNullOrEmpty(customerName) || string.IsNullOrEmpty(address) || string.IsNullOrEmpty(address2) || string.IsNullOrEmpty(city) || string.IsNullOrEmpty(country) || string.IsNullOrEmpty(postalCode) || string.IsNullOrEmpty(phone))
+            {
+                MessageBox.Show("Please include a value for every field");
+                return;
+            }
+
             DataAccess.SaveUpdatedCustomer(customerId, int.Parse(customerData[0]), int.Parse(customerData[1]), int.Parse(customerData[2]), customerName, address, address2, city, country, postalCode, phone, active);
 
             Customers.customers = DataAccess.GetCustomers();

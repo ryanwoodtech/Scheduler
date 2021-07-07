@@ -39,35 +39,12 @@ namespace C969
 
                 if ( userId == appointmentUserId && DateTime.Now < appointmentDate && DateTime.Now > appointmentDate.AddMinutes(-15))
                 {
-                    // Customers.customers.Rows[i] is not the correct row. 
-                    // Look at how I do this in SchedulerAddAppointment
                     string name = DataAccess.GetCustomerName(Appointments.appointments.Rows[i].Field<int>("customerId"));
                     MessageBox.Show("You have a meeting with " + name + " at " + Appointments.appointments.Rows[i].Field<DateTime>("start").TimeOfDay + " today.");
                 }
             }
         }
 
-        /*
-        private DateTime getAppointmentDateTime(string startOrEnd, int row)
-        {
-            if (startOrEnd == "start")
-            {
-                string startDate = (string)SchedulerCustomersDGV.Rows[row].Cells["start"].Value;// .ToString("yyyy/MM/dd");
-                string startTime = (string)SchedulerCustomersDGV.Rows[row].Cells["end"].Value; //.ToString("HH:mm:ss");
-                string appointmentDateTime = startDate + " " + startTime;
-
-                return DateTime.Parse(appointmentDateTime);
-            }
-            else if (startOrEnd == "end")
-            {
-                string endDate = AddAppointmentEndDatePicker.Value.ToString("yyyy/MM/dd");
-                string endTime = AddAppointmentEndTimePicker.Value.ToString("HH:mm:ss");
-                return DateTime.Parse(endDate + " " + endTime);
-            }
-           
-            throw new Exception();
-        }
-        */
         private void FilterAppointments()
         {
             if (AppointmentsAllRadioButton.Checked)
@@ -95,6 +72,7 @@ namespace C969
                         continue;
                     }
 
+                    // Without suspending the CurrencyManager, SchedulerAppointmentsDGV.Rows[i].Visible = false; will error
                     CurrencyManager currencyManager = (CurrencyManager)BindingContext[SchedulerAppointmentsDGV.DataSource];
                     currencyManager.SuspendBinding();
                     SchedulerAppointmentsDGV.Rows[i].Visible = false;
@@ -126,7 +104,7 @@ namespace C969
                         continue;
                     }
 
-                    // Without suspending the CurrencyManager, chedulerAppointmentsDGV.Rows[i].Visible = false; will error
+                    // Without suspending the CurrencyManager, SchedulerAppointmentsDGV.Rows[i].Visible = false; will error
  
                     CurrencyManager currencyManager = (CurrencyManager)BindingContext[SchedulerAppointmentsDGV.DataSource];
                     currencyManager.SuspendBinding();
@@ -153,9 +131,7 @@ namespace C969
             int appointmentId = (int)rowData.Cells[0].Value;
             Appointments.DeleteAppointment(appointmentId);
 
-            // WARNING, HACKY CODE BELOW
             // This code executes independently of the database query e.g. if the query doesn't execute correctly, the DB won't match the DGV
-
             // Delete row from SchedulerAppointmentsDGV
             SchedulerAppointmentsDGV.Rows.RemoveAt(rowData.Index);
 
@@ -189,9 +165,7 @@ namespace C969
                     return;
                 }
 
-                // WARNING, HACKY CODE BELOW
                 // This code executes independently of the database query e.g. if the query doesn't execute correctly, the DB won't match the DGV
-
                 SchedulerCustomersDGV.Rows.RemoveAt(rowData.Index);
 
                 // Refresh DGV
@@ -207,16 +181,9 @@ namespace C969
         }
 
         private void AppointmentsAddButton_Click(object sender, EventArgs e)
-        {
-            // Show add appointment form
-            // Has all of the fields required
-            // When clicking save, it will run an insert query to the DB
-            // When clicking cancel, it will discard all changes
-            
+        { 
             SchedulerAddAppointment schedulerAddAppointmentForm = new SchedulerAddAppointment(SchedulerCustomersDGV.Rows, SchedulerAppointmentsDGV.Rows);
-            schedulerAddAppointmentForm.Show();
-
-            
+            schedulerAddAppointmentForm.Show();   
         }
 
         private void CustomersAddButton_Click(object sender, EventArgs e)
@@ -248,7 +215,7 @@ namespace C969
                     return;
                 }
 
-                SchedulerUpdateAppointment schedulerUpdateAppointmentForm= new SchedulerUpdateAppointment(rowToUpdate, SchedulerCustomersDGV.Rows);
+                SchedulerUpdateAppointment schedulerUpdateAppointmentForm= new SchedulerUpdateAppointment(rowToUpdate, SchedulerCustomersDGV.Rows, SchedulerAppointmentsDGV.Rows);
                 schedulerUpdateAppointmentForm.Show();
                 }
             catch (ArgumentOutOfRangeException)
@@ -319,12 +286,14 @@ namespace C969
             List<string> appointmentTypes = new List<string>();
             List<string[]> allAppointmentData = new List<string[]>();
 
+            // Add all types of appointments to appointmentTypes (including duplicates)
             for (int i = 0; i < SchedulerAppointmentsDGV.RowCount; i++)
             {
                 string type = SchedulerAppointmentsDGV.Rows[i].Cells["type"].Value.ToString().ToLower();
                 appointmentTypes.Add(type);
             }
 
+            // Filter unique types
             var uniqueTypes = appointmentTypes.GroupBy(i => i); // A lambda expression is used here to grab each unique appointment type
 
             foreach (var type in uniqueTypes)
@@ -337,7 +306,6 @@ namespace C969
                 appointmentData[1] = numberOfAppointmentsByType.ToString();
 
                 allAppointmentData.Add(appointmentData);
-                // appointmentData.Add(type.Key, numberOfAppointmentsByType);
             }
 
             return allAppointmentData;
@@ -375,7 +343,6 @@ namespace C969
         private void GenerateReportAppointmentsByType(List<string[]> allAppointmentData)
         {
             string path = Directory.GetCurrentDirectory() + @"\appointment-by-type-report.txt";
-            //string path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\appointment-by-type-report.txt";
 
             using (StreamWriter sw = new StreamWriter(path, false))
             {
@@ -396,17 +363,13 @@ namespace C969
 
         private void GenerateReportAppointmentsByConsultant(DataTable[] allConsultantData)
         {
-            // Populate DGV with allConsultantData
-            // Provide dropdown to go between consultants
-
-
             AppointmentByConsutantReport appointmentByConsutantReportForm = new AppointmentByConsutantReport(allConsultantData);
             appointmentByConsutantReportForm.Show();
         }
 
         private void GenerateReportAppointmentsByCustomer(List<List<string[]>> allCustomerAppointmentData)
         {
-            // Each item in allCustomerAppointmentData is a customer that contains a list of all of the appointments they have
+            // Each item in allCustomerAppointmentData is a customer that contains a List<string[]> of all of the appointments they have
             AppointmentByCustomerReport appointmentByCustomerReportForm = new AppointmentByCustomerReport(allCustomerAppointmentData);
             appointmentByCustomerReportForm.Show();
 

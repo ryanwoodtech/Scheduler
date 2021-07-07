@@ -15,17 +15,14 @@ namespace C969
         public AppointmentByConsutantReport(DataTable[] allConsultantData)
         {
             InitializeComponent();            
-            //List<string> uniqueConsultants = DataAccess.GetUniqueConsultants();
 
             // The size of allConsultantData should match uniqueConsultants
-
             // Iterate through each consultants DataTable
             try
             {
                 for(int i = 0; i < allConsultantData.Length; i++)
                 {
                     // Add the consultants name to the multiline textbox
-                    // Rows[0]
                     ConsultantAppointmentTextBox.AppendText("Appointments for " + allConsultantData[i].Rows[0].Field<string>("createdBy"));
                     ConsultantAppointmentTextBox.AppendText(Environment.NewLine);
                     // Iterate through each row (appointment) in that consultants DataTable

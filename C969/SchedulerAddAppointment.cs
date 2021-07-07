@@ -88,11 +88,6 @@ namespace C969
             return false;
         }
 
-        private bool CheckAppointmentWithCurrentUser()
-        {
-            throw new NotImplementedException();
-        }
-
         private bool CheckCustomerExists()
         {
             int customerId = getCustomerId();
@@ -123,7 +118,7 @@ namespace C969
                     existingAppointmentEndDates[i] = (DateTime)currentRow.Cells["end"].Value;
                 }
             }
-            // If the start of the appointment we are trying to create is GREATER THAN the current appointment we are comparing against && LESS THAN the end of the appointment we are comparing against = BADDDDD!
+            // If the start of the appointment we are trying to create is GREATER THAN the current appointment we are comparing against && LESS THAN the end of the appointment we are comparing against = bad
 
             // Check if the new appointment overlaps an existing appointment
             // Loop through existing appointments
@@ -167,7 +162,6 @@ namespace C969
             return false;
         }
 
-        // Use this to popuate the drop down menu for customers
         private List<string[]> ExtractCustomerComboboxInfo()
         {
             return DataAccess.GetCustomersInfo();
@@ -177,8 +171,6 @@ namespace C969
 
         public void SaveNewAppointment()
         {
-            // Create appointment objec
-
             int customerId = getCustomerId();
             int userId = getUserId();
             string title = AddAppointmentTitleInput.Text;

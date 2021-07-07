@@ -14,16 +14,19 @@ namespace C969
     public partial class SchedulerUpdateAppointment : Form
     {
         IList customerRowIList;
+        IList appointmentRowCollection;
         object[] customerNames;
         object[] customerIds;
 
         DataGridViewRow rowToUpdate;
-        public SchedulerUpdateAppointment(DataGridViewRow rowToUpdate, DataGridViewRowCollection customerRowCollection)
+        public SchedulerUpdateAppointment(DataGridViewRow rowToUpdate, DataGridViewRowCollection customerRowCollection, DataGridViewRowCollection appointmentRowCollection)
         {
             InitializeComponent();
 
             this.customerRowIList = customerRowCollection;
             this.rowToUpdate = rowToUpdate;
+            this.appointmentRowCollection = appointmentRowCollection;
+
 
             this.customerIds = new object[customerRowIList.Count];
             customerIds = ExtractCustomerInfo(0);
@@ -73,20 +76,118 @@ namespace C969
 
         private void UpdateAppointmentSaveButton_Click(object sender, EventArgs e)
         {
-            SaveUpdatedAppointment();
+            bool isValid = CheckAppointmentConstraints();
+
+            if (isValid)
+            {
+                SaveUpdatedAppointment();
+            }
         }
+
+        private bool CheckAppointmentConstraints()
+        {
+            bool isAppointmentDuringBusinessHours = CheckAppointmentDuringBusinessHours();
+            bool isAppointmentConflictingWithAnotherAppointment = CheckAppointmentConflictingWithAnotherAppointment();
+            bool isCustomer = CheckCustomerExists();
+
+            if (!isAppointmentDuringBusinessHours && !isAppointmentConflictingWithAnotherAppointment && isCustomer)
+            {
+                return true;
+            }
+
+            if (isAppointmentDuringBusinessHours)
+            {
+                MessageBox.Show("Appointment cannot be during business hours (8AM - 5PM).");
+            }
+            if (isAppointmentConflictingWithAnotherAppointment)
+            {
+                MessageBox.Show("Appointment cannot be during another appointment.");
+            }
+            if (!isCustomer)
+            {
+                MessageBox.Show("Appointment needs to be with a customer.");
+            }
+
+            return false;
+        }
+
+        private bool CheckCustomerExists()
+        {
+            int customerId = getCustomerId();
+
+            if (customerId == -1)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        private bool CheckAppointmentConflictingWithAnotherAppointment()
+        {
+            DateTime[] existingAppointmentStartDates = new DateTime[appointmentRowCollection.Count];
+            DateTime[] existingAppointmentEndDates = new DateTime[appointmentRowCollection.Count];
+
+            DateTime newAppointmentStartDate = getAppointmentDateTime("start");
+            DateTime newAppointmentEndDate = getAppointmentDateTime("end");
+
+            // Get appointments for the signed in user
+            for (int i = 0; i < appointmentRowCollection.Count; i++)
+            {
+                DataGridViewRow currentRow = (DataGridViewRow)appointmentRowCollection[i];
+
+                if ((string)currentRow.Cells["createdBy"].Value == Scheduler.userName)
+                {
+                    existingAppointmentStartDates[i] = (DateTime)currentRow.Cells["start"].Value;
+                    existingAppointmentEndDates[i] = (DateTime)currentRow.Cells["end"].Value;
+                }
+            }
+            // If the start of the appointment we are trying to create is GREATER THAN the current appointment we are comparing against && LESS THAN the end of the appointment we are comparing against = bad
+
+            // Check if the new appointment overlaps an existing appointment
+            // Loop through existing appointments
+            for (int i = 0; i < existingAppointmentStartDates.Length; i++)
+            {
+                // Check if the new appointment starts in the middle of another appointment
+                if (newAppointmentStartDate > existingAppointmentStartDates[i] && newAppointmentStartDate < existingAppointmentEndDates[i])
+                {
+                    return true;
+                }
+
+                // Will get here if appointment does NOT start in the middle of another appointment
+                if (newAppointmentStartDate < existingAppointmentStartDates[i] && newAppointmentEndDate > existingAppointmentStartDates[i])
+                {
+                    return true;
+                }
+
+            }
+
+            // Code will reach here if appointments do not overlap
+            return false; ;
+        }
+
+        private bool CheckAppointmentDuringBusinessHours()
+        {
+            TimeSpan businessStart = new TimeSpan(8, 0, 0);
+            TimeSpan businessEnd = new TimeSpan(17, 0, 0);
+
+            TimeSpan appointmentStart = getAppointmentDateTime("start").TimeOfDay;
+            TimeSpan appointmentEnd = getAppointmentDateTime("end").TimeOfDay;
+
+            if (appointmentStart < businessStart || appointmentStart > businessEnd)
+            {
+                return true;
+            }
+            else if (appointmentEnd < businessStart || appointmentEnd > businessEnd)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
 
         public void SaveUpdatedAppointment()
         {
-            // Create appointment object
-
-            // Capture selected item
-            // Search customerRowCollection for SelectedItem == customerRowCollection[1][i];
-            // if true: capture customerRowCollection[0][i]  "customerId"
-            // if finish iterating: default none value
-            // if null: default none value
-            // 
-
             int customerId = getCustomerId();
             int userId = getUserId();
             string title = UpdateAppointmentTitleInput.Text;
@@ -97,10 +198,6 @@ namespace C969
             string url = UpdateAppointmentURLInput.Text;
             DateTime start = getAppointmentDateTime("start").ToUniversalTime();
             DateTime end = getAppointmentDateTime("end").ToUniversalTime(); ;
-            // DateTime createDate = DateTime.Now;
-            // string createdBy = Scheduler.userName;
-            // DateTime lastUpdate = DateTime.Now;
-            // string lastUpdatedBy = Scheduler.userName;
 
             Appointment updatedAppointment = new Appointment(customerId, userId, title, description, location, contact, type, url, start, end);
             int updatedAppointmentId = (int)rowToUpdate.Cells[0].Value;

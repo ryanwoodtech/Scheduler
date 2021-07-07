@@ -66,7 +66,6 @@ namespace C969
             {
                 if ((string)dbPassword[0] == pass)
                 {
-                    // Record log in
                     RecordLogin(userName);
 
                     // Log user in
@@ -103,7 +102,6 @@ namespace C969
             string password = LoginPasswordInput.Text;
 
             ValidateUser(username, password);
-
         }
-        }
-    } 
+    }
+ } 

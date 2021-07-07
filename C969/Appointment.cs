@@ -19,7 +19,6 @@ namespace C969
         public DateTime start { get; set; }
         public DateTime end { get; set; }
 
-        public Appointment() { }
         public Appointment(int customerId, int userId, string title, string description, string location, string contact, string type, string url, DateTime start, DateTime end)
         {
             this.customerId = customerId;

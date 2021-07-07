@@ -33,6 +33,12 @@ namespace C969
             string phone = AddCustomerPhoneInput.Text;
             bool active = AddCustomerActiveCheckBox.Checked;
 
+            if (string.IsNullOrEmpty(customerName) || string.IsNullOrEmpty(address) || string.IsNullOrEmpty(address2) || string.IsNullOrEmpty(city) || string.IsNullOrEmpty(country) || string.IsNullOrEmpty(postalCode) || string.IsNullOrEmpty(phone))
+            {
+                MessageBox.Show("Please include a value for every field");
+                return;
+            }
+
             SaveNewCustomer(customerName, address, address2, city, country, postalCode, phone, active);
 
             Customers.customers = DataAccess.GetCustomers();

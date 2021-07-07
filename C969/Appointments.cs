@@ -15,7 +15,6 @@ namespace C969
 
         static public bool DeleteAppointment(int appointmentId)
         {
-            // Delete appointment
             DataAccess.DeleteAppointment(appointmentId);
 
             return true;

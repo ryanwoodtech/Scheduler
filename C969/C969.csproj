@@ -50,7 +50,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Address.cs" />
     <Compile Include="Appointment.cs" />
     <Compile Include="AppointmentByConsutantReport.cs">
       <SubType>Form</SubType>
@@ -65,7 +64,6 @@
       <DependentUpon>AppointmentByCustomerReport.cs</DependentUpon>
     </Compile>
     <Compile Include="Appointments.cs" />
-    <Compile Include="Customer.cs" />
     <Compile Include="Customers.cs" />
     <Compile Include="DataAccess.cs" />
     <Compile Include="Scheduler.cs">
