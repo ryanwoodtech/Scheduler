@@ -63,6 +63,12 @@
     <Compile Include="AppointmentByCustomerReport.Designer.cs">
       <DependentUpon>AppointmentByCustomerReport.cs</DependentUpon>
     </Compile>
+    <Compile Include="AppointmentByTypeReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AppointmentByTypeReport.Designer.cs">
+      <DependentUpon>AppointmentByTypeReport.cs</DependentUpon>
+    </Compile>
     <Compile Include="Appointments.cs" />
     <Compile Include="Customers.cs" />
     <Compile Include="DataAccess.cs" />
@@ -114,6 +120,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AppointmentByCustomerReport.resx">
       <DependentUpon>AppointmentByCustomerReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AppointmentByTypeReport.resx">
+      <DependentUpon>AppointmentByTypeReport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Scheduler.resx">
       <DependentUpon>Scheduler.cs</DependentUpon>

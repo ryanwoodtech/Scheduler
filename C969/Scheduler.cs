@@ -265,7 +265,7 @@ namespace C969
 
             if (reportType == "Appointments by type")
             {
-                GenerateReportAppointmentsByType(AppointmentsByType());
+                GenerateReportAppointmentsByType(UniqueAppointmentMonths());
             }
             else if (reportType == "Appointments by consultant")
             {
@@ -281,34 +281,21 @@ namespace C969
             }
         }
 
-        private List<string[]> AppointmentsByType()
+        private List<string> UniqueAppointmentMonths()
         {
-            List<string> appointmentTypes = new List<string>();
-            List<string[]> allAppointmentData = new List<string[]>();
+            List<string> differentMonths = new List<string>();
 
-            // Add all types of appointments to appointmentTypes (including duplicates)
             for (int i = 0; i < SchedulerAppointmentsDGV.RowCount; i++)
             {
-                string type = SchedulerAppointmentsDGV.Rows[i].Cells["type"].Value.ToString().ToLower();
-                appointmentTypes.Add(type);
+                DateTime monthDateTime = (DateTime)SchedulerAppointmentsDGV.Rows[i].Cells["start"].Value;
+                string month = monthDateTime.ToString("MMMM"); // returns "July" or similar 
+                differentMonths.Add(month);
             }
 
-            // Filter unique types
-            var uniqueTypes = appointmentTypes.GroupBy(i => i); // A lambda expression is used here to grab each unique appointment type
+            List<string> uniqueMonths = differentMonths.Distinct().ToList(); // A lambda expression is used here to grab each unique month
+            //List<string> uniqueMonths = differentMonths.Distinct().ToList(); // A lambda expression is used here to grab each unique month
 
-            foreach (var type in uniqueTypes)
-            {
-                string[] appointmentData = new string[2];
-
-                int numberOfAppointmentsByType = appointmentTypes.FindAll(i => i == type.Key).Count; // A lambda expression is used here to simplify using type.Key as the value for counting
-
-                appointmentData[0] = type.Key;
-                appointmentData[1] = numberOfAppointmentsByType.ToString();
-
-                allAppointmentData.Add(appointmentData);
-            }
-
-            return allAppointmentData;
+            return uniqueMonths;
         }
 
         private DataTable[] AppointmentsByConsultant()
@@ -340,25 +327,10 @@ namespace C969
 
 
 
-        private void GenerateReportAppointmentsByType(List<string[]> allAppointmentData)
+        private void GenerateReportAppointmentsByType(List<string> uniqueAppointmentMonths)
         {
-            string path = Directory.GetCurrentDirectory() + @"\appointment-by-type-report.txt";
-
-            using (StreamWriter sw = new StreamWriter(path, false))
-            {
-                if (!File.Exists(path))
-                {
-                    File.Create(path);
-                }
-
-                foreach (string[] appointment in allAppointmentData)
-                {
-                    sw.WriteLine("There are " + appointment[1] + " appointment(s) of type " + appointment[0] + ".");
-                }
-                sw.Close();
-            }
-
-            Process.Start(path);
+            AppointmentByTypeReport appointmentByTypeReportForm = new AppointmentByTypeReport(uniqueAppointmentMonths);
+            appointmentByTypeReportForm.Show();
         }
 
         private void GenerateReportAppointmentsByConsultant(DataTable[] allConsultantData)
