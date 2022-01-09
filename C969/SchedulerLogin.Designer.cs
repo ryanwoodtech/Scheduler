@@ -36,6 +36,7 @@ namespace C969
             this.LoginPasswordLabel = new System.Windows.Forms.Label();
             this.LoginButton = new System.Windows.Forms.Button();
             this.LoginIncorrectLabel = new System.Windows.Forms.Label();
+            this.SignupButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // LoginSchedulerLabel
@@ -114,11 +115,23 @@ namespace C969
             this.LoginIncorrectLabel.Text = "Invalid username or password";
             this.LoginIncorrectLabel.Visible = false;
             // 
+            // SignupButton
+            // 
+            this.SignupButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.SignupButton.Location = new System.Drawing.Point(81, 223);
+            this.SignupButton.Name = "SignupButton";
+            this.SignupButton.Size = new System.Drawing.Size(93, 34);
+            this.SignupButton.TabIndex = 7;
+            this.SignupButton.Text = "Sign Up";
+            this.SignupButton.UseVisualStyleBackColor = true;
+            this.SignupButton.Click += new System.EventHandler(this.SignupButton_Click);
+            // 
             // SchedulerLogin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 28F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 286);
+            this.Controls.Add(this.SignupButton);
             this.Controls.Add(this.LoginIncorrectLabel);
             this.Controls.Add(this.LoginButton);
             this.Controls.Add(this.LoginPasswordInput);
@@ -145,6 +158,7 @@ namespace C969
         private System.Windows.Forms.Label LoginPasswordLabel;
         private System.Windows.Forms.Button LoginButton;
         private System.Windows.Forms.Label LoginIncorrectLabel;
+        private System.Windows.Forms.Button SignupButton;
     }
 }
 

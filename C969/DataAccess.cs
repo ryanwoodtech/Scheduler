@@ -12,7 +12,9 @@ namespace C969
 {
     class DataAccess
     {
-        static string connectionString = "server=wgudb.ucertify.com;userid=U08hnQ;database=U08hnQ;password=53689293162;";
+        static string oldConnectionString = "server=wgudb.ucertify.com;userid=U08hnQ;database=U08hnQ;password=53689293162;";
+        static string connectionString = "server=us-cdbr-east-05.cleardb.net;userid=b6df9e9570183d;database=heroku_f72e74ad46fe9f2;password=fdf3b631;";
+
         static public DataTable GetAppointments()
         {
             string query = "SELECT * FROM appointment;";

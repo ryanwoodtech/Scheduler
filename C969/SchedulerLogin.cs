@@ -8,6 +8,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
@@ -24,12 +25,10 @@ namespace C969
 
             if (RegionInfo.CurrentRegion.EnglishName == "United States")
             {
-                // Show english text
                 ShowEnglishText();
             }
             else if (RegionInfo.CurrentRegion.EnglishName == "Argentina")
             {
-                // Show spanish text
                 ShowSpanishText();
             }
         }
@@ -60,11 +59,13 @@ namespace C969
 
         private void ValidateUser(string userName, string pass)
         {
+            userName = userName.ToLower();
+
             ArrayList dbUserName = DataAccess.GetColumn("select userName from user where userName=\"" + userName + "\";");
             ArrayList dbPassword = DataAccess.GetColumn("select password from user where userName=\"" + userName + "\";");
             try
             {
-                if ((string)dbPassword[0] == pass)
+                if ((string)dbPassword[0] == ComputeSha256Hash(pass))
                 {
                     RecordLogin(userName);
 
@@ -76,6 +77,45 @@ namespace C969
             catch (ArgumentOutOfRangeException)
             {
                 LoginIncorrectLabel.Visible = true;
+            }
+        }
+
+        private void SignupUser(string userName, string pass)
+        {
+            // Check if user already exists in database
+            userName = userName.ToLower();
+            ArrayList dbUserName = DataAccess.GetColumn("select userName from user where userName=\"" + userName + "\";");
+            
+            // User doesn't exist in the database
+            if (dbUserName.Count == 0)
+            {
+                // RecordSignup(userName);
+
+                string hashedPassword = ComputeSha256Hash(pass);
+
+                // Save userName and hashedPassword to database
+
+                return;
+            }
+
+            LoginIncorrectLabel.Visible = true;
+        }
+
+        private string ComputeSha256Hash(string rawData)
+        {
+            // Create a SHA256   
+            using (SHA256 sha256Hash = SHA256.Create())
+            {
+                // ComputeHash - returns byte array  
+                byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(rawData));
+
+                // Convert byte array to a string   
+                StringBuilder builder = new StringBuilder();
+                for (int i = 0; i < bytes.Length; i++)
+                {
+                    builder.Append(bytes[i].ToString("x2"));
+                }
+                return builder.ToString();
             }
         }
 
@@ -99,9 +139,24 @@ namespace C969
             LoginIncorrectLabel.Visible = false;
 
             string username = LoginUsernameInput.Text;
+
+            // TODO: Hash password to SHA256 and match against password in database
             string password = LoginPasswordInput.Text;
 
             ValidateUser(username, password);
+        }
+
+        private void SignupButton_Click(object sender, EventArgs e)
+        {
+            LoginIncorrectLabel.Visible = false;
+
+            string username = LoginUsernameInput.Text;
+
+            // TODO: Hash password to SHA256 and match against password in database
+            string password = LoginPasswordInput.Text;
+
+            SignupUser(username, password);
+
         }
     }
  } 
