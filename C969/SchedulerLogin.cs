@@ -94,11 +94,13 @@ namespace C969
                 string hashedPassword = ComputeSha256Hash(pass);
 
                 // Save userName and hashedPassword to database
+                DataAccess.SaveNewUser(userName, hashedPassword);
 
+                MessageBox.Show("User saved successfully!", "Success");
                 return;
             }
 
-            LoginIncorrectLabel.Visible = true;
+            MessageBox.Show("User already exists! Try a different username.", "ERROR");
         }
 
         private string ComputeSha256Hash(string rawData)

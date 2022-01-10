@@ -347,5 +347,14 @@ namespace C969
 
         }
 
+        private void AppointmentsTextBox_TextChanged(object sender, EventArgs e)
+        {
+            (SchedulerAppointmentsDGV.DataSource as DataTable).DefaultView.RowFilter = string.Format("title LIKE '%{0}%'", AppointmentsTextBox.Text);
+        }
+
+        private void CustomersTextBox_TextChanged(object sender, EventArgs e)
+        {
+            (SchedulerCustomersDGV.DataSource as DataTable).DefaultView.RowFilter = string.Format("customerName LIKE '%{0}%'", CustomersTextBox.Text);
+        }
     }
 }

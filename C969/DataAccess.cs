@@ -84,6 +84,23 @@ namespace C969
             }
         }
 
+        internal static void SaveNewUser(string userName, string hashedPassword)
+        {
+
+            // INSERT INTO user(userName, password, active, createDate, createdBy, lastUpdate, lastUpdateBy) VALUES(ryan, e0e3a2b6471d044a53a7757994b51dd33c6b3ec90e1aca21cebc8e2ae79d6d9b, '1', '2022-01-09 17:05:33', '', '2022-01-09 17:05:33', '');
+            // "INSERT INTO user(userName, password, active, createDate, createdBy, lastUpdate, lastUpdateBy) VALUES('ryan', 'e0e3a2b6471d044a53a7757994b51dd33c6b3ec90e1aca21cebc8e2ae79d6d9b', '1', '2022-01-09 17:09:42', 'ryan', '2022-01-09 17:09:42', 'ryan');"
+
+            object[] commonTableData = GetCommonTableData();
+            string query = "INSERT INTO user(userName, password, active, createDate, createdBy, lastUpdate, lastUpdateBy) VALUES(\'" + userName + "\', \'" + hashedPassword + "\', \'" + 1 + "\', \'" + commonTableData[0] + "\', \'" + userName + "\', \'" + commonTableData[2] + "\', \'" + userName + "\');";
+
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                MySqlCommand command = new MySqlCommand(query, connection);
+                connection.Open();
+                command.ExecuteNonQuery();
+            }
+        }
+
         internal static ArrayList GetColumn(string query)
         {
             using (MySqlConnection connection = new MySqlConnection(connectionString))
@@ -195,9 +212,9 @@ namespace C969
                 while (reader.Read())
                 {
                     string[] city = new string[3];
-                    city[0] = reader.GetInt32(2).ToString(); // cityId
+                    city[0] = reader.GetInt32(0).ToString(); // cityId
                     city[1] = reader.GetString(1); // city
-                    city[2] = reader.GetInt32(2).ToString(); // countryId
+                    city[2] = reader.GetInt32(6).ToString(); // countryId
 
                     return city;
                 }
@@ -300,7 +317,7 @@ namespace C969
             string queryCity = "UPDATE city SET city='" + city + "', lastUpdate='" + commonTableData[2] + "' WHERE cityId=" + cityId + ";"; 
             // Confirm update queryCity works
             string queryAddress = "UPDATE address SET address='" + address + "', address2='" + address2 + "', postalCode='" + postalCode + "', phone='" + phone + "', lastUpdate='" + commonTableData[2] + "' WHERE addressId=" + addressId + ";";
-            string queryCustomer = "UPDATE customer SET customerName='" + customerName + "', active=" + active + ", lastUpdate='" + commonTableData[2] + "' WHERE customerId=" + customerId + ";";
+            string queryCustomer = "UPDATE customer SET customerName='" + customerName + "', active=" + active + ", lastUpdate='" + commonTableData[2] + "', lastUpdateBy='" + commonTableData[3] + "' WHERE customerId=" + customerId + ";";
 
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
@@ -420,7 +437,7 @@ namespace C969
         {
             object[] commonTableData = GetCommonTableData();
             string query = "INSERT INTO appointment (customerId, userId, title, description, location, contact, type, url, start, end, createDate, createdBy, lastUpdate, lastUpdateBy) VALUES (" + newAppointment.customerId + ", " + newAppointment.userId + ", \'" + newAppointment.title + "\', \'" + newAppointment.description + "\', \'" + newAppointment.location + "\', \'" + newAppointment.contact + "\', \'" + newAppointment.type + "\', \'" + newAppointment.url + "\', \'" + newAppointment.start.ToString("yyyy-MM-dd HH:mm:ss") + "\', \'" + newAppointment.end.ToString("yyyy-MM-dd HH:mm:ss") + "\', \'" + commonTableData[0] + "\', \'" + commonTableData[1] + "\', \'" + commonTableData[2] + "\', \'" + commonTableData[3] + "\');";
-
+           
             return query;
         }
 
