@@ -16,8 +16,13 @@ namespace C969
         {
             InitializeComponent();
 
+            TypeReportTextBox.AppendText("Report Date:   " + DateTime.Now + ".");
+            TypeReportTextBox.AppendText(Environment.NewLine);
+            TypeReportTextBox.AppendText(Environment.NewLine);
+            TypeReportTextBox.AppendText(Environment.NewLine);
+
             // Iterate through each unique month that an appointment exists
-            foreach(string uniqueMonth in uniqueAppointmentMonths)
+            foreach (string uniqueMonth in uniqueAppointmentMonths)
             {
                 List<string> allTypes = new List<string>();
                 List<string> uniqueTypes = new List<string>();

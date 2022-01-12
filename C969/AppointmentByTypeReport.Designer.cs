@@ -47,9 +47,9 @@ namespace C969
             this.TypeReportLabel.AutoSize = true;
             this.TypeReportLabel.Location = new System.Drawing.Point(69, 27);
             this.TypeReportLabel.Name = "TypeReportLabel";
-            this.TypeReportLabel.Size = new System.Drawing.Size(186, 13);
+            this.TypeReportLabel.Size = new System.Drawing.Size(118, 13);
             this.TypeReportLabel.TabIndex = 4;
-            this.TypeReportLabel.Text = "Appointments of Each Type By Month";
+            this.TypeReportLabel.Text = "Appointments by Month";
             // 
             // AppointmentByTypeReport
             // 

@@ -16,8 +16,13 @@ namespace C969
         {
             InitializeComponent();
 
+            CustomerAppointmentTextBox.AppendText("Report Date:   " + DateTime.Now + ".");
+            CustomerAppointmentTextBox.AppendText(Environment.NewLine);
+            CustomerAppointmentTextBox.AppendText(Environment.NewLine);
+            CustomerAppointmentTextBox.AppendText(Environment.NewLine);
+
             // Iterate through each customer
-            for(int i = 0; i < allCustomerAppointmentData.Count; i++)
+            for (int i = 0; i < allCustomerAppointmentData.Count; i++)
             {
                 if (allCustomerAppointmentData[i].Count != 0)
                 {
@@ -25,7 +30,7 @@ namespace C969
                     CustomerAppointmentTextBox.AppendText(Environment.NewLine);
 
                     // Iterate thorugh each customer's appointments
-                    for(int j = 0; j < allCustomerAppointmentData[i].Count; j++)
+                    for (int j = 0; j < allCustomerAppointmentData[i].Count; j++)
                     {
                         // Add info about appointment to CustomerAppointmentTextBox
                         CustomerAppointmentTextBox.AppendText("\tTitle: " + allCustomerAppointmentData[i][j][1]);

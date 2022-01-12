@@ -14,7 +14,12 @@ namespace C969
     {
         public AppointmentByConsutantReport(DataTable[] allConsultantData)
         {
-            InitializeComponent();            
+            InitializeComponent();
+
+            ConsultantAppointmentTextBox.AppendText("Report Date:   " + DateTime.Now + ".");
+            ConsultantAppointmentTextBox.AppendText(Environment.NewLine);
+            ConsultantAppointmentTextBox.AppendText(Environment.NewLine);
+            ConsultantAppointmentTextBox.AppendText(Environment.NewLine);
 
             // The size of allConsultantData should match uniqueConsultants
             // Iterate through each consultants DataTable
