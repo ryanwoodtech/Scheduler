@@ -10,16 +10,13 @@ using System.Windows.Forms;
 
 namespace C969
 {
-    public partial class AppointmentByTypeReport : Form
+    public partial class AppointmentByTypeReport : Report
     {
         public AppointmentByTypeReport(List<string> uniqueAppointmentMonths)
         {
             InitializeComponent();
 
-            TypeReportTextBox.AppendText("Report Date:   " + DateTime.Now + ".");
-            TypeReportTextBox.AppendText(Environment.NewLine);
-            TypeReportTextBox.AppendText(Environment.NewLine);
-            TypeReportTextBox.AppendText(Environment.NewLine);
+            AppendDateTime(TypeReportTextBox);
 
             // Iterate through each unique month that an appointment exists
             foreach (string uniqueMonth in uniqueAppointmentMonths)

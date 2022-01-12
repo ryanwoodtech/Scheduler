@@ -10,16 +10,13 @@ using System.Windows.Forms;
 
 namespace C969
 {
-    public partial class AppointmentByCustomerReport : Form
+    public partial class AppointmentByCustomerReport : Report
     {
         public AppointmentByCustomerReport(List<List<string[]>> allCustomerAppointmentData)
         {
             InitializeComponent();
 
-            CustomerAppointmentTextBox.AppendText("Report Date:   " + DateTime.Now + ".");
-            CustomerAppointmentTextBox.AppendText(Environment.NewLine);
-            CustomerAppointmentTextBox.AppendText(Environment.NewLine);
-            CustomerAppointmentTextBox.AppendText(Environment.NewLine);
+            AppendDateTime(CustomerAppointmentTextBox);
 
             // Iterate through each customer
             for (int i = 0; i < allCustomerAppointmentData.Count; i++)

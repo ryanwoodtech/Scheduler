@@ -10,16 +10,13 @@ using System.Windows.Forms;
 
 namespace C969
 {
-    public partial class AppointmentByConsutantReport : Form
+    public partial class AppointmentByConsutantReport : Report
     {
         public AppointmentByConsutantReport(DataTable[] allConsultantData)
         {
             InitializeComponent();
 
-            ConsultantAppointmentTextBox.AppendText("Report Date:   " + DateTime.Now + ".");
-            ConsultantAppointmentTextBox.AppendText(Environment.NewLine);
-            ConsultantAppointmentTextBox.AppendText(Environment.NewLine);
-            ConsultantAppointmentTextBox.AppendText(Environment.NewLine);
+            AppendDateTime(ConsultantAppointmentTextBox);
 
             // The size of allConsultantData should match uniqueConsultants
             // Iterate through each consultants DataTable

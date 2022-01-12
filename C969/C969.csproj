@@ -72,6 +72,9 @@
     <Compile Include="Appointments.cs" />
     <Compile Include="Customers.cs" />
     <Compile Include="DataAccess.cs" />
+    <Compile Include="Report.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Scheduler.cs">
       <SubType>Form</SubType>
     </Compile>
