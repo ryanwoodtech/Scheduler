@@ -53,9 +53,7 @@ namespace C969
 
         private void AddAppointmentSaveButton_Click(object sender, EventArgs e)
         {
-            bool isValid = CheckAppointmentConstraints();
-
-            if (isValid)
+            if (CheckAppointmentConstraints())
             {
                 SaveNewAppointment();
             }
