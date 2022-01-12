@@ -49,6 +49,7 @@ namespace C969
             this.CustomersTextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.SchedulerAppointmentsDGV)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.SchedulerCustomersDGV)).BeginInit();
             this.SuspendLayout();
@@ -59,7 +60,7 @@ namespace C969
             this.SchedulerAppointmentsDGV.AllowUserToDeleteRows = false;
             this.SchedulerAppointmentsDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.SchedulerAppointmentsDGV.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.SchedulerAppointmentsDGV.Location = new System.Drawing.Point(280, 55);
+            this.SchedulerAppointmentsDGV.Location = new System.Drawing.Point(259, 118);
             this.SchedulerAppointmentsDGV.MultiSelect = false;
             this.SchedulerAppointmentsDGV.Name = "SchedulerAppointmentsDGV";
             this.SchedulerAppointmentsDGV.RowHeadersVisible = false;
@@ -70,7 +71,7 @@ namespace C969
             // AppointmentsLabel
             // 
             this.AppointmentsLabel.AutoSize = true;
-            this.AppointmentsLabel.Location = new System.Drawing.Point(280, 37);
+            this.AppointmentsLabel.Location = new System.Drawing.Point(259, 100);
             this.AppointmentsLabel.Name = "AppointmentsLabel";
             this.AppointmentsLabel.Size = new System.Drawing.Size(71, 13);
             this.AppointmentsLabel.TabIndex = 1;
@@ -79,7 +80,7 @@ namespace C969
             // CustomersLabel
             // 
             this.CustomersLabel.AutoSize = true;
-            this.CustomersLabel.Location = new System.Drawing.Point(280, 386);
+            this.CustomersLabel.Location = new System.Drawing.Point(259, 449);
             this.CustomersLabel.Name = "CustomersLabel";
             this.CustomersLabel.Size = new System.Drawing.Size(56, 13);
             this.CustomersLabel.TabIndex = 3;
@@ -91,7 +92,7 @@ namespace C969
             this.SchedulerCustomersDGV.AllowUserToDeleteRows = false;
             this.SchedulerCustomersDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.SchedulerCustomersDGV.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.SchedulerCustomersDGV.Location = new System.Drawing.Point(280, 405);
+            this.SchedulerCustomersDGV.Location = new System.Drawing.Point(259, 468);
             this.SchedulerCustomersDGV.MultiSelect = false;
             this.SchedulerCustomersDGV.Name = "SchedulerCustomersDGV";
             this.SchedulerCustomersDGV.RowHeadersVisible = false;
@@ -102,7 +103,7 @@ namespace C969
             // AppointmentsAddButton
             // 
             this.AppointmentsAddButton.BackColor = System.Drawing.SystemColors.Control;
-            this.AppointmentsAddButton.Location = new System.Drawing.Point(806, 319);
+            this.AppointmentsAddButton.Location = new System.Drawing.Point(785, 382);
             this.AppointmentsAddButton.Name = "AppointmentsAddButton";
             this.AppointmentsAddButton.Size = new System.Drawing.Size(75, 31);
             this.AppointmentsAddButton.TabIndex = 4;
@@ -113,7 +114,7 @@ namespace C969
             // AppointmentsUpdateButton
             // 
             this.AppointmentsUpdateButton.BackColor = System.Drawing.SystemColors.Control;
-            this.AppointmentsUpdateButton.Location = new System.Drawing.Point(688, 319);
+            this.AppointmentsUpdateButton.Location = new System.Drawing.Point(667, 382);
             this.AppointmentsUpdateButton.Name = "AppointmentsUpdateButton";
             this.AppointmentsUpdateButton.Size = new System.Drawing.Size(112, 31);
             this.AppointmentsUpdateButton.TabIndex = 5;
@@ -124,7 +125,7 @@ namespace C969
             // AppointmentsDeleteButton
             // 
             this.AppointmentsDeleteButton.BackColor = System.Drawing.SystemColors.Control;
-            this.AppointmentsDeleteButton.Location = new System.Drawing.Point(276, 319);
+            this.AppointmentsDeleteButton.Location = new System.Drawing.Point(255, 382);
             this.AppointmentsDeleteButton.Name = "AppointmentsDeleteButton";
             this.AppointmentsDeleteButton.Size = new System.Drawing.Size(75, 31);
             this.AppointmentsDeleteButton.TabIndex = 6;
@@ -135,7 +136,7 @@ namespace C969
             // CustomersDeleteButton
             // 
             this.CustomersDeleteButton.BackColor = System.Drawing.SystemColors.Control;
-            this.CustomersDeleteButton.Location = new System.Drawing.Point(280, 668);
+            this.CustomersDeleteButton.Location = new System.Drawing.Point(259, 731);
             this.CustomersDeleteButton.Name = "CustomersDeleteButton";
             this.CustomersDeleteButton.Size = new System.Drawing.Size(75, 31);
             this.CustomersDeleteButton.TabIndex = 9;
@@ -146,7 +147,7 @@ namespace C969
             // CustomersAddButton
             // 
             this.CustomersAddButton.BackColor = System.Drawing.SystemColors.Control;
-            this.CustomersAddButton.Location = new System.Drawing.Point(806, 668);
+            this.CustomersAddButton.Location = new System.Drawing.Point(785, 731);
             this.CustomersAddButton.Name = "CustomersAddButton";
             this.CustomersAddButton.Size = new System.Drawing.Size(75, 31);
             this.CustomersAddButton.TabIndex = 7;
@@ -158,41 +159,41 @@ namespace C969
             // 
             this.AppointmentsAllRadioButton.AutoSize = true;
             this.AppointmentsAllRadioButton.Checked = true;
-            this.AppointmentsAllRadioButton.Location = new System.Drawing.Point(191, 123);
+            this.AppointmentsAllRadioButton.Location = new System.Drawing.Point(94, 186);
             this.AppointmentsAllRadioButton.Name = "AppointmentsAllRadioButton";
-            this.AppointmentsAllRadioButton.Size = new System.Drawing.Size(36, 17);
+            this.AppointmentsAllRadioButton.Size = new System.Drawing.Size(103, 17);
             this.AppointmentsAllRadioButton.TabIndex = 10;
             this.AppointmentsAllRadioButton.TabStop = true;
-            this.AppointmentsAllRadioButton.Text = "All";
+            this.AppointmentsAllRadioButton.Text = "All Appointments";
             this.AppointmentsAllRadioButton.UseVisualStyleBackColor = true;
             this.AppointmentsAllRadioButton.CheckedChanged += new System.EventHandler(this.AppointmentsAllRadioButton_CheckedChanged);
             // 
             // AppointmentsMonthRadioButton
             // 
             this.AppointmentsMonthRadioButton.AutoSize = true;
-            this.AppointmentsMonthRadioButton.Location = new System.Drawing.Point(191, 163);
+            this.AppointmentsMonthRadioButton.Location = new System.Drawing.Point(94, 226);
             this.AppointmentsMonthRadioButton.Name = "AppointmentsMonthRadioButton";
-            this.AppointmentsMonthRadioButton.Size = new System.Drawing.Size(55, 17);
+            this.AppointmentsMonthRadioButton.Size = new System.Drawing.Size(141, 17);
             this.AppointmentsMonthRadioButton.TabIndex = 11;
-            this.AppointmentsMonthRadioButton.Text = "Month";
+            this.AppointmentsMonthRadioButton.Text = "Appointments this Month";
             this.AppointmentsMonthRadioButton.UseVisualStyleBackColor = true;
             this.AppointmentsMonthRadioButton.Click += new System.EventHandler(this.AppointmentsMonthRadioButton_Click);
             // 
             // AppointmentsWeekRadioButton
             // 
             this.AppointmentsWeekRadioButton.AutoSize = true;
-            this.AppointmentsWeekRadioButton.Location = new System.Drawing.Point(191, 203);
+            this.AppointmentsWeekRadioButton.Location = new System.Drawing.Point(94, 266);
             this.AppointmentsWeekRadioButton.Name = "AppointmentsWeekRadioButton";
-            this.AppointmentsWeekRadioButton.Size = new System.Drawing.Size(54, 17);
+            this.AppointmentsWeekRadioButton.Size = new System.Drawing.Size(140, 17);
             this.AppointmentsWeekRadioButton.TabIndex = 12;
-            this.AppointmentsWeekRadioButton.Text = "Week";
+            this.AppointmentsWeekRadioButton.Text = "Appointments this Week";
             this.AppointmentsWeekRadioButton.UseVisualStyleBackColor = true;
             this.AppointmentsWeekRadioButton.Click += new System.EventHandler(this.AppointmentsWeekRadioButton_Click);
             // 
             // CustomersUpdateButton
             // 
             this.CustomersUpdateButton.BackColor = System.Drawing.SystemColors.Control;
-            this.CustomersUpdateButton.Location = new System.Drawing.Point(688, 668);
+            this.CustomersUpdateButton.Location = new System.Drawing.Point(667, 731);
             this.CustomersUpdateButton.Name = "CustomersUpdateButton";
             this.CustomersUpdateButton.Size = new System.Drawing.Size(112, 31);
             this.CustomersUpdateButton.TabIndex = 13;
@@ -204,7 +205,7 @@ namespace C969
             // 
             this.SchedulerGenerateReportLabel.AutoSize = true;
             this.SchedulerGenerateReportLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SchedulerGenerateReportLabel.Location = new System.Drawing.Point(47, 272);
+            this.SchedulerGenerateReportLabel.Location = new System.Drawing.Point(26, 547);
             this.SchedulerGenerateReportLabel.Name = "SchedulerGenerateReportLabel";
             this.SchedulerGenerateReportLabel.Size = new System.Drawing.Size(171, 25);
             this.SchedulerGenerateReportLabel.TabIndex = 14;
@@ -217,14 +218,14 @@ namespace C969
             "Appointments by type",
             "Appointments by consultant",
             "Appointments by customer"});
-            this.SchedulerGenerateReportComboBox.Location = new System.Drawing.Point(52, 310);
+            this.SchedulerGenerateReportComboBox.Location = new System.Drawing.Point(31, 585);
             this.SchedulerGenerateReportComboBox.Name = "SchedulerGenerateReportComboBox";
             this.SchedulerGenerateReportComboBox.Size = new System.Drawing.Size(166, 21);
             this.SchedulerGenerateReportComboBox.TabIndex = 15;
             // 
             // SchedulerGenerateReportButton
             // 
-            this.SchedulerGenerateReportButton.Location = new System.Drawing.Point(143, 345);
+            this.SchedulerGenerateReportButton.Location = new System.Drawing.Point(122, 620);
             this.SchedulerGenerateReportButton.Name = "SchedulerGenerateReportButton";
             this.SchedulerGenerateReportButton.Size = new System.Drawing.Size(75, 30);
             this.SchedulerGenerateReportButton.TabIndex = 16;
@@ -234,7 +235,7 @@ namespace C969
             // 
             // AppointmentsTextBox
             // 
-            this.AppointmentsTextBox.Location = new System.Drawing.Point(781, 29);
+            this.AppointmentsTextBox.Location = new System.Drawing.Point(760, 92);
             this.AppointmentsTextBox.Name = "AppointmentsTextBox";
             this.AppointmentsTextBox.Size = new System.Drawing.Size(100, 20);
             this.AppointmentsTextBox.TabIndex = 17;
@@ -242,7 +243,7 @@ namespace C969
             // 
             // CustomersTextBox
             // 
-            this.CustomersTextBox.Location = new System.Drawing.Point(781, 379);
+            this.CustomersTextBox.Location = new System.Drawing.Point(760, 442);
             this.CustomersTextBox.Name = "CustomersTextBox";
             this.CustomersTextBox.Size = new System.Drawing.Size(100, 20);
             this.CustomersTextBox.TabIndex = 18;
@@ -251,26 +252,38 @@ namespace C969
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(709, 32);
+            this.label1.Location = new System.Drawing.Point(630, 95);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(66, 13);
+            this.label1.Size = new System.Drawing.Size(128, 13);
             this.label1.TabIndex = 19;
-            this.label1.Text = "Filter by Title";
+            this.label1.Text = "Filter by Appointment Title";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(654, 382);
+            this.label2.Location = new System.Drawing.Point(633, 445);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(121, 13);
             this.label2.TabIndex = 20;
             this.label2.Text = "Filter by Customer Name";
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Fira Code", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(365, 25);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(193, 51);
+            this.label3.TabIndex = 21;
+            this.label3.Text = "Scheduler";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
             // Scheduler
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(954, 711);
+            this.ClientSize = new System.Drawing.Size(914, 796);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.CustomersTextBox);
@@ -323,5 +336,6 @@ namespace C969
         private System.Windows.Forms.TextBox CustomersTextBox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
     }
 }

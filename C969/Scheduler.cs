@@ -161,7 +161,7 @@ namespace C969
                 int customerId = (int)rowData.Cells[0].Value;
                 if (!Customers.DeleteCustomer(customerId))
                 {
-                    MessageBox.Show("Query failed");
+                    MessageBox.Show("Error: Customer was NOT deleted. Try cancelling any appointments with the current customer before deleting.");
                     return;
                 }
 

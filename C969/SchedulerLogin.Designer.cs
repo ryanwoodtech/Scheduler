@@ -42,11 +42,11 @@ namespace C969
             // LoginSchedulerLabel
             // 
             this.LoginSchedulerLabel.AutoSize = true;
-            this.LoginSchedulerLabel.Font = new System.Drawing.Font("Adobe Devanagari", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LoginSchedulerLabel.Location = new System.Drawing.Point(73, 18);
+            this.LoginSchedulerLabel.Font = new System.Drawing.Font("Fira Code", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LoginSchedulerLabel.Location = new System.Drawing.Point(46, 13);
             this.LoginSchedulerLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.LoginSchedulerLabel.Name = "LoginSchedulerLabel";
-            this.LoginSchedulerLabel.Size = new System.Drawing.Size(139, 43);
+            this.LoginSchedulerLabel.Size = new System.Drawing.Size(193, 51);
             this.LoginSchedulerLabel.TabIndex = 0;
             this.LoginSchedulerLabel.Text = "Scheduler";
             // 
