@@ -319,7 +319,8 @@ namespace C969
         private List<List<string[]>> AppointmentsByCustomer()
         {
             // allAppointments[0] = first customers appointments
-            // allAppointments[1] = second customers appointments ...
+            // allAppointments[1] = second customers appointments
+            // ...
             List<List<string[]>> allAppoinments = DataAccess.GetAppointmentsByCustomer();
             
             return allAppoinments;
@@ -355,6 +356,32 @@ namespace C969
         private void CustomersTextBox_TextChanged(object sender, EventArgs e)
         {
             (SchedulerCustomersDGV.DataSource as DataTable).DefaultView.RowFilter = string.Format("customerName LIKE '%{0}%'", CustomersTextBox.Text);
+        }
+
+        private void SchedulerAppointmentsDGV_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            SchedulerAppointmentsDGV.Columns["appointmentId"].Visible = false; // Index 0
+            SchedulerAppointmentsDGV.Columns["customerId"].Visible = false;    // Index 1
+            SchedulerAppointmentsDGV.Columns["userId"].Visible = false;        // Index 2
+
+            SchedulerAppointmentsDGV.Columns["title"].HeaderText = "Title";
+            SchedulerAppointmentsDGV.Columns["description"].HeaderText = "Description";
+            SchedulerAppointmentsDGV.Columns["location"].HeaderText = "Location";
+            SchedulerAppointmentsDGV.Columns["contact"].HeaderText = "Contact";
+            SchedulerAppointmentsDGV.Columns["type"].HeaderText = "Type";
+            SchedulerAppointmentsDGV.Columns["url"].HeaderText = "URL";
+            SchedulerAppointmentsDGV.Columns["start"].HeaderText = "Start";
+            SchedulerAppointmentsDGV.Columns["end"].HeaderText = "End";
+        }
+
+        private void SchedulerCustomersDGV_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            SchedulerCustomersDGV.Columns["customerId"].Visible = false;
+            SchedulerCustomersDGV.Columns["addressId"].Visible = false;
+
+            // Columns are being hidden, index is not what it seems. 
+            SchedulerCustomersDGV.Columns["customerName"].HeaderText = "Name";
+            SchedulerCustomersDGV.Columns["active"].HeaderText = "Active";
         }
     }
 }

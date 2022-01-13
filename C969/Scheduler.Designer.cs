@@ -67,6 +67,7 @@ namespace C969
             this.SchedulerAppointmentsDGV.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.SchedulerAppointmentsDGV.Size = new System.Drawing.Size(601, 257);
             this.SchedulerAppointmentsDGV.TabIndex = 0;
+            this.SchedulerAppointmentsDGV.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.SchedulerAppointmentsDGV_DataBindingComplete);
             // 
             // AppointmentsLabel
             // 
@@ -99,6 +100,7 @@ namespace C969
             this.SchedulerCustomersDGV.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.SchedulerCustomersDGV.Size = new System.Drawing.Size(601, 257);
             this.SchedulerCustomersDGV.TabIndex = 2;
+            this.SchedulerCustomersDGV.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.SchedulerCustomersDGV_DataBindingComplete);
             // 
             // AppointmentsAddButton
             // 
