@@ -1,5 +1,5 @@
 ﻿
-namespace C969
+namespace Scheduler
 {
     partial class SchedulerLogin
     {

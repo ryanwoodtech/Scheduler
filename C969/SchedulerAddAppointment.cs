@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Collections;
 using System.Windows.Forms;
 
-namespace C969
+namespace Scheduler
 {
     public partial class SchedulerAddAppointment : Form
     {

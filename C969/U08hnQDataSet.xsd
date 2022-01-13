@@ -4,7 +4,7 @@
     <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
       <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
         <Connections>
-          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="U08hnQConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="U08hnQConnectionString (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.C969.Properties.Settings.GlobalReference.Default.U08hnQConnectionString" Provider="MySql.Data.MySqlClient" />
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="U08hnQConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="U08hnQConnectionString (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.Scheduler.Properties.Settings.GlobalReference.Default.U08hnQConnectionString" Provider="MySql.Data.MySqlClient" />
         </Connections>
         <Tables>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="appointmentTableAdapter" GeneratorDataComponentClassName="appointmentTableAdapter" Name="appointment" UserDataComponentName="appointmentTableAdapter">

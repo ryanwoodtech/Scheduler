@@ -8,7 +8,7 @@ using MySql.Data.MySqlClient;
 using System.Data;
 using System.Collections;
 
-namespace C969
+namespace Scheduler
 {
     class DataAccess
     {

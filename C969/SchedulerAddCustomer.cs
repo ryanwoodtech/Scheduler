@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace C969
+namespace Scheduler
 {
     public partial class SchedulerAddCustomer : Form
     {

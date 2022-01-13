@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace C969
+namespace Scheduler
 {
     public class Report : Form
     {
