@@ -12,6 +12,13 @@ namespace Scheduler
 {
     public partial class AppointmentByCustomerReport : Report
     {
+        public override void AppendDateTime(TextBox textBox)
+        {
+            textBox.AppendText("Appointment by Customer Report");
+            textBox.AppendText(Environment.NewLine);
+
+            base.AppendDateTime(textBox);
+        }
         public AppointmentByCustomerReport(List<List<string[]>> allCustomerAppointmentData)
         {
             InitializeComponent();

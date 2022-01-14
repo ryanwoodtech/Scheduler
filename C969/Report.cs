@@ -11,7 +11,7 @@ namespace Scheduler
     {
         public Report() { }
 
-        public void AppendDateTime(TextBox textBox)
+        public virtual void AppendDateTime(TextBox textBox)
         {
             textBox.AppendText("Report Date:   " + DateTime.Now + ".");
             textBox.AppendText(Environment.NewLine);
