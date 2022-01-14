@@ -68,6 +68,7 @@ namespace Scheduler
             this.SchedulerAppointmentsDGV.Size = new System.Drawing.Size(601, 257);
             this.SchedulerAppointmentsDGV.TabIndex = 0;
             this.SchedulerAppointmentsDGV.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.SchedulerAppointmentsDGV_DataBindingComplete);
+            this.SchedulerAppointmentsDGV.DoubleClick += new System.EventHandler(this.SchedulerAppointmentsDGV_DoubleClick);
             // 
             // AppointmentsLabel
             // 
@@ -101,6 +102,7 @@ namespace Scheduler
             this.SchedulerCustomersDGV.Size = new System.Drawing.Size(601, 257);
             this.SchedulerCustomersDGV.TabIndex = 2;
             this.SchedulerCustomersDGV.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.SchedulerCustomersDGV_DataBindingComplete);
+            this.SchedulerCustomersDGV.DoubleClick += new System.EventHandler(this.SchedulerCustomersDGV_DoubleClick);
             // 
             // AppointmentsAddButton
             // 

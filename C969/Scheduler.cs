@@ -383,5 +383,48 @@ namespace Scheduler
             SchedulerCustomersDGV.Columns["customerName"].HeaderText = "Name";
             SchedulerCustomersDGV.Columns["active"].HeaderText = "Active";
         }
+        private void SchedulerAppointmentsDGV_DoubleClick(object sender, EventArgs e)
+        {
+            // Grab selected DataGridViewRow and send it to update
+            try
+            {
+                DataGridViewRow rowToUpdate = SchedulerAppointmentsDGV.SelectedRows[0];
+
+                if (rowToUpdate.Cells.Count == 0)
+                {
+                    MessageBox.Show("You must select an appointment to update.");
+                    return;
+                }
+
+                SchedulerUpdateAppointment schedulerUpdateAppointmentForm = new SchedulerUpdateAppointment(rowToUpdate, SchedulerCustomersDGV.Rows, SchedulerAppointmentsDGV.Rows);
+                schedulerUpdateAppointmentForm.Show();
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                return;
+            }
+
+        }
+
+        private void SchedulerCustomersDGV_DoubleClick(object sender, EventArgs e)
+        {
+            try
+            {
+                DataGridViewRow rowToUpdate = SchedulerCustomersDGV.SelectedRows[0];
+
+                if (rowToUpdate.Cells.Count == 0)
+                {
+                    MessageBox.Show("You must select an appointment to update.");
+                    return;
+                }
+
+                SchedulerUpdateCustomer schedulerUpdateCustomerForm = new SchedulerUpdateCustomer(rowToUpdate);
+                schedulerUpdateCustomerForm.Show();
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                return;
+            }
+        }
     }
 }

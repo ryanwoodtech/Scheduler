@@ -12,14 +12,13 @@ namespace Scheduler
 {
     class DataAccess
     {
-        static string oldConnectionString = "server=wgudb.ucertify.com;userid=U08hnQ;database=U08hnQ;password=53689293162;";
-        static string connectionString = "server=us-cdbr-east-05.cleardb.net;userid=b6df9e9570183d;database=heroku_f72e74ad46fe9f2;password=fdf3b631;";
+        static readonly string ConnectionString = "server=us-cdbr-east-05.cleardb.net;userid=b6df9e9570183d;database=heroku_f72e74ad46fe9f2;password=fdf3b631;";
 
         static public DataTable GetAppointments()
         {
             string query = "SELECT * FROM appointment;";
 
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            using (MySqlConnection connection = new MySqlConnection(ConnectionString))
             {
                 MySqlCommand command = new MySqlCommand(query, connection);
                 MySqlDataAdapter adapter = new MySqlDataAdapter(command);
@@ -47,7 +46,7 @@ namespace Scheduler
         {
             string query = "SELECT customerName FROM customer WHERE customerId=" + customerId + ";";
 
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            using (MySqlConnection connection = new MySqlConnection(ConnectionString))
             {
                 MySqlCommand command = new MySqlCommand(query, connection);
                 connection.Open();
@@ -64,7 +63,7 @@ namespace Scheduler
         {
             string query = "SELECT * FROM customer;";
 
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            using (MySqlConnection connection = new MySqlConnection(ConnectionString))
             {
                 MySqlCommand command = new MySqlCommand(query, connection);
                 MySqlDataAdapter adapter = new MySqlDataAdapter(command);
@@ -93,7 +92,7 @@ namespace Scheduler
             object[] commonTableData = GetCommonTableData();
             string query = "INSERT INTO user(userName, password, active, createDate, createdBy, lastUpdate, lastUpdateBy) VALUES(\'" + userName + "\', \'" + hashedPassword + "\', \'" + 1 + "\', \'" + commonTableData[0] + "\', \'" + userName + "\', \'" + commonTableData[2] + "\', \'" + userName + "\');";
 
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            using (MySqlConnection connection = new MySqlConnection(ConnectionString))
             {
                 MySqlCommand command = new MySqlCommand(query, connection);
                 connection.Open();
@@ -103,7 +102,7 @@ namespace Scheduler
 
         internal static ArrayList GetColumn(string query)
         {
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            using (MySqlConnection connection = new MySqlConnection(ConnectionString))
             {
                 MySqlCommand command = new MySqlCommand(query, connection);
                 connection.Open();
@@ -135,7 +134,7 @@ namespace Scheduler
             string query = "SELECT * FROM customer;";
             List<string[]> customerData = new List<string[]>();
 
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            using (MySqlConnection connection = new MySqlConnection(ConnectionString))
             {
                 MySqlCommand command = new MySqlCommand(query, connection);
                 connection.Open();
@@ -181,7 +180,7 @@ namespace Scheduler
         {
             string query = "SELECT * FROM country WHERE countryId=" + countryId + ";";
 
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            using (MySqlConnection connection = new MySqlConnection(ConnectionString))
             {
                 MySqlCommand command = new MySqlCommand(query, connection);
                 connection.Open();
@@ -204,7 +203,7 @@ namespace Scheduler
         {
             string query = "SELECT * FROM city WHERE cityId=" + int.Parse(cityId.ToString()) + ";";
 
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            using (MySqlConnection connection = new MySqlConnection(ConnectionString))
             {
                 MySqlCommand command = new MySqlCommand(query, connection);
                 connection.Open();
@@ -226,7 +225,7 @@ namespace Scheduler
         {
             string query = "SELECT * FROM address WHERE addressId=" + addressId + ";";
 
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            using (MySqlConnection connection = new MySqlConnection(ConnectionString))
             {
                 MySqlCommand command = new MySqlCommand(query, connection);
                 connection.Open();
@@ -252,7 +251,7 @@ namespace Scheduler
         {
             string query = "DELETE FROM appointment WHERE appointmentId=" + appointmentId + ";";
 
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            using (MySqlConnection connection = new MySqlConnection(ConnectionString))
             {
                 MySqlCommand command = new MySqlCommand(query, connection);
                 connection.Open();
@@ -268,7 +267,7 @@ namespace Scheduler
 
             try
             {
-                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                using (MySqlConnection connection = new MySqlConnection(ConnectionString))
                 {
                     MySqlCommand command = new MySqlCommand(query, connection);
                     connection.Open();
@@ -286,7 +285,7 @@ namespace Scheduler
         {
             string query = SqlFormat(newAppointment);
 
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            using (MySqlConnection connection = new MySqlConnection(ConnectionString))
             {
                 MySqlCommand command = new MySqlCommand(query, connection);
                 connection.Open();
@@ -299,7 +298,7 @@ namespace Scheduler
             // find appointment id and replace with new appointment
             string query = "UPDATE appointment SET customerId=" + updatedAppointment.customerId + ", userId=" + updatedAppointment.userId + ", title=' " + updatedAppointment.title + "', description='" + updatedAppointment.description + "', location='" + updatedAppointment.location + "', contact='" + updatedAppointment.contact + "', type='" + updatedAppointment.type + "', url='" + updatedAppointment.url + "', start='" + updatedAppointment.start.ToString("yyyy-MM-dd HH:mm:ss") + "', end='" + updatedAppointment.end.ToString("yyyy-MM-dd HH:mm:ss") + "', lastUpdate='" + DateTime.Now.ToUniversalTime().ToString("yyyy-MM-dd HH:mm:ss") + "', lastUpdateBy='" + Scheduler.userName + "' WHERE appointmentId=" + updatedAppointmentId + ";";
 
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            using (MySqlConnection connection = new MySqlConnection(ConnectionString))
             {
                 MySqlCommand command = new MySqlCommand(query, connection);
                 connection.Open();
@@ -319,7 +318,7 @@ namespace Scheduler
             string queryAddress = "UPDATE address SET address='" + address + "', address2='" + address2 + "', postalCode='" + postalCode + "', phone='" + phone + "', lastUpdate='" + commonTableData[2] + "' WHERE addressId=" + addressId + ";";
             string queryCustomer = "UPDATE customer SET customerName='" + customerName + "', active=" + active + ", lastUpdate='" + commonTableData[2] + "', lastUpdateBy='" + commonTableData[3] + "' WHERE customerId=" + customerId + ";";
 
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            using (MySqlConnection connection = new MySqlConnection(ConnectionString))
             {
                 MySqlCommand commandCountry = new MySqlCommand(queryCountry, connection);
                 MySqlCommand commandCity = new MySqlCommand(queryCity, connection);
@@ -340,7 +339,7 @@ namespace Scheduler
             List<string> uniqueConsultants = new List<string>();
             string query = "SELECT DISTINCT userName FROM user;";
 
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            using (MySqlConnection connection = new MySqlConnection(ConnectionString))
             {
                 MySqlCommand command = new MySqlCommand(query, connection);
                 connection.Open();
@@ -359,7 +358,7 @@ namespace Scheduler
         {
             string query = "SELECT * FROM appointment WHERE createdBy='" + consultant + "';";
 
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            using (MySqlConnection connection = new MySqlConnection(ConnectionString))
             {
                 MySqlCommand command = new MySqlCommand(query, connection);
                 MySqlDataAdapter adapter = new MySqlDataAdapter(command);
@@ -392,7 +391,7 @@ namespace Scheduler
             string customerIdQuery = "SELECT customerId FROM customer;";
 
 
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            using (MySqlConnection connection = new MySqlConnection(ConnectionString))
             {
                 MySqlCommand command = new MySqlCommand(customerIdQuery, connection);
                 connection.Open();
@@ -404,7 +403,7 @@ namespace Scheduler
                 connection.Close();
             }
 
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            using (MySqlConnection connection = new MySqlConnection(ConnectionString))
             {
                 connection.Open();
                 
@@ -451,7 +450,7 @@ namespace Scheduler
             string selectQuery = "SELECT LAST_INSERT_ID()";
             //string selectQuery = "SELECT countryId FROM country WHERE country = \'" + country + "\';";
 
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            using (MySqlConnection connection = new MySqlConnection(ConnectionString))
             {
                 MySqlCommand command = new MySqlCommand(query, connection);
                 MySqlCommand select = new MySqlCommand(selectQuery, connection);
@@ -474,7 +473,7 @@ namespace Scheduler
             string query = "INSERT INTO city (city, countryId, createDate, createdBy, lastUpdate, lastUpdateBy) VALUES (\'" + city + "\', " + countryId + ", \'" + commonTableData[0] + "\', \'" + commonTableData[1] + "\', \'" + commonTableData[2] + "\', \'" + commonTableData[3] + "\');";
             string selectQuery = "SELECT LAST_INSERT_ID()";
 
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            using (MySqlConnection connection = new MySqlConnection(ConnectionString))
             {
                 MySqlCommand command = new MySqlCommand(query, connection);
                 MySqlCommand select = new MySqlCommand(selectQuery, connection);
@@ -497,7 +496,7 @@ namespace Scheduler
             string query = "INSERT INTO address (address, address2, cityId, postalCode, phone, createDate, createdBy, lastUpdate, lastUpdateBy) VALUES (\'" + address + "\', \'" + address2 + "\', \'" + cityId + "\', \'" + postalCode + "\', \'" + phone + "\', \'" + commonTableData[0] + "\', \'" + commonTableData[1] + "\', \'" + commonTableData[2] + "\', \'" + commonTableData[3] + "\');";
             string selectQuery = "SELECT LAST_INSERT_ID()";
 
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            using (MySqlConnection connection = new MySqlConnection(ConnectionString))
             {
                 MySqlCommand command = new MySqlCommand(query, connection);
                 MySqlCommand select = new MySqlCommand(selectQuery, connection);
@@ -518,7 +517,7 @@ namespace Scheduler
 
             string query = "INSERT INTO customer (customerName, addressId, active, createDate, createdBy, lastUpdate, lastUpdateBy) VALUES (\'" + customerName + "\', " + addressId + ", \'" + Convert.ToInt32(active) + "\', \'" + commonTableData[0] + "\', \'" + commonTableData[1] + "\', \'" + commonTableData[2] + "\', \'" + commonTableData[3] + "\');";
 
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            using (MySqlConnection connection = new MySqlConnection(ConnectionString))
             {
                 MySqlCommand command = new MySqlCommand(query, connection);
                 connection.Open();
