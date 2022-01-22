@@ -306,17 +306,18 @@ namespace Scheduler
             }
 
         }
+        // int customerId, int addressId, int cityId, int countryId, string customerName, string address, string address2, string city, string country, string postalCode, string phone, bool active
 
-        static public void SaveUpdatedCustomer(int customerId, int addressId, int cityId, int countryId, string customerName, string address, string address2, string city, string country, string postalCode, string phone, bool active)
+        static public void SaveUpdatedCustomer(Customer updatedCustomer)
         {
-            // Confirm correct cityId was passed in
+            // createDate, createdBy, lastUpdate, lastUpdatedBy
             object[] commonTableData = GetCommonTableData();
 
-            string queryCountry = "UPDATE country SET country='" + country + "', lastUpdate='" + commonTableData[2] + "' WHERE countryId=" + countryId + ";";
-            string queryCity = "UPDATE city SET city='" + city + "', lastUpdate='" + commonTableData[2] + "' WHERE cityId=" + cityId + ";"; 
+            string queryCountry = "UPDATE country SET country='" + updatedCustomer.Country + "', lastUpdate='" + commonTableData[2] + "' WHERE countryId=" + updatedCustomer.CountryId + ";";
+            string queryCity = "UPDATE city SET city='" + updatedCustomer.City + "', lastUpdate='" + commonTableData[2] + "' WHERE cityId=" + updatedCustomer.CityId + ";"; 
             // Confirm update queryCity works
-            string queryAddress = "UPDATE address SET address='" + address + "', address2='" + address2 + "', postalCode='" + postalCode + "', phone='" + phone + "', lastUpdate='" + commonTableData[2] + "' WHERE addressId=" + addressId + ";";
-            string queryCustomer = "UPDATE customer SET customerName='" + customerName + "', active=" + active + ", lastUpdate='" + commonTableData[2] + "', lastUpdateBy='" + commonTableData[3] + "' WHERE customerId=" + customerId + ";";
+            string queryAddress = "UPDATE address SET address='" + updatedCustomer.Address + "', address2='" + updatedCustomer.Address2 + "', postalCode='" + updatedCustomer.PostalCode + "', phone='" + updatedCustomer.Phone + "', lastUpdate='" + commonTableData[2] + "' WHERE addressId=" + updatedCustomer.AddressId + ";";
+            string queryCustomer = "UPDATE customer SET customerName='" + updatedCustomer.CustomerName + "', active=" + updatedCustomer.Active + ", lastUpdate='" + commonTableData[2] + "', lastUpdateBy='" + commonTableData[3] + "' WHERE customerId=" + updatedCustomer.CustomerId + ";";
 
             using (MySqlConnection connection = new MySqlConnection(ConnectionString))
             {

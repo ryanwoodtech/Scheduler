@@ -37,5 +37,11 @@ namespace Scheduler
             return DataAccess.DeleteCustomer(customerId);
             
         }
+
+        static public void UpdateCustomer(Customer updatedCustomer)
+        {
+            DataAccess.SaveUpdatedCustomer(updatedCustomer);
+            Customers.customers = DataAccess.GetCustomers();
+        }
     }
 }
