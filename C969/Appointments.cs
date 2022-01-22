@@ -13,11 +13,18 @@ namespace Scheduler
 
         static public DataTable appointments = new DataTable();
 
+        static public void AddAppointment(Appointment newAppointment)
+        {
+            DataAccess.SaveNewAppointment(newAppointment);
+            appointments = DataAccess.GetAppointments();
+        }
         static public bool DeleteAppointment(int appointmentId)
         {
             DataAccess.DeleteAppointment(appointmentId);
 
             return true;
         }
+
+
     }
 }

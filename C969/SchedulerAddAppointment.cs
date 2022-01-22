@@ -181,9 +181,7 @@ namespace Scheduler
             DateTime end = getAppointmentDateTime("end").ToUniversalTime();
 
             Appointment newAppointment = new Appointment( customerId, userId, title, description, location, contact, type, url, start, end);
-
-            DataAccess.SaveNewAppointment(newAppointment);
-            Appointments.appointments = DataAccess.GetAppointments();
+            Appointments.AddAppointment(newAppointment);
 
             MessageBox.Show("Appointment Added!");
             Close();
