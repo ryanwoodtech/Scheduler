@@ -24,9 +24,12 @@ namespace Scheduler
 
         static public void AddCustomer(string customerName, string address, string address2, string city, string country, string postalCode, string phone, bool active)
         {
-            int addressId = SaveSimilarData(address, address2, city, country, postalCode, phone);
+            Customer newCustomer = new Customer(customerName, address, address2, city, postalCode, phone, active)
+            {
+                AddressId = SaveSimilarData(address, address2, city, country, postalCode, phone)
+            };
 
-            DataAccess.SaveNewCustomer(customerName, addressId, active);
+            DataAccess.SaveNewCustomer(newCustomer);
         }
         static public bool DeleteCustomer(int customerId)
         {

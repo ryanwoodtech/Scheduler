@@ -1,0 +1,127 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Scheduler.SchedulerUpdateCustomer">
+    <Position X="8" Y="7.75" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAgAASABACgAJAgAAEDUAAkCCARAAQAIIQAAAgAAEAA=</HashCode>
+      <FileName>SchedulerUpdateCustomer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Scheduler.Appointment">
+    <Position X="7.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACQAAAAAAgKAAAAAgCAAAJAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>Appointment.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Scheduler.AppointmentByConsutantReport" Collapsed="true">
+    <Position X="2.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACACAAABAAAACAABACAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>AppointmentByConsutantReport.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Scheduler.AppointmentByCustomerReport" Collapsed="true">
+    <Position X="5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAACAAABAAAACAABACAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>AppointmentByCustomerReport.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Scheduler.AppointmentByTypeReport" Collapsed="true">
+    <Position X="0.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAACABBACAAAAAAAQAAAAAAAAAAA=</HashCode>
+      <FileName>AppointmentByTypeReport.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Scheduler.Appointments">
+    <Position X="7.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>Appointments.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Scheduler.Customers" Collapsed="true">
+    <Position X="9.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAABAAAAAAAABAAAAAAEACAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Customers.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Scheduler.DataAccess">
+    <Position X="12.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEBAQAIQIIgEACAADAQQABAAACEgAAAAACAQIgABEAE=</HashCode>
+      <FileName>DataAccess.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Scheduler.Report" Collapsed="true">
+    <Position X="2.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Report.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Scheduler.Scheduler">
+    <Position X="9.75" Y="7.75" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAIR2xDBEKAAGBDECRCSEAACBAAiIEASAQYsAQEAAUA=</HashCode>
+      <FileName>Scheduler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Scheduler.SchedulerAddAppointment">
+    <Position X="11.5" Y="7.75" Width="2.25" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAARABCBQCgAiCgCBUKQAEACAJBAAQAggBOCEAGQAAQ=</HashCode>
+      <FileName>SchedulerAddAppointment.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Scheduler.SchedulerAddCustomer">
+    <Position X="2.25" Y="7.75" Width="2" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAIAkAAICACAACEAACIAEguARAIAAEAQAAAgABACAA=</HashCode>
+      <FileName>SchedulerAddCustomer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Scheduler.SchedulerLogin">
+    <Position X="4.5" Y="7.75" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>ACABAAIAACAABUAIGACQAAACAAIAAAAACACQEgAAEgA=</HashCode>
+      <FileName>SchedulerLogin.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Scheduler.SchedulerUpdateAppointment">
+    <Position X="6.25" Y="7.75" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>IAAAUCCAADgAAgAARACACCIiCIAQIQBggCKAMIWAgAA=</HashCode>
+      <FileName>SchedulerUpdateAppointment.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Scheduler.Customer">
+    <Position X="9.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QCAAAAAAAAAAAAAIIAAAAAAAQAAAAAAiAAAAIAAAAAA=</HashCode>
+      <FileName>Customer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

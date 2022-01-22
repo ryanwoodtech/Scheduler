@@ -10,7 +10,7 @@ using System.Collections;
 
 namespace Scheduler
 {
-    class DataAccess
+    static class DataAccess
     {
         static readonly string ConnectionString = "server=us-cdbr-east-05.cleardb.net;userid=b6df9e9570183d;database=heroku_f72e74ad46fe9f2;password=fdf3b631;";
 
@@ -511,11 +511,11 @@ namespace Scheduler
             return -1;
         }
 
-        static public void SaveNewCustomer(string customerName, int addressId, bool active)
+        static public void SaveNewCustomer(Customer newCustomer)
         {
             object[] commonTableData = GetCommonTableData();
 
-            string query = "INSERT INTO customer (customerName, addressId, active, createDate, createdBy, lastUpdate, lastUpdateBy) VALUES (\'" + customerName + "\', " + addressId + ", \'" + Convert.ToInt32(active) + "\', \'" + commonTableData[0] + "\', \'" + commonTableData[1] + "\', \'" + commonTableData[2] + "\', \'" + commonTableData[3] + "\');";
+            string query = "INSERT INTO customer (customerName, addressId, active, createDate, createdBy, lastUpdate, lastUpdateBy) VALUES (\'" + newCustomer.CustomerName + "\', " + newCustomer.AddressId + ", \'" + Convert.ToInt32(newCustomer.Active) + "\', \'" + commonTableData[0] + "\', \'" + commonTableData[1] + "\', \'" + commonTableData[2] + "\', \'" + commonTableData[3] + "\');";
 
             using (MySqlConnection connection = new MySqlConnection(ConnectionString))
             {

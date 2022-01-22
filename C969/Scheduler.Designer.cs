@@ -163,7 +163,7 @@ namespace Scheduler
             // 
             this.AppointmentsAllRadioButton.AutoSize = true;
             this.AppointmentsAllRadioButton.Checked = true;
-            this.AppointmentsAllRadioButton.Location = new System.Drawing.Point(94, 186);
+            this.AppointmentsAllRadioButton.Location = new System.Drawing.Point(56, 183);
             this.AppointmentsAllRadioButton.Name = "AppointmentsAllRadioButton";
             this.AppointmentsAllRadioButton.Size = new System.Drawing.Size(103, 17);
             this.AppointmentsAllRadioButton.TabIndex = 10;
@@ -175,7 +175,7 @@ namespace Scheduler
             // AppointmentsMonthRadioButton
             // 
             this.AppointmentsMonthRadioButton.AutoSize = true;
-            this.AppointmentsMonthRadioButton.Location = new System.Drawing.Point(94, 226);
+            this.AppointmentsMonthRadioButton.Location = new System.Drawing.Point(56, 223);
             this.AppointmentsMonthRadioButton.Name = "AppointmentsMonthRadioButton";
             this.AppointmentsMonthRadioButton.Size = new System.Drawing.Size(141, 17);
             this.AppointmentsMonthRadioButton.TabIndex = 11;
@@ -186,7 +186,7 @@ namespace Scheduler
             // AppointmentsWeekRadioButton
             // 
             this.AppointmentsWeekRadioButton.AutoSize = true;
-            this.AppointmentsWeekRadioButton.Location = new System.Drawing.Point(94, 266);
+            this.AppointmentsWeekRadioButton.Location = new System.Drawing.Point(56, 263);
             this.AppointmentsWeekRadioButton.Name = "AppointmentsWeekRadioButton";
             this.AppointmentsWeekRadioButton.Size = new System.Drawing.Size(140, 17);
             this.AppointmentsWeekRadioButton.TabIndex = 12;
