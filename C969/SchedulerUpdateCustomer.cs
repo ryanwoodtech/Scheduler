@@ -70,9 +70,8 @@ namespace Scheduler
                 return;
             }
 
-            DataAccess.SaveUpdatedCustomer(customerId, int.Parse(customerData[0]), int.Parse(customerData[1]), int.Parse(customerData[2]), customerName, address, address2, city, country, postalCode, phone, active);
-
-            Customers.customers = DataAccess.GetCustomers();
+            Customer updatedCustomer = new Customer(customerId, int.Parse(customerData[0]), int.Parse(customerData[1]), int.Parse(customerData[2]), customerName, address, address2, city, country, postalCode, phone, active);
+            Customers.UpdateCustomer(updatedCustomer);
 
             MessageBox.Show("Customer Updated!");
             Close();
