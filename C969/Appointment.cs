@@ -8,29 +8,29 @@ namespace Scheduler
 {
     class Appointment
     {
-        public int customerId { get; set; }
-        public int userId { get; set; }
-        public string title { get; set; }
-        public string description { get; set; }
-        public string location { get; set; }
-        public string contact { get; set; }
-        public string type { get; set; }
-        public string url { get; set; }
-        public DateTime start { get; set; }
-        public DateTime end { get; set; }
+        public int CustomerId { get; set; }
+        public int UserId { get; set; }
+        public string Title { get; set; }
+        public string Description { get; set; }
+        public string Location { get; set; }
+        public string Contact { get; set; }
+        public string Type { get; set; }
+        public string Url { get; set; }
+        public DateTime Start { get; set; }
+        public DateTime End { get; set; }
 
         public Appointment(int customerId, int userId, string title, string description, string location, string contact, string type, string url, DateTime start, DateTime end)
         {
-            this.customerId = customerId;
-            this.userId = userId;
-            this.title = title;
-            this.description = description;
-            this.location = location;
-            this.contact = contact;
-            this.type = type;
-            this.url = url;
-            this.start = start;
-            this.end = end;
+            CustomerId = customerId;
+            UserId = userId;
+            Title = title;
+            Description = description;
+            Location = location;
+            Contact = contact;
+            Type = type;
+            Url = url;
+            Start = start;
+            End = end;
         }
     }
 }

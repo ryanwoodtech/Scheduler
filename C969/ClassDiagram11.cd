@@ -45,7 +45,7 @@
       <FileName>Appointments.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Scheduler.Customers" Collapsed="true">
+  <Class Name="Scheduler.Customers">
     <Position X="9.5" Y="4.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAABAAAAAAAABAAAAAAEACAAAAAAAAAAAAAAAAA=</HashCode>

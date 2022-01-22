@@ -296,7 +296,7 @@ namespace Scheduler
         static public void SaveUpdatedAppointment(Appointment updatedAppointment, int updatedAppointmentId)
         {
             // find appointment id and replace with new appointment
-            string query = "UPDATE appointment SET customerId=" + updatedAppointment.customerId + ", userId=" + updatedAppointment.userId + ", title=' " + updatedAppointment.title + "', description='" + updatedAppointment.description + "', location='" + updatedAppointment.location + "', contact='" + updatedAppointment.contact + "', type='" + updatedAppointment.type + "', url='" + updatedAppointment.url + "', start='" + updatedAppointment.start.ToString("yyyy-MM-dd HH:mm:ss") + "', end='" + updatedAppointment.end.ToString("yyyy-MM-dd HH:mm:ss") + "', lastUpdate='" + DateTime.Now.ToUniversalTime().ToString("yyyy-MM-dd HH:mm:ss") + "', lastUpdateBy='" + Scheduler.userName + "' WHERE appointmentId=" + updatedAppointmentId + ";";
+            string query = "UPDATE appointment SET customerId=" + updatedAppointment.CustomerId + ", userId=" + updatedAppointment.UserId + ", title=' " + updatedAppointment.Title + "', description='" + updatedAppointment.Description + "', location='" + updatedAppointment.Location + "', contact='" + updatedAppointment.Contact + "', type='" + updatedAppointment.Type + "', url='" + updatedAppointment.Url + "', start='" + updatedAppointment.Start.ToString("yyyy-MM-dd HH:mm:ss") + "', end='" + updatedAppointment.End.ToString("yyyy-MM-dd HH:mm:ss") + "', lastUpdate='" + DateTime.Now.ToUniversalTime().ToString("yyyy-MM-dd HH:mm:ss") + "', lastUpdateBy='" + Scheduler.userName + "' WHERE appointmentId=" + updatedAppointmentId + ";";
 
             using (MySqlConnection connection = new MySqlConnection(ConnectionString))
             {
@@ -435,7 +435,7 @@ namespace Scheduler
         static private string SqlFormat(Appointment newAppointment)
         {
             object[] commonTableData = GetCommonTableData();
-            string query = "INSERT INTO appointment (customerId, userId, title, description, location, contact, type, url, start, end, createDate, createdBy, lastUpdate, lastUpdateBy) VALUES (" + newAppointment.customerId + ", " + newAppointment.userId + ", \'" + newAppointment.title + "\', \'" + newAppointment.description + "\', \'" + newAppointment.location + "\', \'" + newAppointment.contact + "\', \'" + newAppointment.type + "\', \'" + newAppointment.url + "\', \'" + newAppointment.start.ToString("yyyy-MM-dd HH:mm:ss") + "\', \'" + newAppointment.end.ToString("yyyy-MM-dd HH:mm:ss") + "\', \'" + commonTableData[0] + "\', \'" + commonTableData[1] + "\', \'" + commonTableData[2] + "\', \'" + commonTableData[3] + "\');";
+            string query = "INSERT INTO appointment (customerId, userId, title, description, location, contact, type, url, start, end, createDate, createdBy, lastUpdate, lastUpdateBy) VALUES (" + newAppointment.CustomerId + ", " + newAppointment.UserId + ", \'" + newAppointment.Title + "\', \'" + newAppointment.Description + "\', \'" + newAppointment.Location + "\', \'" + newAppointment.Contact + "\', \'" + newAppointment.Type + "\', \'" + newAppointment.Url + "\', \'" + newAppointment.Start.ToString("yyyy-MM-dd HH:mm:ss") + "\', \'" + newAppointment.End.ToString("yyyy-MM-dd HH:mm:ss") + "\', \'" + commonTableData[0] + "\', \'" + commonTableData[1] + "\', \'" + commonTableData[2] + "\', \'" + commonTableData[3] + "\');";
            
             return query;
         }

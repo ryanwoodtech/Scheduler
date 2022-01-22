@@ -7,14 +7,14 @@ namespace Scheduler
 {
     public class Customer
     {
-        public string CustomerName;
-        public string Address;
-        public string Address2;
-        public string City;
-        public string PostalCode;
-        public string Phone;
-        public bool Active;
-        public int AddressId; 
+        public string CustomerName { get; set; }
+        public string Address { get; set; }
+        public string Address2 { get; set; }
+        public string City { get; set; }
+        public string PostalCode { get; set; }
+        public string Phone { get; set; }
+        public bool Active { get; set; }
+        public int AddressId { get; set; }
 
         public Customer(string customerName, string address, string address2, string city, string postalCode, string phone, bool active, int addressId = -1)
         {
