@@ -18,13 +18,16 @@ namespace Scheduler
             DataAccess.SaveNewAppointment(newAppointment);
             appointments = DataAccess.GetAppointments();
         }
+        static public void UpdateAppointment(Appointment updatedAppointment, int updatedAppointmentId)
+        {
+            DataAccess.SaveUpdatedAppointment(updatedAppointment, updatedAppointmentId);
+            appointments = DataAccess.GetAppointments();
+        }
         static public bool DeleteAppointment(int appointmentId)
         {
             DataAccess.DeleteAppointment(appointmentId);
 
             return true;
         }
-
-
     }
 }

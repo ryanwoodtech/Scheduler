@@ -202,8 +202,7 @@ namespace Scheduler
             Appointment updatedAppointment = new Appointment(customerId, userId, title, description, location, contact, type, url, start, end);
             int updatedAppointmentId = (int)rowToUpdate.Cells[0].Value;
 
-            DataAccess.SaveUpdatedAppointment(updatedAppointment, updatedAppointmentId);
-            Appointments.appointments = DataAccess.GetAppointments();
+            Appointments.UpdateAppointment(updatedAppointment, updatedAppointmentId);
 
             MessageBox.Show("Appointment Updated!");
             Close();
