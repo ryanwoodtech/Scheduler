@@ -41,7 +41,43 @@ namespace Scheduler
                 return appointmentsDataTable;
             }
         }
+        internal static Appointment GetAppointment(int appointmentId)
+        {
+            string query = "SELECT * FROM appointment WHERE appointmentId=" + appointmentId + ";";
+            using (MySqlConnection connection = new MySqlConnection(ConnectionString))
+            {
+                MySqlCommand command = new MySqlCommand(query, connection);
+                connection.Open();
+                MySqlDataReader reader = command.ExecuteReader();
 
+                while (reader.Read())
+                {
+                    return new Appointment(reader.GetInt32(1), reader.GetInt32(2), reader.GetString(3), reader.GetString(4), reader.GetString(5), reader.GetString(6), reader.GetString(7), reader.GetString(8), (DateTime)reader.GetValue(9), (DateTime)reader.GetValue(10));
+                }
+            }
+
+            throw new Exception();
+           
+        }
+
+        static public int GetAppointmentId(int customerId, int userId, string title)
+        {
+            string query = "SELECT appointmentId FROM appointment WHERE customerId=\'" + customerId + "\' AND userId=\'" + userId + "\' AND title=\'" + title + "\';";
+
+            using (MySqlConnection connection = new MySqlConnection(ConnectionString))
+            {
+                MySqlCommand command = new MySqlCommand(query, connection);
+                connection.Open();
+                MySqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    return reader.GetInt32(0);
+                }
+            }
+
+            throw new Exception();
+        }
         static public string GetCustomerName(int customerId)
         {
             string query = "SELECT customerName FROM customer WHERE customerId=" + customerId + ";";
@@ -288,6 +324,7 @@ namespace Scheduler
             using (MySqlConnection connection = new MySqlConnection(ConnectionString))
             {
                 MySqlCommand command = new MySqlCommand(query, connection);
+
                 connection.Open();
                 command.ExecuteNonQuery();
             }

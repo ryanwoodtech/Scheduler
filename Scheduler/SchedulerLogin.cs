@@ -63,18 +63,16 @@ namespace Scheduler
 
             ArrayList dbUserName = DataAccess.GetColumn("select userName from user where userName=\"" + userName + "\";");
             ArrayList dbPassword = DataAccess.GetColumn("select password from user where userName=\"" + userName + "\";");
-            try
-            {
-                if ((string)dbPassword[0] == ComputeSha256Hash(pass))
-                {
-                    RecordLogin(userName);
 
-                    // Log user in
-                    ArrayList dbUserId = DataAccess.GetColumn("select userId from user where userName=\"" + userName + "\";");
-                    ShowSchedulerForm((int)dbUserId[0], (string)dbUserName[0]);
-                }
+            if ((string)dbPassword[0] == ComputeSha256Hash(pass))
+            {
+                RecordLogin(userName);
+
+                // Log user in
+                ArrayList dbUserId = DataAccess.GetColumn("select userId from user where userName=\"" + userName + "\";");
+                ShowSchedulerForm((int)dbUserId[0], (string)dbUserName[0]);
             }
-            catch (ArgumentOutOfRangeException)
+            else
             {
                 LoginIncorrectLabel.Visible = true;
             }

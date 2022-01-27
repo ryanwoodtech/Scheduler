@@ -383,9 +383,13 @@ namespace Scheduler
             SchedulerCustomersDGV.Columns["customerName"].HeaderText = "Name";
             SchedulerCustomersDGV.Columns["active"].HeaderText = "Active";
         }
+
+        private void SchedulerCustomersDGV_DoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+        }
+
         private void SchedulerAppointmentsDGV_DoubleClick(object sender, EventArgs e)
         {
-            // Grab selected DataGridViewRow and send it to update
             try
             {
                 DataGridViewRow rowToUpdate = SchedulerAppointmentsDGV.SelectedRows[0];
@@ -404,6 +408,7 @@ namespace Scheduler
                 return;
             }
 
+
         }
 
         private void SchedulerCustomersDGV_DoubleClick(object sender, EventArgs e)
@@ -414,7 +419,7 @@ namespace Scheduler
 
                 if (rowToUpdate.Cells.Count == 0)
                 {
-                    MessageBox.Show("You must select an appointment to update.");
+                    MessageBox.Show("You must select an customer to update.");
                     return;
                 }
 
@@ -425,6 +430,8 @@ namespace Scheduler
             {
                 return;
             }
+
+
         }
     }
 }

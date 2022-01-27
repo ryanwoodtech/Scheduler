@@ -10,7 +10,7 @@
 
 #pragma warning disable 1591
 
-namespace C969 {
+namespace Scheduler {
     
     
     /// <summary>
@@ -860,7 +860,7 @@ namespace C969 {
         }
     }
 }
-namespace C969.U08hnQDataSetTableAdapters {
+namespace Scheduler.U08hnQDataSetTableAdapters {
     
     
     /// <summary>
@@ -1200,7 +1200,7 @@ namespace C969.U08hnQDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         private void InitConnection() {
             this._connection = new global::MySql.Data.MySqlClient.MySqlConnection();
-            this._connection.ConnectionString = global::C969.Properties.Settings.Default.U08hnQConnectionString;
+            this._connection.ConnectionString = global::Scheduler.Properties.Settings.Default.U08hnQConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]

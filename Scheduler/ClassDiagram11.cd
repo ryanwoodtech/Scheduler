@@ -13,53 +13,53 @@
   <Class Name="Scheduler.Appointment">
     <Position X="7.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAACQAAAAAAgKAAAAAgCAAAJAAAAAAAQAAAAAAA=</HashCode>
+      <HashCode>AAIAAAAAACAgAEAACAIAAAgAAAAAABAACQAAAAAAAAA=</HashCode>
       <FileName>Appointment.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Scheduler.AppointmentByConsutantReport" Collapsed="true">
-    <Position X="2.75" Y="2" Width="1.5" />
+  <Class Name="Scheduler.AppointmentByConsutantReport">
+    <Position X="2.75" Y="2.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAACACAAABAAAACAABACAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>AppointmentByConsutantReport.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Scheduler.AppointmentByCustomerReport" Collapsed="true">
-    <Position X="5" Y="2" Width="1.5" />
+  <Class Name="Scheduler.AppointmentByCustomerReport">
+    <Position X="5" Y="2.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAABAAAACAAABAAAACAABACAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>AppointmentByCustomerReport.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Scheduler.AppointmentByTypeReport" Collapsed="true">
-    <Position X="0.5" Y="2" Width="1.5" />
+  <Class Name="Scheduler.AppointmentByTypeReport">
+    <Position X="0.5" Y="2.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAACAAAAAAAACABBACAAAAAAAQAAAAAAAAAAA=</HashCode>
       <FileName>AppointmentByTypeReport.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Scheduler.Appointments">
-    <Position X="7.5" Y="4.5" Width="1.5" />
+    <Position X="7.5" Y="4.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAABAAAAAAAAAAEAAAAgQAAAAAAA=</HashCode>
       <FileName>Appointments.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Scheduler.Customers">
-    <Position X="9.5" Y="4.5" Width="1.5" />
+    <Position X="9.5" Y="4.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAABAAAAAAAABAAAAAAEACAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAABAQAAAAAABAAAAAAEACAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Customers.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Scheduler.DataAccess">
-    <Position X="12.75" Y="0.5" Width="1.5" />
+    <Position X="11.75" Y="0.5" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AEBAQAIQIIgEACAADAQQABAAACEgAAAAACAQIgABEAE=</HashCode>
       <FileName>DataAccess.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Scheduler.Report" Collapsed="true">
+  <Class Name="Scheduler.Report">
     <Position X="2.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAA=</HashCode>
@@ -119,7 +119,7 @@
   <Class Name="Scheduler.Customer">
     <Position X="9.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>QCAAAAAAAAAAAAAIIAAAAAAAQAAAAAAiAAAAIAAAAAA=</HashCode>
+      <HashCode>QCAAAAABAAAAAAAIIAAAAAAAQAIQABAiAAAAIAAAAAA=</HashCode>
       <FileName>Customer.cs</FileName>
     </TypeIdentifier>
   </Class>

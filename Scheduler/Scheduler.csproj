@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{E4BF70F9-B32F-4E73-B82E-91220E351A25}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>C969</RootNamespace>
-    <AssemblyName>C969</AssemblyName>
+    <RootNamespace>Scheduler</RootNamespace>
+    <AssemblyName>Scheduler</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -149,6 +149,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="SchedulerUpdateAppointment.resx">
       <DependentUpon>SchedulerUpdateAppointment.cs</DependentUpon>

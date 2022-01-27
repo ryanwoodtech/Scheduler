@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Collections;
 using System.Windows.Forms;
+using System.Runtime.InteropServices;
+
 
 namespace Scheduler
 {
@@ -53,10 +55,84 @@ namespace Scheduler
 
         private void AddAppointmentSaveButton_Click(object sender, EventArgs e)
         {
+            int customerId = getCustomerId();
+            int userId = getUserId();
+            string title = AddAppointmentTitleInput.Text;
+            string description = AddAppointmentDescriptionInput.Text;
+            string location = AddAppointmentLocationInput.Text;
+            string contact = AddAppointmentContactInput.Text;
+            string type = AddAppointmentTypeInput.Text;
+            string url = AddAppointmentURLInput.Text;
+            DateTime start = getAppointmentDateTime("start").ToUniversalTime();
+            DateTime end = getAppointmentDateTime("end").ToUniversalTime();
+
+            Appointment newAppointment = new Appointment( customerId, userId, title, description, location, contact, type, url, start, end);
+
             if (CheckAppointmentConstraints())
             {
-                SaveNewAppointment();
+                SaveNewAppointment(newAppointment);
             }
+
+            // Uncomment these two lines to test that the new appointment was saved successfully
+            Appointment appointmentFromDatabase = GetAppointment(customerId, userId, title);
+            TestSuccessfulAppointment(newAppointment, appointmentFromDatabase);
+        }
+
+        private Appointment GetAppointment(int customerId, int userId, string title)
+        {
+            int appointmentId = DataAccess.GetAppointmentId(customerId, userId, title);
+            return DataAccess.GetAppointment(appointmentId);
+        }
+
+        private void TestSuccessfulAppointment(Appointment newAppointment, Appointment appointmentFromDatabase)
+        {
+            Console.WriteLine("-----BEGIN TEST-----");
+            Console.WriteLine("User entered appointment");
+            Console.WriteLine();
+            Console.WriteLine("UserId: " + newAppointment.UserId);
+            Console.WriteLine("Title: " + newAppointment.Title);
+            Console.WriteLine("Description: " + newAppointment.Description);
+            Console.WriteLine("Location: " + newAppointment.Location);
+            Console.WriteLine("Contact: " + newAppointment.Contact);
+            Console.WriteLine("Type: " + newAppointment.Type);
+            Console.WriteLine("URL: " + newAppointment.Url);
+            Console.WriteLine("Start: " + newAppointment.Start.ToLocalTime());
+            Console.WriteLine("End: " + newAppointment.End.ToLocalTime());
+            Console.WriteLine();
+
+            Console.WriteLine("Appointment from database");
+            Console.WriteLine();
+            Console.WriteLine("UserId: " + appointmentFromDatabase.UserId);
+            Console.WriteLine("Title: " + appointmentFromDatabase.Title);
+            Console.WriteLine("Description: " + appointmentFromDatabase.Description);
+            Console.WriteLine("Location: " + appointmentFromDatabase.Location);
+            Console.WriteLine("Contact: " + appointmentFromDatabase.Contact);
+            Console.WriteLine("Type: " + appointmentFromDatabase.Type);
+            Console.WriteLine("URL: " + appointmentFromDatabase.Url);
+            Console.WriteLine("Start: " + appointmentFromDatabase.Start.ToLocalTime());
+            Console.WriteLine("End: " + appointmentFromDatabase.End.ToLocalTime());
+            Console.WriteLine();
+            Console.WriteLine("RESULTS");
+
+            if (
+                newAppointment.UserId == appointmentFromDatabase.UserId &&
+                newAppointment.Title == appointmentFromDatabase.Title &&
+                newAppointment.Description == appointmentFromDatabase.Description &&
+                newAppointment.Location == appointmentFromDatabase.Location &&
+                newAppointment.Contact == appointmentFromDatabase.Contact &&
+                newAppointment.Type == appointmentFromDatabase.Type &&
+                newAppointment.Url == appointmentFromDatabase.Url &&
+                newAppointment.Start == appointmentFromDatabase.Start &&
+                newAppointment.End == appointmentFromDatabase.End 
+                )
+            {
+                Console.WriteLine("Every value is saved correctly in the database!");
+                Console.WriteLine("Check to ensure each field has an appropriate value.");
+            } else
+            {
+                Console.WriteLine("Test failed.");
+            }
+            Console.WriteLine("-----END TEST-----");
         }
 
         private bool CheckAppointmentConstraints()
@@ -64,6 +140,7 @@ namespace Scheduler
             bool isAppointmentDuringBusinessHours = CheckAppointmentDuringBusinessHours();
             bool isAppointmentConflictingWithAnotherAppointment = CheckAppointmentConflictingWithAnotherAppointment();
             bool isCustomer = CheckCustomerExists();
+
 
             if(!isAppointmentDuringBusinessHours && !isAppointmentConflictingWithAnotherAppointment && isCustomer)
             {
@@ -167,20 +244,8 @@ namespace Scheduler
         }
 
 
-        public void SaveNewAppointment()
+        private void SaveNewAppointment(Appointment newAppointment)
         {
-            int customerId = getCustomerId();
-            int userId = getUserId();
-            string title = AddAppointmentTitleInput.Text;
-            string description = AddAppointmentDescriptionInput.Text;
-            string location = AddAppointmentLocationInput.Text;
-            string contact = AddAppointmentContactInput.Text;
-            string type = AddAppointmentTypeInput.Text;
-            string url = AddAppointmentURLInput.Text;
-            DateTime start = getAppointmentDateTime("start").ToUniversalTime();
-            DateTime end = getAppointmentDateTime("end").ToUniversalTime();
-
-            Appointment newAppointment = new Appointment( customerId, userId, title, description, location, contact, type, url, start, end);
             Appointments.AddAppointment(newAppointment);
 
             MessageBox.Show("Appointment Added!");
